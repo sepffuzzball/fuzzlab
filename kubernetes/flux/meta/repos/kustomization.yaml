@@ -5,12 +5,15 @@ kind: Kustomization
 resources:
   - ./authentik.yaml
   - ./bitnami.yaml
+  - ./bjw-s.yaml
   - ./ceph-csi.yaml
   - ./coder.yaml
   - ./crunchydata.yaml
   - ./csi-driver-nfs.yaml
   - ./csi-driver-smb.yaml
   - ./external-dns.yaml
+  - ./external-secrets.yaml
   - ./intel.yaml
   - ./node-feature-discovery.yaml
   - ./nvidia.yaml
+  - ./stakater.yaml
