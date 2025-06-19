@@ -12,5 +12,5 @@ resources:
   - ./csi-driver-smb.yaml
   - ./external-dns.yaml
   - ./intel.yaml
-  - ./node-feature-disovery.yaml
+  - ./node-feature-discovery.yaml
   - ./nvidia.yaml
