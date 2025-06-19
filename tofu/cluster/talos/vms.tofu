@@ -4,11 +4,11 @@ resource "proxmox_virtual_environment_pool" "rancher" {
 }
 
 locals {
-  cp_nodes  = { for k, v in var.nodes : k => v if v.machine_type != "dgpuworker" }
-  gpu_nodes = { for k, v in var.nodes : k => v if v.machine_type == "dgpuworker" }
+  #cp_nodes  = { for k, v in var.nodes : k => v if v.machine_type != "dgpuworker" }
+  #gpu_nodes = { for k, v in var.nodes : k => v if v.machine_type == "dgpuworker" }
 
   # merge them so we can iterate the whole fleet in one go
-  all_nodes = merge(local.cp_nodes, local.gpu_nodes)
+  #all_nodes = merge(local.cp_nodes, local.gpu_nodes)
 
   # descriptions & tags in look-ups so we don’t repeat ternaries everywhere
   desc_by_type = {
@@ -91,13 +91,17 @@ resource "proxmox_virtual_environment_vm" "this" {
 
     dns {
       servers = each.value.dns
-      domain  = var.domain
     }
 
     ip_config {
       ipv4 {
         address = each.value.ip
         gateway = var.cluster.gateway
+      }
+
+      ipv6 {
+        address = each.value.ipv6
+        gateway = var.cluster.gatewayv6
       }
     }
   }

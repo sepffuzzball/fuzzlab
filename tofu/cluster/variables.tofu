@@ -34,6 +34,7 @@ variable "talos_cluster_config" {
     name                         = string
     vip                          = optional(string)
     gateway                      = string
+    gatewayv6                    = string
     subnet_mask                  = optional(string, "22")
     talos_machine_config_version = optional(string)
     proxmox_cluster              = string
@@ -56,6 +57,7 @@ variable "talos_nodes" {
       host_node     = string
       machine_type  = string
       ip            = string
+      ipv6          = string
       dns           = optional(list(string))
       mac_address   = string
       vm_id         = number
@@ -72,22 +74,6 @@ variable "talos_nodes" {
     error_message = "Node machine_type must be either 'controlplane' or 'worker'."
     // @formatter:on
   }
-}
-
-variable "dns" {
-    description = "DNS search providers"
-}
-
-variable "domain" {
-    description = "Search domain"
-}
-
-variable "gateway" {
-    description = "Internet gateway"
-}
-
-variable "cluster_name" {
-    description = "Cluster Name"
 }
 
 locals {

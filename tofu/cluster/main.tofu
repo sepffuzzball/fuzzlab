@@ -9,7 +9,4 @@ module "talos" {
   image   = var.talos_image
   cluster = var.talos_cluster_config
   proxmox_nodes = var.proxmox_nodes
-  domain = var.domain
-  dns = var.dns
-  gateway = var.gateway
 }

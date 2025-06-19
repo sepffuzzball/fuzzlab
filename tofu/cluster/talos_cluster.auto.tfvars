@@ -1,14 +1,10 @@
-dns                 = ["10.0.1.1"]
-domain              = "fuzzball.enterprises"
-gateway             = "10.0.1.1"
-cluster_name        = "fuzzlab"
-
 talos_cluster_config = {
   name = "fuzzlab"
   # Only use a VIP if the nodes share a layer 2 network
   # Ref: https://www.talos.dev/v1.9/talos-guides/network/vip/#requirements
   vip     = "10.0.100.100"
   gateway = "10.0.100.1"
+  gatewayv6 = "fdca:fe37:11aa:a100::"
   # The version of talos features to use in generated machine configuration. Generally the same as image version.
   # See https://github.com/siderolabs/terraform-provider-talos/blob/main/docs/data-sources/machine_configuration.md
   # Uncomment to use this instead of version from talos_image.
