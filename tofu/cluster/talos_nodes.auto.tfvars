@@ -1,8 +1,8 @@
 talos_nodes = {
-  "talos01" = {
+  "talos10011" = {
     host_node     = "pve01"
     machine_type  = "controlplane"
-    ip            = "10.0.2.91/22"
+    ip            = "10.0.100.11/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:01"
     vm_id         = 2091
@@ -12,10 +12,10 @@ talos_nodes = {
     #igpu          = true
     #update        = true
   }
-  "talos02" = {
+  "talos10012" = {
     host_node     = "pve02"
     machine_type  = "controlplane"
-    ip            = "10.0.2.92/22"
+    ip            = "10.0.100.12/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:02"
     vm_id         = 2092
@@ -25,10 +25,10 @@ talos_nodes = {
     #igpu          = true
     #update        = true
   }
-  "talos03" = {
+  "talos10013" = {
     host_node     = "pve03"
     machine_type  = "controlplane"
-    ip            = "10.0.2.93/22"
+    ip            = "10.0.100.13/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:03"
     vm_id         = 2093
@@ -39,10 +39,10 @@ talos_nodes = {
     #update        = true
   }
 
-  "talos04" = {
+  "talos10014" = {
     host_node     = "pve04"
     machine_type  = "worker"
-    ip            = "10.0.2.94/22"
+    ip            = "10.0.100.14/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:04"
     vm_id         = 2094
@@ -52,10 +52,10 @@ talos_nodes = {
     igpu          = true
     #update        = true
   }
-  "talos05" = {
+  "talos10015" = {
     host_node     = "pve05"
     machine_type  = "worker"
-    ip            = "10.0.2.95/22"
+    ip            = "10.0.100.15/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:05"
     vm_id         = 2095
@@ -65,10 +65,10 @@ talos_nodes = {
     igpu          = true
     #update        = true
   }
-  "talos06" = {
+  "talos10016" = {
     host_node     = "pve01"
     machine_type  = "worker"
-    ip            = "10.0.2.96/22"
+    ip            = "10.0.100.16/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:06"
     vm_id         = 2096
@@ -78,10 +78,10 @@ talos_nodes = {
     igpu          = true
     #update        = true
   }
-  "talos07" = {
+  "talos10017" = {
     host_node     = "pve02"
     machine_type  = "worker"
-    ip            = "10.0.2.97/22"
+    ip            = "10.0.100.17/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:07"
     vm_id         = 2097
@@ -91,10 +91,10 @@ talos_nodes = {
     igpu          = true
     #update        = true
   }
-  "talos08" = {
+  "talos10018" = {
     host_node     = "pve03"
     machine_type  = "worker"
-    ip            = "10.0.2.98/22"
+    ip            = "10.0.100.18/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:08"
     vm_id         = 2098
@@ -105,10 +105,10 @@ talos_nodes = {
     #update        = true
   }
 
-  "talos09" = {
+  "talos10019" = {
     host_node     = "pve64"
     machine_type  = "dgpuworker"
-    ip            = "10.0.2.99/22"
+    ip            = "10.0.100.19/22"
     dns           = ["10.0.1.1"]
     mac_address   = "BC:24:11:2E:C8:09"
     vm_id         = 2099

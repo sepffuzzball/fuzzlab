@@ -97,7 +97,7 @@ resource "proxmox_virtual_environment_vm" "this" {
     ip_config {
       ipv4 {
         address = each.value.ip
-        gateway = var.gateway
+        gateway = var.cluster.gateway
       }
     }
   }
@@ -105,6 +105,7 @@ resource "proxmox_virtual_environment_vm" "this" {
   network_device {
     bridge      = "vmbr1"
     mac_address = each.value.mac_address
+    vlan_id     = 100
   }
 
   #############################################
