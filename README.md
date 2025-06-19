@@ -46,10 +46,12 @@ There are **5 stages** outlined below for completing this project, make sure you
 
 3. Install [OpenTofu](https://opentofu.org/docs/intro/install/deb/) onto workstation
 
-4. Initialize tofu
+4. Initialize and deploy cluster tofu
     ```sh
-    cd tofu/kubernetes
+    cd tofu/cluster
     tofu init
+    tofu plan
+    tofu apply
     ```
 
 9. Verify with `nmap` that your nodes are available on the network. (Replace `192.168.1.0/24` with the network your nodes are on.)
