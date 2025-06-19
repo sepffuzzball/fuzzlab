@@ -58,10 +58,6 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/clustersecretstore
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
@@ -72,6 +68,7 @@ spec:
   dependsOn:
     - name: crunchy-postgres-operator-cluster
     - name: external-secrets
+      namespace: kube-system
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -85,10 +82,6 @@ spec:
       app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
   path: ./kubernetes/apps/database/crunchy-postgres-operator/userinit-controller
   prune: true
   sourceRef:
