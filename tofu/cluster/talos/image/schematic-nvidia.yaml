@@ -1,0 +1,7 @@
+customization:
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/nvidia-container-toolkit-production
+      - siderolabs/intel-ucode
+      - siderolabs/qemu-guest-agent
+      - siderolabs/nonfree-kmod-nvidia-production

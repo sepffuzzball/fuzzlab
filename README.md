@@ -44,12 +44,15 @@ There are **5 stages** outlined below for completing this project, make sure you
 
 2. This will eventually lead you to download a Talos Linux ISO (or for SBCs a RAW) image. Make sure to note the **schematic ID** you will need this later on.
 
-3. Open Tofu Stuff goes here
+3. Install [OpenTofu](https://opentofu.org/docs/intro/install/deb/) onto workstation
 
+4. Initialize tofu
+    ```sh
+    cd tofu/kubernetes
+    tofu init
+    ```
 
-
-
-4. Verify with `nmap` that your nodes are available on the network. (Replace `192.168.1.0/24` with the network your nodes are on.)
+9. Verify with `nmap` that your nodes are available on the network. (Replace `192.168.1.0/24` with the network your nodes are on.)
 
     ```sh
     nmap -Pn -n -p 50000 192.168.1.0/24 -vv | grep 'Discovered'

@@ -2,6 +2,7 @@
 *.pub
 *.key
 *.decrypted~*.yaml
+*.dec*
 /age.key
 /cloudflare-tunnel.json
 /github-deploy.key
@@ -19,3 +20,10 @@ talosconfig
 .venv/
 .DS_Store
 Thumbs.db
+# Ansible
+.venv*
+# Taskfile
+.tasks
+*.terraform.lock.hcl
+*.tfstate*
+.terraform/
