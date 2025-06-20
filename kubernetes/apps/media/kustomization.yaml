@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: media
 components:
   - ../../components/common
-#resources:
-#  - ./pv-smb.yaml
-#  - ./secrets.sops.yaml
-#  - ./sonarr/ks.yaml
+resources:
+  - ./pv-smb.yaml
+  - ./secrets.sops.yaml
+  - ./sonarr/ks.yaml
