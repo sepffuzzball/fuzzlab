@@ -22,7 +22,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/home-operations/sonarr
               tag: 4.0.15.2940
@@ -70,12 +70,13 @@ spec:
         fsGroup: ${PGID}
         fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
+      app:
+        controller: arr
         ports:
           http:
             port: *port
     route:
-      main:
+      app:
         enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
@@ -85,7 +86,7 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: main
+              - identifier: app
                 port: *port
     persistence:
       config:
