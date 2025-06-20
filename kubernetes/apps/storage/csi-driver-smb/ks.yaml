@@ -9,14 +9,24 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  interval: 30m
   path: ./kubernetes/apps/storage/csi-driver-smb/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
+  retryInterval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   targetNamespace: *namespace
-  wait: true
-  interval: 30m
-  retryInterval: 1m
   timeout: 5m
+  wait: true
