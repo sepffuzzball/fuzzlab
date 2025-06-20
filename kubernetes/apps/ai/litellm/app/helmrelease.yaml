@@ -38,25 +38,28 @@ spec:
               - "/app/config.yaml"
     service:
       app:
-        controller: litellm
         ports:
           http:
             port: &port 4000
-      route:
-        app:
-          enabled: true
-          hostnames:
-            - "litellm.${SECRET_DOMAIN}"
-          annotations:
-            external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-          parentRefs:
-            - name: external
-              namespace: kube-system
-              sectionName: https
-          rules:
-            - backendRefs:
-                - identifier: app
-                  port: *port
+    serviceMonitor:
+      app:
+        endpoints:
+          - port: http
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        #annotations:
+        #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
     persistence:
       config-file:
         type: configMap
