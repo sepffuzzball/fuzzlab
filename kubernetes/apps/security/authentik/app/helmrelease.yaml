@@ -97,7 +97,7 @@ spec:
     authentik:
       log_level: info
       email:
-        port: 587
+        port: &port 587
         use_tls: true
       secret_key: "${SECRET_AUTHENTIK_KEY}"
       outposts:
