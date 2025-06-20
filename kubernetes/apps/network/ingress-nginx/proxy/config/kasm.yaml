@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kasm
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: ${KASM_ADDR}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/upstream-vhost: ${KASM_ADDR}
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+  name: proxy-kasm
+  namespace: default
+spec:
+  ingressClassName: external
+  rules:
+    - host: kasm.${SECRET_DOMAIN}
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: kasm
+                port:
+                  number: 443
+  tls:
+    - hosts:
+        - kasm.${SECRET_DOMAIN}

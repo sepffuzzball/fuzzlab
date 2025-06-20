@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dat
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: ${DAT_ADDR}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/upstream-vhost: ${DAT_ADDR}
+    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
+  name: proxy-dat
+  namespace: default
+spec:
+  ingressClassName: fbe
+  rules:
+    - host: &host dat.${SECRET_DOMAIN_FBE}
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: dat
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - *host
