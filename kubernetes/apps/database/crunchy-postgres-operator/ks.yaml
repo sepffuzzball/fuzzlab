@@ -19,6 +19,8 @@ spec:
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   sourceRef:
     kind: GitRepository
@@ -47,6 +49,12 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/cluster
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   sourceRef:
     kind: GitRepository
@@ -74,6 +82,12 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/clustersecretstore
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   sourceRef:
     kind: GitRepository
@@ -103,6 +117,12 @@ spec:
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/userinit-controller
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   sourceRef:
     kind: GitRepository
@@ -143,6 +163,11 @@ spec:
   components:
   - ../../../../components/gatus/external
   postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
     substitute:
       APP: *app
       NS: *namespace
