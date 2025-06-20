@@ -9,3 +9,12 @@ spec:
     - dnsName: "external.${SECRET_DOMAIN}"
       recordType: CNAME
       targets: ["cd31d47e-56cb-4df9-9776-a08597f168a4.cfargotunnel.com"]
+    - dnsName: "external.${SECRET_DOMAIN_KMC}"
+      recordType: CNAME
+      targets: ["${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
+    - dnsName: "external.${SECRET_DOMAIN_SEPF}"
+      recordType: CNAME
+      targets: ["${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
+    - dnsName: "external.${SECRET_DOMAIN_FBS}"
+      recordType: CNAME
+      targets: ["${SECRET_CLOUDFLARE_TUNNEL_ID}.cfargotunnel.com"]
