@@ -52,8 +52,4 @@ spec:
       app:
         ports:
           http:
-            enabled: false
-            port: http
-          redis:
-            enabled: true
             port: *port
