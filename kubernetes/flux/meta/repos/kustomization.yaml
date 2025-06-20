@@ -5,7 +5,6 @@ kind: Kustomization
 resources:
   - ./authentik.yaml
   - ./bitnami.yaml
-  - ./bjw-s.yaml
   - ./ceph-csi.yaml
   - ./coder.yaml
   - ./crunchydata.yaml

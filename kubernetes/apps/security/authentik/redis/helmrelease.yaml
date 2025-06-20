@@ -1,0 +1,59 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app authentik-redis
+  namespace: ${NS}
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        annotations:
+          secret.reloader.stakater.com/reload: authentik-secret
+        pod:
+          automountServiceAccountToken: false
+        containers:
+          app:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 7.2.3
+            command:
+              - sh
+            args:
+              - -c
+              - >-
+                redis-server --requirepass $REDIS_PASSWORD
+            env:
+              REDIS_PORT: &port 6379
+              REDIS_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: authentik-secret
+                    key: redisPassword
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128M
+              limits:
+                memory: 256M
+
+    service:
+      app:
+        ports:
+          http:
+            enabled: false
+          redis:
+            enabled: true
+            port: *port
