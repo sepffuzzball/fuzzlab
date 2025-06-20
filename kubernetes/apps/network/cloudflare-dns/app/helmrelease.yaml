@@ -37,12 +37,20 @@ spec:
       - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
       - --crd-source-kind=DNSEndpoint
       - --gateway-name=external
+      - --ingress-class=external
     triggerLoopOnEvent: true
     policy: sync
-    sources: ["crd", "gateway-httproute"]
+    sources: ["crd", "gateway-httproute", "ingress"]
     txtPrefix: k8s.
     txtOwnerId: default
-    domainFilters: ["${SECRET_DOMAIN}"]
+    domainFilters:
+            - "${SECRET_DOMAIN}"
+            - "${SECRET_DOMAIN_FBE}"
+            - "${SECRET_DOMAIN_SEPF}"
+            - "${SECRET_DOMAIN_FBEC}"
+            - "${SECRET_DOMAIN_FBS}"
+            - "${SECRET_DOMAIN_FBM}"
+            - "${SECRET_DOMAIN_KMC}"
     serviceMonitor:
       enabled: true
     podAnnotations:
