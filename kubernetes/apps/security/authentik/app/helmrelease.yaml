@@ -131,6 +131,12 @@ spec:
               namespace: kube-system
               sectionName: https
           rules:
+            - filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  add:
+                    - name: X-Frame-Options
+                      value: SAMEORIGIN
             - backendRefs:
                 - identifier: app
                   port: *port
