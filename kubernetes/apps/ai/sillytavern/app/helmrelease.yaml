@@ -49,7 +49,7 @@ spec:
         controller: sillytavern
         ports:
           http:
-            port: 8000
+            port: &port 8000
     route:
       app:
         enabled: true
