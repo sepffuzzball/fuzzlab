@@ -14,6 +14,7 @@ resources:
   - ./democratic-csi.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
+  - ./ingress-nginx.yaml
   - ./intel.yaml
   - ./node-feature-discovery.yaml
   - ./nvidia.yaml
