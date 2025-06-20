@@ -5,7 +5,7 @@ namespace: media
 components:
   - ../../components/common
 resources:
-  - ./lidarr.ks.yaml
+  - ./lidarr/ks.yaml
 #  - ./plex/ks.yaml
   - ./pv-smb.yaml
   - ./sabnzbd/ks.yaml
