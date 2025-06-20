@@ -15,6 +15,10 @@ spec:
       name: sops-age
   interval: 10m
   path: "./kubernetes/apps/database/crunchy-postgres-operator/operator"
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
