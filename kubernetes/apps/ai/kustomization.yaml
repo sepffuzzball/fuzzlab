@@ -1,11 +1,11 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: media
+namespace: ai
 components:
   - ../../components/common
 resources:
-#  - ./plex/ks.yaml
-  - ./pv-smb.yaml
-  - ./secrets.sops.yaml
-  - ./sonarr/ks.yaml
+  - ./litellm/ks.yaml
+  #- ./openwebui/ks.yaml
+  #- ./sillytavern/ks.yaml
+  #- ./sillytavern-kip/ks.yaml

@@ -3,24 +3,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app sonarr
+  name: &app plex
   namespace: &namespace media
 spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  components:
-  - ../../../../components/gatus/internal
-
   dependsOn:
     - name: csi-driver-cephfs
       namespace: storage
     - name: csi-driver-smb
       namespace: storage
-    - name: crunchy-postgres-operator
-      namespace: database
+  components:
+  - ../../../../components/gatus/external
   interval: 30m
-  path: ./kubernetes/apps/media/sonarr/app
+  path: ./kubernetes/apps/media/plex/app
   postBuild:
     substituteFrom:
       - name: cluster-secrets
@@ -32,12 +29,10 @@ spec:
       NS: *namespace
       DB_NAME: *app
       DB_USER: *app
-      GATUS_DOMAIN: ${SECRET_DOMAIN_LOCAL}
+      GATUS_DOMAIN: ${SECRET_DOMAIN_FBE}
       GATUS_SUBDOMAIN: *app
       GATUS_PATH: /
-      GATUS_STATUS: "200"
-      GATUS_GROUP: internal-media
-      GATUS_PROTOCOL: http
+      GATUS_STATUS: "401"
   prune: true
   retryInterval: 1m
   sourceRef:
