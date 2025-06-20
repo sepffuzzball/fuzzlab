@@ -43,7 +43,7 @@ spec:
           http:
             port: &port 4000
       route:
-        main:
+        app:
           enabled: true
           hostnames:
             - "litellm.${SECRET_DOMAIN}"
