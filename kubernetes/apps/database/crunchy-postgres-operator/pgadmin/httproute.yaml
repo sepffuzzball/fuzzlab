@@ -4,6 +4,8 @@ kind: HTTPRoute
 metadata:
   name: pgadmin
   namespace: database
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
 spec:
   hostnames:
     - "pga.${SECRET_DOMAIN}"
@@ -11,9 +13,6 @@ spec:
     - name: external
       namespace: kube-system
       sectionName: https
-  ##Annotations not allowed
-  #annotations:
-  #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
   rules:
     - backendRefs:
         - name: pgadmin
