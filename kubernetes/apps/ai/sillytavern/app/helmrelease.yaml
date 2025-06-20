@@ -54,9 +54,9 @@ spec:
       app:
         enabled: true
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
         parentRefs:
-          - name: external
+          - name: internal
             namespace: kube-system
             #sectionName: https
         rules:
