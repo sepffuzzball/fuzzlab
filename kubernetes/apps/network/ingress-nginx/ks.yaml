@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-internal
+  name: &app ingress-nginx-fbe
   namespace: &namespace network
 spec:
   commonMetadata:
@@ -17,11 +17,13 @@ spec:
     - name: cilium-gateway
       namespace: kube-system
   interval: 30m
-  path: ./kubernetes/apps/network/ingress-nginx/internal
+  path: ./kubernetes/apps/network/ingress-nginx/fbe
   postBuild:
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   retryInterval: 1m
   sourceRef:
@@ -36,7 +38,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-external
+  name: &app ingress-nginx-proxy
   namespace: &namespace network
 spec:
   commonMetadata:
@@ -47,18 +49,15 @@ spec:
     secretRef:
       name: sops-age
   dependsOn:
-    - name: cilium-gateway
-      namespace: kube-system
-    - name: cloudflare-tunnel
-      namespace: network
-    - name: cloudflare-dns
-      namespace: network
+    - name: ingress-nginx-fbe
   interval: 30m
-  path: ./kubernetes/apps/network/ingress-nginx/external
+  path: ./kubernetes/apps/network/ingress-nginx/proxy
   postBuild:
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
   prune: true
   retryInterval: 1m
   sourceRef:
