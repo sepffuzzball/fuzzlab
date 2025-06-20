@@ -7,4 +7,4 @@ components:
 resources:
   - ./pv-smb.yaml
   - ./secrets.sops.yaml
-#  - ./sonarr/ks.yaml
+  - ./sonarr/ks.yaml
