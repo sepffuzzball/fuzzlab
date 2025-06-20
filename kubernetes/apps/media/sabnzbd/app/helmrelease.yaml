@@ -89,7 +89,7 @@ spec:
           http:
             port: *port
     route:
-      app:
+      main:
         enabled: true
         hostnames:
           - "sab.${SECRET_DOMAIN_LOCAL}"
@@ -99,7 +99,7 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: main
                 port: *port
 
 
