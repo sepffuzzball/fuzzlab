@@ -50,21 +50,36 @@ spec:
         ports:
           http:
             port: 8000
-
-    ingress:
+    route:
       app:
         enabled: true
-        className: internal
-        hosts:
-          - host: &host 'sillytavern.${SECRET_DOMAIN_LOCAL}'
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        #tls:
-        #  - hosts:
-        #      - *host
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+        rules:
+          - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          - backendRefs:
+              - identifier: app
+                port: *port
+    # ingress:
+    #   app:
+    #     enabled: true
+    #     className: internal
+    #     hosts:
+    #       - host: &host 'sillytavern.${SECRET_DOMAIN_LOCAL}'
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: app
+    #               port: http
+    #     #tls:
+    #     #  - hosts:
+    #     #      - *host
 
     persistence:
       config:
