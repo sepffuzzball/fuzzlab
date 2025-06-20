@@ -64,6 +64,7 @@ spec:
         enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "ai.${SECRET_DOMAIN}"
         #annotations:
         #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         parentRefs:
