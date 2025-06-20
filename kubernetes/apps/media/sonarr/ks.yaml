@@ -17,8 +17,11 @@ spec:
       name: sops-age
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
     - name: csi-driver-smb
+      namespace: storage
     - name: crunchy-postgres-operator
+      namespace: database
   interval: 30m
   path: ./kubernetes/apps/media/sonarr/app
   postBuild:
