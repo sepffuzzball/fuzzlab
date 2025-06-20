@@ -6,7 +6,6 @@ resources:
   - ./config/apollo.yaml
   - ./config/ark.yaml
   - ./config/bitwarden.yaml
-  #- ./config/cloud.yaml
   - ./config/dat.yaml
   - ./config/dockge.yaml
   - ./config/dumbdrop.yaml
@@ -15,7 +14,6 @@ resources:
   - ./config/home.yaml
   - ./config/kasm.yaml
   - ./config/kvm.yaml
-  #- ./config/matrix.yaml
   - ./config/powerwall.yaml
   - ./config/pve.yaml
   - ./config/notes.yaml
