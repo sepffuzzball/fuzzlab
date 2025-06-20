@@ -24,14 +24,6 @@ spec:
       main:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: ${PUID}
-            runAsGroup: ${PGID}
-            runAsNonRoot: true
-            fsGroup: ${PGID}
-            fsGroupChangePolicy: OnRootMismatch
-
         containers:
           main:
             image:
@@ -83,6 +75,13 @@ spec:
                 memory: 256Mi
               limits:
                 memory: 2048Mi
+    defaultPodOptions:
+      securityContext:
+        runAsUser: ${PUID}
+        runAsGroup: ${PGID}
+        runAsNonRoot: true
+        fsGroup: ${PGID}
+        fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         controller: main
