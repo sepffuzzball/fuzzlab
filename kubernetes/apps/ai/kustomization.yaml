@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: ai
 components:
   - ../../components/common
-resources:
-  - ./litellm/ks.yaml
+#resources:
+#  - ./litellm/ks.yaml
   #- ./openwebui/ks.yaml
   #- ./sillytavern/ks.yaml
   #- ./sillytavern-kip/ks.yaml
