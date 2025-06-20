@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app lidarr
 spec:
   interval: 30m
   chartRef:
@@ -16,67 +16,69 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
   values:
     controllers:
       arr:
-        annotations:
-          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            runAsNonRoot: true
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
+
         containers:
-          app:
+          main:
             image:
-              repository: ghcr.io/home-operations/sonarr
-              tag: 4.0.15.2940
+              repository: ghcr.io/home-operations/lidarr
+              tag: 2.13.0.4664
             env:
               TZ: ${TIMEZONE}
-              SONARR__INSTANCE_NAME: Sonarr
-              SONARR__PORT: &port 80
-              SONARR__LOG_LEVEL: info
-              SONARR__ANALYTICS_ENABLED: "False"
-              SONARR__AUTHENTICATION_METHOD: External
-              SONARR__THEME: dark
-              SONARR__POSTGRES_HOST:
+              LIDARR__INSTANCE_NAME: Lidarr
+              LIDARR__PORT: &port 80
+              LIDARR__LOG_LEVEL: info
+              LIDARR__ANALYTICS_ENABLED: "False"
+              LIDARR__AUTHENTICATION_METHOD: External
+              LIDARR__THEME: dark
+              LIDARR__POSTGRES_HOST:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_HOST
-              SONARR__POSTGRES_MAIN_DB: "${DB_NAME}"
-              SONARR__POSTGRES_LOG_DB: "${DB_NAME}-log"
-              SONARR__POSTGRES_PASSWORD:
+              LIDARR__POSTGRES_MAIN_DB: "${DB_NAME}"
+              LIDARR__POSTGRES_LOG_DB: "${DB_NAME}-log"
+              LIDARR__POSTGRES_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_PASS
-              SONARR__POSTGRES_USER:
+              LIDARR__POSTGRES_USER:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_USER
-              SONARR__API_KEY:
+              LIDARR__API_KEY:
                 valueFrom:
                   secretKeyRef:
                     name: cluster-media-secrets
-                    key: "SONARR_0_API_KEY"
+                    key: "LIDARR_0_API_KEY"
             resources:
               requests:
-                cpu: 100m
+                cpu: 18m
                 memory: 128Mi
               limits:
-                memory: 4096Mi
-    defaultPodOptions:
-      securityContext:
-        runAsUser: ${PUID}
-        runAsGroup: ${PGID}
-        runAsNonRoot: true
-        fsGroup: ${PGID}
-        fsGroupChangePolicy: OnRootMismatch
+                memory: 2048Mi
     service:
-      app:
+      main:
         controller: arr
         ports:
           http:
             port: *port
     route:
-      app:
+      main:
         enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
@@ -86,12 +88,12 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: main
                 port: *port
     persistence:
       config:
         enabled: true
-        existingClaim: sonarr-config
+        existingClaim: lidarr-config
         globalMounts:
           - path: /config
       tmp:
@@ -110,3 +112,18 @@ spec:
         existingClaim: lcl-downloads
         globalMounts:
           - path: /downloads
+      unprocessed:
+        enabled: true
+        existingClaim: lcl-unprocessed
+        globalMounts:
+          - path: /media/unprocessed
+      music:
+        enabled: true
+        existingClaim: lcl-music
+        globalMounts:
+          - path:  /media/music
+      videos:
+        enabled: true
+        existingClaim: lcl-videos
+        globalMounts:
+          - path: /media/video
