@@ -9,6 +9,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 10m
   path: "./kubernetes/apps/database/crunchy-postgres-operator/operator"
   prune: true
@@ -32,6 +36,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/cluster
@@ -55,6 +63,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/clustersecretstore
@@ -80,6 +92,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/database/crunchy-postgres-operator/userinit-controller
@@ -103,6 +119,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   interval: 30m
   timeout: 5m
 
