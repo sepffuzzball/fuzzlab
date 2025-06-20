@@ -3,8 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app authentik-redis
-  namespace: ${NS}
+  name: authentik-redis
 spec:
   interval: 1h
   chartRef:
