@@ -59,10 +59,7 @@ spec:
           - name: external
             namespace: kube-system
         rules:
-          - matches:
-            - path:
-                type: PathPrefix
-                value: /
+
           - backendRefs:
               - identifier: app
                 port: *port
