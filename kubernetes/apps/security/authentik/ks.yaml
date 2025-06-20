@@ -34,7 +34,7 @@ spec:
         name: cluster-settings
     substitute:
       APP: *app
-      NS: *ns
+      NS: *namespace
       DB_NAME: *app
       DB_USER: *app
       HOSTNAME: auth.fzbl.xyz
