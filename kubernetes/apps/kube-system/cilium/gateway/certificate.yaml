@@ -11,3 +11,94 @@ spec:
     kind: ClusterIssuer
   commonName: "${SECRET_DOMAIN}"
   dnsNames: ["${SECRET_DOMAIN}", "*.${SECRET_DOMAIN}"]
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_FBE/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_FBE/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_FBE}"
+  dnsNames:
+    - "${SECRET_DOMAIN_FBE}"
+    - "*.${SECRET_DOMAIN_FBE}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_SEPF/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_SEPF/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_SEPF}"
+  dnsNames:
+    - "${SECRET_DOMAIN_SEPF}"
+    - "*.${SECRET_DOMAIN_SEPF}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_FBEC/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_FBEC/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_FBEC}"
+  dnsNames:
+    - "${SECRET_DOMAIN_FBEC}"
+    - "*.${SECRET_DOMAIN_FBEC}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_FBS/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_FBS/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_FBS}"
+  dnsNames:
+    - "${SECRET_DOMAIN_FBS}"
+    - "*.${SECRET_DOMAIN_FBS}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_FBM/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_FBM/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_FBM}"
+  dnsNames:
+    - "${SECRET_DOMAIN_FBM}"
+    - "*.${SECRET_DOMAIN_FBM}"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/cert-manager.io/certificate_v1.json
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_DOMAIN_KMC/./-}-production"
+spec:
+  secretName: "${SECRET_DOMAIN_KMC/./-}-production-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_DOMAIN_KMC}"
+  dnsNames:
+    - "${SECRET_DOMAIN_KMC}"
+    - "*.${SECRET_DOMAIN_KMC}"
+
