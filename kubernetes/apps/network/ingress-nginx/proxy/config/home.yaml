@@ -5,15 +5,14 @@ metadata:
   name: home
 spec:
   type: ExternalName
-  #externalName: ${HOME_ADDR}
-  externalName: "10.0.103.173"
+  externalName: ${HOME_ADDR}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    nginx.ingress.kubernetes.io/upstream-vhost: "10.0.103.173"
+    nginx.ingress.kubernetes.io/upstream-vhost: ${HOME_ADDR}
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
   name: proxy-home
 spec:
