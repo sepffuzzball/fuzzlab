@@ -1,0 +1,145 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app sabnzbd
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            runAsNonRoot: true
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-operations/sabnzbd
+              tag: 4.5.1
+            env:
+              TZ: ${TIMEZONE}
+              SABNZBD__PORT: &port 80
+              SABNZBD__HOST_WHITELIST_ENTRIES: >-
+                sabnzbd,
+                sabnzbd.media,
+                sabnzbd.media.svc,
+                sabnzbd.media.svc.cluster,
+                sabnzbd.media.svc.cluster.local,
+                sab.fzbl.xyz,
+                sabnzbd.fzbl.xyz,
+                sab.fzbl.local,
+                sabnzbd.fzbl.local,
+                sab.fuzzball.enterprises,
+                sabnzbd.fuzzball.enterprises
+              SABNZBD__API_KEY: &apiKey
+                valueFrom:
+                    secretKeyRef:
+                      name: cluster-media-secrets
+                      key: "SECRET_SABNZBD_API_KEY"
+              SABNZBD__NZB_KEY: *apiKey
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api?mode=version
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              #readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 500m
+                memory: 256Mi
+              limits:
+                memory: 2048Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "sab.${SECRET_DOMAIN_LOCAL}"
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+
+
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: internal
+    #     annotations:
+    #       #External-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    #       hajimari.io/icon: download-box
+    #     hosts:
+    #       - host: &host "sab.${SECRET_DOMAIN_LOCAL}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #     #tls:
+    #     #  - hosts:
+    #     #      - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: sabnzbd-config
+        globalMounts:
+          - path: /config
+      tmp:
+        type: emptyDir
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      lcl:
+        enabled: true
+        existingClaim: lcl
+        globalMounts:
+          - path: /lcl
+      downloads:
+        enabled: true
+        existingClaim: lcl-downloads
+        globalMounts:
+          - path: /downloads

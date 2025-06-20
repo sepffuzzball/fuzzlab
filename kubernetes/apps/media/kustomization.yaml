@@ -7,5 +7,6 @@ components:
 resources:
 #  - ./plex/ks.yaml
   - ./pv-smb.yaml
+  - ./sabnzbd/ks.yaml
   - ./secrets.sops.yaml
   - ./sonarr/ks.yaml
