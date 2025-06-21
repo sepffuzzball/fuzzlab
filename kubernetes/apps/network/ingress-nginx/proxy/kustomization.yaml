@@ -16,5 +16,5 @@ resources:
   # - ./config/kvm.yaml
   # - ./config/powerwall.yaml
   # - ./config/pve.yaml
-  # - ./config/notes.yaml
+   - ./config/notes.yaml
   # - ./config/sepffuzzball.yaml
