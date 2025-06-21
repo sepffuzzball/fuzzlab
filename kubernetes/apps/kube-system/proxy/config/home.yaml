@@ -4,8 +4,15 @@ kind: Service
 metadata:
   name: home
 spec:
-  type: ExternalName
-  externalName: ${HOME_ADDR}
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  externalIPs:
+    - ${HOME_ADDR}
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
