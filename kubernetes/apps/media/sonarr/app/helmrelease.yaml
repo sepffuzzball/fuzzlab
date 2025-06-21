@@ -33,7 +33,7 @@ spec:
               SONARR__LOG_LEVEL: info
               SONARR__ANALYTICS_ENABLED: "False"
               SONARR__AUTH_METHOD: External
-              SONARR__AUTH_REQUIRED: DisabledForLocalAddresses_
+              SONARR__AUTH_REQUIRED: DisabledForLocalAddresses
               SONARR__THEME: dark
               SONARR__POSTGRES_HOST:
                 valueFrom:
