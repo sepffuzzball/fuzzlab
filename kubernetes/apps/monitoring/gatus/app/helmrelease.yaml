@@ -134,9 +134,6 @@ spec:
               - identifier: app
                 port: *port
 
-    serviceAccount:
-      create: true
-      name: gatus
     persistence:
       config:
         type: emptyDir
