@@ -86,6 +86,7 @@ spec:
         enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "dashboard.${SECRET_DOMAIN}"
         parentRefs:
           - name: external
             namespace: kube-system
