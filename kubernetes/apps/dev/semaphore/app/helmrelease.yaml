@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: semaphore
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      semaphore:
+        annotations:
+          reloader.stakater.com/auto: 'true'
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/semaphore
+              tag: v2.9.37@sha256:da37f0083a1a3d642eb5d4494244ede866bd8dfe6837dc8eae1250a6c1a411f6
+
+            envFrom:
+              - secretRef:
+                  name: semaphore-secrets
+
+            env:
+              SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+              SEMAPHORE_PORT: &port 3000
+
+              SEMAPHORE_LDAP_ACTIVATED: 'no'
+              SEMAPHORE_DB_DIALECT: postgres
+              SEMAPHORE_DB_PORT: '5432'
+              SEMAPHORE_DB_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_USER
+              SEMAPHORE_DB_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_PASS
+              SEMAPHORE_DB_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_HOST
+              SEMAPHORE_DB:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_DBNAME
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 50Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        controller: semaphore
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "ansible.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
