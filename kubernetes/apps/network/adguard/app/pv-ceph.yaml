@@ -21,7 +21,7 @@ spec:
   storageClassName: csi-cephfs-sc
   claimRef:
     name: adguard-config
-    namespace: adguard
+    namespace: ${NS}
   capacity:
     storage: 2Gi
   volumeMode: Filesystem
@@ -68,7 +68,7 @@ spec:
   storageClassName: csi-cephfs-sc
   claimRef:
     name: adguard-data
-    namespace: adguard
+    namespace: ${NS}
   capacity:
     storage: 2Gi
   volumeMode: Filesystem
