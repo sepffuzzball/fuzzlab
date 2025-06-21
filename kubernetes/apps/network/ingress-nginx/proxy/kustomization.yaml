@@ -2,19 +2,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./config/adguard.yaml
-  - ./config/apollo.yaml
-  - ./config/ark.yaml
-  - ./config/bitwarden.yaml
-  - ./config/dat.yaml
-  - ./config/dockge.yaml
-  - ./config/dumbdrop.yaml
-  - ./config/frigate.yaml
-  - ./config/gitlab.yaml
-  - ./config/home.yaml
-  - ./config/kasm.yaml
-  - ./config/kvm.yaml
-  - ./config/powerwall.yaml
-  - ./config/pve.yaml
-  - ./config/notes.yaml
-  - ./config/sepffuzzball.yaml
+  # - ./config/adguard.yaml
+  # - ./config/apollo.yaml
+  # - ./config/ark.yaml
+  # - ./config/bitwarden.yaml
+  # - ./config/dat.yaml
+  # - ./config/dockge.yaml
+  # - ./config/dumbdrop.yaml
+  # - ./config/frigate.yaml
+  # - ./config/gitlab.yaml
+   - ./config/home.yaml
+  # - ./config/kasm.yaml
+  # - ./config/kvm.yaml
+  # - ./config/powerwall.yaml
+  # - ./config/pve.yaml
+  # - ./config/notes.yaml
+  # - ./config/sepffuzzball.yaml
