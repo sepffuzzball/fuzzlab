@@ -19,11 +19,11 @@ ingress:
   - hostname: "*.${SECRET_DOMAIN_SEPF}"
     service: *svck
 
-  - hostname: "${SECRET_DOMAIN_FBE}"
-    service: hello_world
+  #- hostname: "${SECRET_DOMAIN_FBE}"
+  #  service: hello_world
     #service: &svcf https://cilium-ingress.kube-system.svc.cluster.local:443
-  - hostname: "*.${SECRET_DOMAIN_FBE}"
-    service: hello_world
+  #- hostname: "*.${SECRET_DOMAIN_FBE}"
+  #  service: hello_world
     #originRequest:
     #  noTLSVerify: true
     #service: *svcf
