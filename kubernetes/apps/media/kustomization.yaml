@@ -9,7 +9,11 @@ resources:
   - ./lidarr/ks.yaml
   #- ./jellyfin/ks.yaml
   #- ./plex/ks.yaml
+  #- ./prowlarr/ks.yaml
   - ./pv-smb.yaml
+  #- ./radarr/ks.yaml
+  #- ./readarr/ks.yaml
+  #- ./readarr-audio/ks.yaml
   - ./sabnzbd/ks.yaml
   - ./secrets.sops.yaml
   - ./sonarr/ks.yaml
