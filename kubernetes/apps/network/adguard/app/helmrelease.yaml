@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app adguard
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      adguard:
+        replicas: 1
+        strategy: RollingUpdate
+
+        containers:
+          app:
+            image:
+              repository: adguard/adguardhome
+              tag: v0.107.59
+            env:
+              TZ: "${TIMEZONE}"
+
+    service:
+      app:
+        controller: adguard
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${AD01_ADDR}
+        ports:
+          http:
+            primary: true
+            port: 80
+            #port: 3000 - use this for initial setup
+          dns-tcp:
+            port: 53
+            protocol: TCP
+          dns-udp:
+            port: 53
+            protocol: UDP
+
+    persistence:
+      data:
+        existingClaim: adguard-data
+        globalMounts:
+          - path: /opt/adguardhome/data
+      conf:
+        existingClaim: adguard-config
+        globalMounts:
+          - path: /opt/adguardhome/conf
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+    # ingress:
+    #   app:
+    #     enabled: true
+    #     className: internal
+    #     hosts:
+    #       - host: &host adguard.${SECRET_DOMAIN_LOCAL}
+    #         paths:
+    #           - path: /
+    #             pathType: Prefix
+    #             service:
+    #               identifier: app
+    #               port: http
