@@ -6,6 +6,6 @@ components:
   - ../../components/common
 resources:
   - ./homepage/ks.yaml
-  - ./shlink/ks.yaml
+  #- ./shlink/ks.yaml
   - ./searxng/ks.yaml
   - ./stirling-pdf/ks.yaml
