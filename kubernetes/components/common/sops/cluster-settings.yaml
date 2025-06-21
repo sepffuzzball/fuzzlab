@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  AD01_ADDR: "10.0.2.101"
+  AD01_ADDR: "10.0.101.101"
   AD02_ADDR: "10.0.2.50"
   AD03_ADDR: "10.0.2.10"
   ANSIBLE_ADDR: "10.0.2.102"
