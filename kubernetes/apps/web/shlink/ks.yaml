@@ -12,7 +12,9 @@ spec:
       name: sops-age
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
     - name: crunchy-postgres-operator-cluster
+      namespace: database
   path: ./kubernetes/apps/web/shlink/app
   prune: true
   sourceRef:
