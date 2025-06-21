@@ -84,23 +84,22 @@ spec:
         loadBalancerIP: ${PLEX_ADDR}
         ports:
           http:
-            port: 32400
+            port: &port 32400
 
-    ingress:
+    route:
       app:
-        className: fbe
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
-        hosts:
-          - host: &hostName plex.${SECRET_DOMAIN_FBE}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *hostName
+        enabled: true
+        hostnames:
+          - "plex.${SECRET_DOMAIN_FBE}"
+        parentRefs:
+          - name: external-fbe
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+
 
     persistence:
       config:
