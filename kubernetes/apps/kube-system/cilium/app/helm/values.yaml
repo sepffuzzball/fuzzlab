@@ -26,6 +26,9 @@ gatewayAPI:
   enabled: true
 hubble:
   enabled: false
+ingressController:
+  enabled: true
+  loadbalancerMode: shared
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.88.0.0/16"
