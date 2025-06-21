@@ -55,7 +55,7 @@ spec:
       main:
         enabled: true
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
         parentRefs:
           - name: internal
             namespace: kube-system
