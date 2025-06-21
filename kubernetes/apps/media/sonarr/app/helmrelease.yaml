@@ -71,13 +71,11 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
-        controller: arr
         ports:
           http:
             port: *port
     route:
       app:
-        enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
         parentRefs:
