@@ -26,7 +26,9 @@ spec:
   timeout: 5m
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
     - name: csi-driver-nfs
+      namespace: storage
   components:
   - ../../../../components/gatus/external
   postBuild:

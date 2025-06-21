@@ -26,8 +26,11 @@ spec:
   timeout: 5m
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
     - name: csi-driver-nfs
+      namespace: storage
     - name: crunchy-postgres-operator-cluster
+      namespace: database
   postBuild:
     substituteFrom:
       - name: cluster-secrets
