@@ -12,9 +12,13 @@ ingress:
   - hostname: "*.${SECRET_DOMAIN_KMC}"
     service: *svck
   - hostname: "${SECRET_DOMAIN_FBE}"
-    service: &svcf https://cilium-gateway-external-fbe.kube-system.svc.cluster.local
+    service: &svcf https://cilium-ingress.kube-system.svc.cluster.local
   - hostname: "*.${SECRET_DOMAIN_FBE}"
     service: *svcf
+  # - hostname: "${SECRET_DOMAIN_FBE}"
+  #   service: &svcf https://cilium-gateway-external-fbe.kube-system.svc.cluster.local
+  # - hostname: "*.${SECRET_DOMAIN_FBE}"
+  #   service: *svcf
   ## Can only use either cilium gateway or ingress-nginx, now to figure out how to do everything on either
   #- hostname: "${SECRET_DOMAIN}"
   #  service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
