@@ -7,7 +7,8 @@ metadata:
 spec:
   allowFirstLastIPs: "No"
   blocks:
-    #- cidr: "10.0.100.0/22"
+    - start: "10.0.100.10"
+      stop: "10.0.100.254"
     - start: "10.0.101.10"
       stop: "10.0.101.254"
     - start: "10.0.102.10"
