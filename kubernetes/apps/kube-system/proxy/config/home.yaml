@@ -5,7 +5,7 @@ metadata:
   name: home
 spec:
   type: ExternalName
-  externalName: ${NOTES_ADDR}
+  externalName: ${HOME_ADDR}
 ---
 apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
