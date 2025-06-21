@@ -27,7 +27,9 @@ spec:
   timeout: 5m
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
     - name: crunchy-postgres-operator
+      namespace: database
   components:
   - ../../../../components/gatus/external
   postBuild:
