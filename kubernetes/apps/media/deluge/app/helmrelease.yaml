@@ -38,8 +38,8 @@ spec:
               ENABLE_PRIVOXY: yes
               LAN_NETWORK: 172.21.0.0/16,172.17.0.0/16,10.0.0.0/16
               NAME_SERVERS: 10.0.1.1,1.1.1.1,9.9.9.9
-              PGID: 1100
-              PUID: 1100
+              PGID: ${PGID}
+              PUID: ${PUID}
               STRICT_PORT_FORWARD: yes
               TZ: ${TIMEZONE}
               UMASK: 002
@@ -88,11 +88,27 @@ spec:
         controller: deluge
         ports:
           http:
-            port: *port
-          soulseek:
+            port: &port 8112
+          privoxy:
             enabled: true
-            port: *soulseekPort
+            port: 8118
             protocol: TCP
+          microsocks:
+            enable: true
+            port: 9118
+            protocol: TCP
+          vpn1:
+            enable: true
+            port: 58846
+            protocol: TCP
+          vpn2:
+            enable: true
+            port: 58946
+            protocol: TCP
+          vpn3:
+            enable: true
+            port: 58946
+            protocol: UDP
     # ingress:
     #   app:
     #     className: internal
