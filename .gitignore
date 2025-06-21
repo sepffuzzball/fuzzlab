@@ -11,6 +11,7 @@
 # Template config files
 /cluster.yaml
 /nodes.yaml
+/whoami.yaml
 # Kubernetes
 kubeconfig
 talosconfig
