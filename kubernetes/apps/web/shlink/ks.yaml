@@ -32,7 +32,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      NS: *ns
+      NS: *namespace
       DB_NAME: *app
       DB_USER: *app
       GATUS_DOMAIN: ${SECRET_DOMAIN}
