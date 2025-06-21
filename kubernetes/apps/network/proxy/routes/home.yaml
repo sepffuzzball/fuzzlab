@@ -10,7 +10,7 @@ spec:
   hostnames:
     - "home.${SECRET_DOMAIN_FBE}"
   parentRefs:
-    - name: external
+    - name: external-fbe
       namespace: kube-system
       sectionName: https
   rules:
