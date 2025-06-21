@@ -5,5 +5,4 @@ namespace: web
 components:
   - ../../components/common
 resources:
-  - ./namespace.yaml
   - ./gatus/ks.yaml
