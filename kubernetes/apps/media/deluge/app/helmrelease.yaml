@@ -94,19 +94,19 @@ spec:
             port: 8118
             protocol: TCP
           microsocks:
-            enable: true
+            enabled: true
             port: 9118
             protocol: TCP
           vpn1:
-            enable: true
+            enabled: true
             port: 58846
             protocol: TCP
           vpn2:
-            enable: true
+            enabled: true
             port: 58946
             protocol: TCP
           vpn3:
-            enable: true
+            enabled: true
             port: 58946
             protocol: UDP
     # ingress:
