@@ -3,6 +3,12 @@ originRequest:
   originServerName: "external.${SECRET_DOMAIN}"
 
 ingress:
+  - hostname: "${SECRET_DOMAIN_FBE}"
+    service: &svcf https://cilium-ingress.kube-system.svc.cluster.local
+  - hostname: "*.${SECRET_DOMAIN_FBE}"
+    originRequest:
+      noTLSVerify: true
+    service: *svcf
   - hostname: "${SECRET_DOMAIN}"
     service: &svc https://cilium-gateway-external.kube-system.svc.cluster.local
   - hostname: "*.${SECRET_DOMAIN}"
@@ -19,12 +25,7 @@ ingress:
     service: http://10.0.2.10
   - hostname: "whoami.${SECRET_DOMAIN_FBE}"
     service: "http://whoami.whoami.svc.cluster.local"
-  - hostname: "${SECRET_DOMAIN_FBE}"
-    service: &svcf https://cilium-ingress.kube-system.svc.cluster.local
-  - hostname: "*.${SECRET_DOMAIN_FBE}"
-    originRequest:
-      noTLSVerify: true
-    service: *svcf
+
   # - hostname: "${SECRET_DOMAIN_FBE}"
   #   service: &svcf https://cilium-gateway-external-fbe.kube-system.svc.cluster.local
   # - hostname: "*.${SECRET_DOMAIN_FBE}"
