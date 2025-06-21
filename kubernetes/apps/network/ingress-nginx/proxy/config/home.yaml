@@ -16,7 +16,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
   name: proxy-home
 spec:
-  ingressClassName: fbe
+  ingressClassName: cilium
   rules:
     - host: &host home.${SECRET_DOMAIN_FBE}
       http:
