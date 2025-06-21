@@ -20,24 +20,24 @@
           url: http://gatus.monitoring.svc.cluster.local
 - Hardware:
   - Dat:
-        href: http://10.0.2.20/
-        siteMonitor: http://10.0.2.20/
+        href: http://${DAT_ADDR}/
+        siteMonitor: http://${DAT_ADDR}/
         icon: truenas.png
         description: Truenas Storage Server
         widget:
           type: truenas
-          url: http://10.0.2.20/
+          url: http://${DAT_ADDR}/
           key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
           enablePools: true
           nasType: scale
   - Proxmox:
         href: https://pve.${SECRET_DOMAIN_FBE}
-        siteMonitor: https://10.0.1.64:8006/
+        siteMonitor: https://${PVE_ADDR}:8006/
         icon: proxmox.png
         description: Proxmox Datacenter
         widget:
           type: proxmox
-          url: https://10.0.1.64:8006/
+          url: https://${PVE_ADDR}:8006/
           username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
           password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN}}"
           node: pve64
@@ -67,21 +67,21 @@
 
     - Frigate:
         href: https://frigate.${SECRET_DOMAIN}
-        siteMonitor: http://10.0.2.106:5000
+        siteMonitor: http://${FRIGATE_ADDR}:5000
         icon: frigate.png
         #description: Frigate Doorbell
         widget:
           type: frigate
-          url: http://10.0.2.106:5000
+          url: http://${FRIGATE_ADDR}:5000
           enableRecentEvents: false
     - HomeAssistant:
         href: https://home.${SECRET_DOMAIN_FBE}
-        siteMonitor: http://10.0.2.10
+        siteMonitor: http://${HOME_ADDR}
         icon: home-assistant.png
         #description: Home Assistant
         widget:
           type: homeassistant
-          url: https://10.0.2.10
+          url: https://${HOME_ADDR}
           key: "{{HOMEPAGE_VAR_HASS_TOKEN}}"
     - Mealie:
         href: https://mealie.${SECRET_DOMAIN_FBE}
@@ -176,7 +176,7 @@
     - Adguard01:
         href: https://adguard01.${SECRET_DOMAIN_FBE}
         icon: adguard-home.png
-        siteMonitor: http://10.0.2.101/
+        siteMonitor: http://${AD01_ADDR}/
         #description: Adguard 01
         widget:
           type: adguard
@@ -186,7 +186,7 @@
           password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
     - Adguard02:
         href: https://adguard02.${SECRET_DOMAIN_FBE}
-        siteMonitor: http://10.0.2.50/
+        siteMonitor: http://${AD02_ADDR}/
         icon: adguard-home.png
         #description: Adguard 02
         widget:
@@ -198,7 +198,7 @@
     - Adguard03:
         href: https://adguard03.${SECRET_DOMAIN_FBE}
         icon: adguard-home.png
-        siteMonitor: http://10.0.2.10/a0d7b954_adguard/ingress
+        siteMonitor: http://${AD03_ADDR}/a0d7b954_adguard/ingress
         #description: Adguard 03
         widget:
           type: adguard
