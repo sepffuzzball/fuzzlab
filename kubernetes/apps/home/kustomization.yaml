@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: home
+components:
+  - ../../components/common
+resources:
+  - ./km/ks.yaml
+  - ./beginnings/ks.yaml
+  - ./blog/ks.yaml
+  #- ./frigate/ks.yaml
+  - ./mealie/ks.yaml
+  - ./secrets.sops.yaml
+  - ./teslamate/ks.yaml
