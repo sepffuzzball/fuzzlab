@@ -13,7 +13,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/upstream-vhost: ${HOME_ADDR}
-    external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_FBE}"
   name: proxy-home
 spec:
   ingressClassName: cilium
