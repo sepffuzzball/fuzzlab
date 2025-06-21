@@ -78,7 +78,7 @@ spec:
         enabled: true
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-          - "semaphore.${SECRET_DOMAIN}"
+          - "ansible.${SECRET_DOMAIN}"
         parentRefs:
           - name: external
             namespace: kube-system
