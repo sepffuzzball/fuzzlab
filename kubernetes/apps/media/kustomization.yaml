@@ -6,6 +6,7 @@ components:
   - ../../components/common
 resources:
   - ./lidarr/ks.yaml
+  - ./jellyfin/ks.yaml
   - ./plex/ks.yaml
   - ./pv-smb.yaml
   - ./sabnzbd/ks.yaml
