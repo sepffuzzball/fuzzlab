@@ -1,0 +1,134 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: deluge
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
+      namespace: storage
+  values:
+    controllers:
+      deluge:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: binhex/arch-delugevpn
+              tag: 2.2
+            env:
+              DEBUG: false
+              DELUGE_DAEMON_LOG_LEVEL: info
+              DELUGE_WEB_LOG_LEVEL: info
+              ENABLE_PRIVOXY: yes
+              LAN_NETWORK: 172.21.0.0/16,172.17.0.0/16,10.0.0.0/16
+              NAME_SERVERS: 10.0.1.1,1.1.1.1,9.9.9.9
+              PGID: 1100
+              PUID: 1100
+              STRICT_PORT_FORWARD: yes
+              TZ: ${TIMEZONE}
+              UMASK: 002
+              VPN_CLIENT: openvpn
+              VPN_ENABLED: yes
+              VPN_PROV: protonvpn
+              DELUGE_ENABLE_WEBUI_PASSWORD: no
+            envFrom:
+              - secretRef:
+                  name: deluge-secrets
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: true
+              readOnlyRootFilesystem: false
+              capabilities:
+                drop: ["ALL"]
+                add: ["NET_BIND"]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 2Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: deluge
+        ports:
+          http:
+            port: *port
+          soulseek:
+            enabled: true
+            port: *soulseekPort
+            protocol: TCP
+    # ingress:
+    #   app:
+    #     className: internal
+    #     hosts:
+    #       - host: &host "deluge.${SECRET_DOMAIN_LOCAL}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: app
+    #               port: http
+    # route:
+    #   app:
+    #     enabled: true
+    #     hostnames:
+    #       - "deluge.${SECRET_DOMAIN_LOCAL}"
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: app
+    #             port: *port
+
+    persistence:
+      config:
+        existingClaim: deluge-config
+        globalMounts:
+          - path: /config
+      tmp:
+        type: emptyDir
+
+      lcl:
+        existingClaim: lcl
+
+      downloads:
+        existingClaim: lcl-downloads
+        globalMounts:
+          - path: /downloads

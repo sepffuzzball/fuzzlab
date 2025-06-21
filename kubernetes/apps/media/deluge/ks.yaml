@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app deluge
+  namespace: &namespace media
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  components:
+  - ../../../../components/gatus/external
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
+      namespace: storage
+  interval: 30m
+  path: ./kubernetes/apps/media/deluge/app
+  prune: true
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      DB_NAME: *app
+      DB_USER: *app
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
+      GATUS_SUBDOMAIN: *app
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
+      GATUS_GROUP: media
+      GATUS_PROTOCOL: https
+  retryInterval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: *namespace
+  timeout: 30m
+  wait: false

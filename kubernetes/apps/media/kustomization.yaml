@@ -5,6 +5,7 @@ namespace: media
 components:
   - ../../components/common
 resources:
+  - ./deluge/ks.yaml
   - ./lidarr/ks.yaml
   #- ./jellyfin/ks.yaml
   #- ./plex/ks.yaml
