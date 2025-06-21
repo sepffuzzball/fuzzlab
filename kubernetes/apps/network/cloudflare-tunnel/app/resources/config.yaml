@@ -7,6 +7,10 @@ ingress:
     service: &svc https://cilium-gateway-external.kube-system.svc.cluster.local
   - hostname: "*.${SECRET_DOMAIN}"
     service: *svc
+  - hostname: "${SECRET_DOMAIN_KMC}"
+    service: &svc https://cilium-gateway-external.kube-system.svc.cluster.local
+  - hostname: "*.${SECRET_DOMAIN_KMC}"
+    service: *svc
   ## Can only use either cilium gateway or ingress-nginx, now to figure out how to do everything on either
   #- hostname: "${SECRET_DOMAIN}"
   #  service: https://ingress-nginx-external-controller.network.svc.cluster.local:443

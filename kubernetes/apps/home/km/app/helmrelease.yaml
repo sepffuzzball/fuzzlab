@@ -46,7 +46,7 @@ spec:
         hostnames:
           - "${SECRET_DOMAIN_KMC}"
         parentRefs:
-          - name: external
+          - name: external-kmc
             namespace: kube-system
             sectionName: https
         rules:
