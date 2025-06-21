@@ -6,6 +6,9 @@ metadata:
   name: &app gpu-device-plugin
   namespace: &namespace tools
 spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   decryption:
     provider: sops
     secretRef:

@@ -6,6 +6,9 @@ metadata:
   name: &app nvidia-device-plugin
   namespace: &namespace tools
 spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   decryption:
     provider: sops
     secretRef:

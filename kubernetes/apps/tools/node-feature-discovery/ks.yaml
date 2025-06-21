@@ -6,6 +6,9 @@ metadata:
   name: &app node-feature-discovery
   namespace: &namespace tools
 spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   decryption:
     provider: sops
     secretRef:
@@ -44,7 +47,7 @@ spec:
   targetNamespace: *namespace
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
+      app.kubernetes.io/name: *app
   interval: 30m
   timeout: 5m
   path: ./kubernetes/apps/tools/node-feature-discovery/rules
