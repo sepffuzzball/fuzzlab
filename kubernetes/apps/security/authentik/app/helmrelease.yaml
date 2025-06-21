@@ -120,15 +120,20 @@ spec:
           enabled: true
           hostnames:
             - "auth.${SECRET_DOMAIN}"
+            - "deluge.${SECRET_DOMAIN}"
+            - "frigate.${SECRET_DOMAIN}"
             - "lidarr.${SECRET_DOMAIN}"
             - "kiptavern.${SECRET_DOMAIN}"
             - "prowlarr.${SECRET_DOMAIN}"
             - "radarr.${SECRET_DOMAIN}"
             - "readarr.${SECRET_DOMAIN}"
+            - "readarr-audio.${SECRET_DOMAIN}"
             - "sab.${SECRET_DOMAIN}"
+            - "shlink.${SECRET_DOMAIN}"
             - "slskd.${SECRET_DOMAIN}"
             - "sonarr.${SECRET_DOMAIN}"
             - "sillytavern.${SECRET_DOMAIN}"
+            - "teslamate.${SECRET_DOMAIN}"
           annotations:
             external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           parentRefs:
@@ -145,40 +150,6 @@ spec:
             - backendRefs:
                 - identifier: app
                   port: *port
-
-
-
-      # ingress:
-      #   enabled: true
-      #   ingressClassName: external
-      #   annotations:
-      #     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-      #     nginx.ingress.kubernetes.io/configuration-snippet: |
-      #       more_set_headers "X-Frame-Options: SAMEORIGIN";
-      #   hosts:
-      #     - &host "auth.${SECRET_DOMAIN}"
-      #     - "deluge.${SECRET_DOMAIN}"
-      #     - "frigate.${SECRET_DOMAIN}"
-      #     - "kuma.${SECRET_DOMAIN}"
-      #     - "lidarr.${SECRET_DOMAIN}"
-      #     - "mylar.${SECRET_DOMAIN}"
-      #     - "n8n.${SECRET_DOMAIN}"
-      #     - "prowlarr.${SECRET_DOMAIN}"
-      #     - "radarr.${SECRET_DOMAIN}"
-      #     - "readarr.${SECRET_DOMAIN}"
-      #     - "sab.${SECRET_DOMAIN}"
-      #     - "shlink.${SECRET_DOMAIN}"
-      #     - "sillytavern.${SECRET_DOMAIN}"
-      #     - "slskd.${SECRET_DOMAIN}"
-      #     - "sonarr.${SECRET_DOMAIN}"
-      #     - "status.${SECRET_DOMAIN}"
-      #     - "kiptavern.${SECRET_DOMAIN}"
-      #     - "teslamate.${SECRET_DOMAIN}"
-      #   paths: ["/"]
-      #   pathType: Prefix
-      #   tls:
-      #     - hosts:
-      #         - *host
 
     worker:
       replicas: 1
