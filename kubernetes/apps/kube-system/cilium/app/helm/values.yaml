@@ -28,7 +28,11 @@ hubble:
   enabled: false
 ingressController:
   enabled: true
+  default: true
   loadbalancerMode: shared
+  service:
+    annotations:
+     io.cilium/lb-ipam-ips: 10.0.100.102
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.88.0.0/16"
