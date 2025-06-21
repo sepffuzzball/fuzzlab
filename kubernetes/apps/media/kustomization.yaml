@@ -12,3 +12,4 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./secrets.sops.yaml
   - ./sonarr/ks.yaml
+  - ./slskd/ks.yaml

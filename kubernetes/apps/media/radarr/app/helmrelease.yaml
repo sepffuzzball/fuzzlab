@@ -1,0 +1,126 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: &app radarr
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+  values:
+    controllers:
+      arr:
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            runAsNonRoot: true
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-operations/radarr
+              tag: 5.22.2.9862
+            env:
+              TZ: ${TIMEZONE}
+              RADARR__INSTANCE_NAME: radarr
+              RADARR__PORT: &port 80
+              RADARR__LOG_LEVEL: info
+              RADARR__ANALYTICS_ENABLED: "False"
+              RADARR__AUTHENTICATION_METHOD: External
+              RADARR__THEME: dark
+              RADARR__POSTGRES_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_HOST
+              RADARR__POSTGRES_MAIN_DB: "${DB_NAME}"
+              RADARR__POSTGRES_LOG_DB: "${DB_NAME}-log"
+              RADARR__POSTGRES_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_PASS
+              RADARR__POSTGRES_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_USER
+              RADARR__API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: cluster-media-secrets
+                    key: "RADARR_0_API_KEY"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 2048Mi
+    service:
+      main:
+        controller: arr
+        ports:
+          http:
+            port: *port
+    ingress:
+      main:
+        enabled: true
+        className: internal
+        annotations:
+          #External-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hajimari.io/icon: movie-filter
+        hosts:
+          - host: &host "radarr.${SECRET_DOMAIN_LOCAL}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        #tls:
+        #  - hosts:
+        #      - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: radarr-config
+        globalMounts:
+          - path: /config
+      tmp:
+        type: emptyDir
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      lcl:
+        enabled: true
+        existingClaim: lcl
+        globalMounts:
+          - path: /lcl
+      downloads:
+        enabled: true
+        existingClaim: lcl-downloads
+        globalMounts:
+          - path: /downloads
