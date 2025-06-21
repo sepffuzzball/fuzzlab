@@ -22,33 +22,33 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
           #security.alpha.kubernetes.io/sysctls: net.ipv4.ping_group_range=0 2147483647
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/haraldkoch/postgres-init
-              tag: 17.4@sha256:0bf77003ceaf4afa50c6f7a5b770c3086a893145fe48b2c47b7acfa48a54a96a
-            envFrom: &secret
-              - secretRef:
-                  name: gatus-db-secret
-          init-config:
-            dependsOn: init-db
-            image:
-              repository: ghcr.io/kiwigrid/k8s-sidecar
-              tag: 1.30.2@sha256:cdb361e67b1b5c4945b6e943fbf5909badaaeb51595eaf75fb7493b3abbbe10f
-            env:
-              FOLDER: /config
-              LABEL: gatus.io/enabled
-              NAMESPACE: ALL
-              RESOURCE: both
-              UNIQUE_FILENAMES: true
-              METHOD: WATCH
-            restartPolicy: Always
-            resources:
-              requests:
-                cpu: 50m
-                memory: 128Mi
-              limits:
-                memory: 256Mi
+        # initContainers:
+        #   init-db:
+        #     image:
+        #       repository: ghcr.io/haraldkoch/postgres-init
+        #       tag: 17.4@sha256:0bf77003ceaf4afa50c6f7a5b770c3086a893145fe48b2c47b7acfa48a54a96a
+        #     envFrom: &secret
+        #       - secretRef:
+        #           name: gatus-db-secret
+        #   init-config:
+        #     dependsOn: init-db
+        #     image:
+        #       repository: ghcr.io/kiwigrid/k8s-sidecar
+        #       tag: 1.30.2@sha256:cdb361e67b1b5c4945b6e943fbf5909badaaeb51595eaf75fb7493b3abbbe10f
+        #     env:
+        #       FOLDER: /config
+        #       LABEL: gatus.io/enabled
+        #       NAMESPACE: ALL
+        #       RESOURCE: both
+        #       UNIQUE_FILENAMES: true
+        #       METHOD: WATCH
+        #     restartPolicy: Always
+        #     resources:
+        #       requests:
+        #         cpu: 50m
+        #         memory: 128Mi
+        #       limits:
+        #         memory: 256Mi
         containers:
           app:
             image:

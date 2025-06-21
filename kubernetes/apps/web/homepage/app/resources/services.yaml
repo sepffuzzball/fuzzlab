@@ -38,8 +38,8 @@
         widget:
           type: proxmox
           url: https://10.0.1.64:8006/
-          username: "{{HOMEPAGE_VAR_PROXMOX_USER}}" 
-          password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN}}" 
+          username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
+          password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN}}"
           node: pve64
   #- Unifi:
   #      href: https://unifi.ui.com
@@ -81,7 +81,7 @@
         #description: Home Assistant
         widget:
           type: homeassistant
-          url: https://home.${SECRET_DOMAIN_FBE}
+          url: https://10.0.2.10
           key: "{{HOMEPAGE_VAR_HASS_TOKEN}}"
     - Mealie:
         href: https://mealie.${SECRET_DOMAIN_FBE}
@@ -113,7 +113,7 @@
     #      type: sabnzbd
     #      url: http://sabnzbd.media.svc.cluster.local
     #      key: "{{HOMEPAGE_VAR_SABNZBD_TOKEN}}"
-#- Media: 
+#- Media:
     #- Plex:
     #    href: https://plex.${SECRET_DOMAIN}
     #    siteMonitor: http://plex.media.svc.cluster.local:32400
