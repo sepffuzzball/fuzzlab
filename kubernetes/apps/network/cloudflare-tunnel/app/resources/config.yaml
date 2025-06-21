@@ -11,6 +11,10 @@ ingress:
     service: &svck https://cilium-gateway-external-kmc.kube-system.svc.cluster.local
   - hostname: "*.${SECRET_DOMAIN_KMC}"
     service: *svck
+  - hostname: "${SECRET_DOMAIN_SEPF}"
+    service: &svck https://cilium-gateway-external-spf.kube-system.svc.cluster.local
+  - hostname: "*.${SECRET_DOMAIN_SEPF}"
+    service: *svck
   - hostname: "${SECRET_DOMAIN_FBE}"
     service: &svcf https://cilium-ingress.kube-system.svc.cluster.local
   - hostname: "*.${SECRET_DOMAIN_FBE}"
