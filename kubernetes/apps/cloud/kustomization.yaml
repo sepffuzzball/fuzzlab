@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: cloud
+components:
+  - ../../components/common
+resources:
+  - ./foundry/ks.yaml
+  - ./foundrydc20/ks.yaml
+  - ./immich/ks.yaml
+  #- ./nextcloud/ks.yaml
+  #- ./owncloud/ks.yaml
