@@ -63,3 +63,4 @@ spec:
   tls:
     - hosts:
         - *host
+      secretName: ${SECRET_DOMAIN_FBE}-production-tls
