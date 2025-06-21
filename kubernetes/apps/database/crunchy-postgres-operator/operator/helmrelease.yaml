@@ -26,3 +26,4 @@ spec:
         egress.home.arpa/apiserver: allow
         egress.home.arpa/world: allow
         egress.home.arpa/kubedns: allow # TODO: Remove when clusterNetworkPolicy is in place
+        io.cilium/lb-ipam-ips: "10.0.100.33"
