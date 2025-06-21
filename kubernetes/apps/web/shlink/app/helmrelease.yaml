@@ -58,7 +58,7 @@ spec:
       main:
         enabled: true
         hostnames:
-          - "s.${SECRET_DOMAIN}"
+          - *host
         parentRefs:
           - name: external
             namespace: kube-system
