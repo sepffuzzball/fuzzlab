@@ -88,19 +88,19 @@ spec:
         ports:
           http:
             port: *port
-    route:
-      main:
-        enabled: true
-        hostnames:
-          - "sab.${SECRET_DOMAIN_LOCAL}"
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: main
-                port: *port
+    # route:
+    #   main:
+    #     enabled: true
+    #     hostnames:
+    #       - "sab.${SECRET_DOMAIN_LOCAL}"
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: main
+    #             port: *port
 
 
     # ingress:

@@ -88,20 +88,20 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      main:
-        enabled: true
-        className: internal
-        hosts:
-          - host: &host "readarr-audio.${SECRET_DOMAIN_LOCAL}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-        #tls:
-        #  - hosts:
-        #      - *host
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: internal
+    #     hosts:
+    #       - host: &host "readarr-audio.${SECRET_DOMAIN_LOCAL}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #     #tls:
+    #     #  - hosts:
+    #     #      - *host
     persistence:
       config:
         enabled: true

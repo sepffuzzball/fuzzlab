@@ -85,23 +85,23 @@ spec:
         ports:
           http:
             port: *port
-    ingress:
-      main:
-        enabled: true
-        className: internal
-        annotations:
-          #External-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hajimari.io/icon: movie-filter
-        hosts:
-          - host: &host "radarr.${SECRET_DOMAIN_LOCAL}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-        #tls:
-        #  - hosts:
-        #      - *host
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: internal
+    #     annotations:
+    #       #External-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    #       hajimari.io/icon: movie-filter
+    #     hosts:
+    #       - host: &host "radarr.${SECRET_DOMAIN_LOCAL}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #     #tls:
+    #     #  - hosts:
+    #     #      - *host
     persistence:
       config:
         enabled: true
