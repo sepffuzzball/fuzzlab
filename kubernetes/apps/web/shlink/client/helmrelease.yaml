@@ -1,0 +1,61 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app shlink-client
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+        rollingUpdate:
+          unavailable: 2
+          surge: 0
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
+        containers:
+          main:
+            image:
+              repository: ghcr.io/shlinkio/shlink-web-client
+              tag: 4.2.1@sha256:63157a52bca88126dd86caee36ade0f24d77f0d85ae743b7d422a9ac60395fcf
+            env:
+              SHLINK_SERVER_URL: "https://s.${SECRET_DOMAIN}"
+              SHLINK_SERVER_API_KEY: ${SECRET_SHLINK_API_KEY}
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - "shlink.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: main
+                port: *port

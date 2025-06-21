@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app shlink
+  namespace: &namespace web
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  dependsOn:
+    - name: csi-driver-cephfs
+    - name: crunchy-postgres-operator-cluster
+  path: ./kubernetes/apps/web/shlink/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: shlink
+      namespace: web
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  targetNamespace: *namespace
+
+  postBuild:
+    substitute:
+      APP: *app
+      NS: *ns
+      DB_NAME: *app
+      DB_USER: *app
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
+      GATUS_SUBDOMAIN: "s"
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app shlink-client
+  namespace: &namespace web
+spec:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  dependsOn:
+    - name: shlink
+  path: ./kubernetes/apps/web/shlink/client
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: shlink-client
+      namespace: web
+  interval: 15m
+  retryInterval: 1m
+  timeout: 3m
+  targetNamespace: *namespace
+  components:
+  - ../../../../components/gatus/external
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
+      GATUS_SUBDOMAIN: shlink
+      GATUS_PATH: /
+      GATUS_STATUS: "200"

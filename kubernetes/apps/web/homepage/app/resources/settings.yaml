@@ -1,0 +1,49 @@
+---
+title: Dashboard
+theme: dark
+color: slate
+headerStyle: boxedWidgets
+hideErrors: true
+layout:
+  - BMTOP:
+      style: row
+      header: false
+      disableCollapse: true
+      iconsOnly: true
+  - Web:
+      style: row
+      columns: 4
+      header: false
+  - Home:
+      style: row
+      columns: 3
+      header: false
+  - BMMID:
+      style: row
+      header: false
+      disableCollapse: true
+      iconsOnly: true
+  - Services:
+      style: row
+      columns: 2
+      header: false
+  - Hardware: 
+      style: row
+      columns: 2
+      header: false
+      initiallyCollapsed: false
+  - BMBTM:
+      style: row
+      header: false
+      disableCollapse: true
+      iconsOnly: true
+  #- Auto-Discovered1:
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  showSearchSuggestions: true
+  hideVisitURL: false
+  #provider: custom
+  #url: https://search.fuzzball.enterprises/search?q=
+  #target: _blank
+  #suggestionUrl: https://ac.ecosia.org/autocomplete?type=list&q=

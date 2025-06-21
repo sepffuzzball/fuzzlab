@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: stirling-pdf
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      stirling-pdf:
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/frooodle/s-pdf
+              tag: 0.18.1@sha256:8967366617998d99ce8f71af9041302e5ee6bd007d8d603456716a54e928eaf7
+
+    service:
+      main:
+        controller: stirling-pdf
+        ports:
+          http:
+            port: &port 8080
+
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "pdf.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: main
+                port: *port

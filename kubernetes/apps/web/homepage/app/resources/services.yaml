@@ -1,0 +1,216 @@
+---
+- Services:
+    - Authentik:
+        href: https://auth.${SECRET_DOMAIN}
+        siteMonitor: http://authentik-server.security.svc.cluster.local
+        icon: authentik.png
+        #description: Authentik IDP
+        widget:
+          type: authentik
+          #fields: ["users", "loginsLast24H"]
+          url: https://auth.${SECRET_DOMAIN}
+          key: "{{HOMEPAGE_VAR_AUTHENTIK_TOKEN}}"
+    - Gatus:
+        href: https://status.${SECRET_DOMAIN}
+        siteMonitor: http://gatus.monitoring.svc.cluster.local
+        icon: gatus.png
+        #description: Status page
+        widget:
+          type: gatus
+          url: http://gatus.monitoring.svc.cluster.local
+- Hardware:
+  - Dat:
+        href: http://10.0.2.20/
+        siteMonitor: http://10.0.2.20/
+        icon: truenas.png
+        description: Truenas Storage Server
+        widget:
+          type: truenas
+          url: http://10.0.2.20/
+          key: "{{HOMEPAGE_VAR_TRUENAS_KEY}}"
+          enablePools: true
+          nasType: scale
+  - Proxmox:
+        href: https://pve.${SECRET_DOMAIN_FBE}
+        siteMonitor: https://10.0.1.64:8006/
+        icon: proxmox.png
+        description: Proxmox Datacenter
+        widget:
+          type: proxmox
+          url: https://10.0.1.64:8006/
+          username: "{{HOMEPAGE_VAR_PROXMOX_USER}}" 
+          password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN}}" 
+          node: pve64
+  #- Unifi:
+  #      href: https://unifi.ui.com
+  #      siteMonitor: https://10.0.1.1/
+  #      icon: unifi.png
+  #      description: Unifi network
+  #      widget:
+  #        type: unifi
+  #        url: https://10.0.1.1
+  #        username: "{{HOMEPAGE_VAR_UNIFI_USERNAME}}"
+  #        password: "{{HOMEPAGE_VAR_UNIFI_PASSWORD}}"
+          #key: "{{HOMEPAGE_VAR_UNIFI_KEY}}"
+#- Cloud:
+#    - Immich:
+#        href: https://photos.${SECRET_DOMAIN}
+#        siteMonitor: http://immich-server.cloud.svc.cluster.local:2283
+#        icon: immich.png
+#        description: Photo Storage Server
+#        widget:
+#          type: immich
+#          url: http://immich-server.cloud.svc.cluster.local:2283
+#          key: "{{HOMEPAGE_VAR_IMMICH_TOKEN}}"
+#          version: 2
+- Home:
+
+    - Frigate:
+        href: https://frigate.${SECRET_DOMAIN}
+        siteMonitor: http://10.0.2.106:5000
+        icon: frigate.png
+        #description: Frigate Doorbell
+        widget:
+          type: frigate
+          url: http://10.0.2.106:5000
+          enableRecentEvents: false
+    - HomeAssistant:
+        href: https://home.${SECRET_DOMAIN_FBE}
+        siteMonitor: http://10.0.2.10
+        icon: home-assistant.png
+        #description: Home Assistant
+        widget:
+          type: homeassistant
+          url: https://home.${SECRET_DOMAIN_FBE}
+          key: "{{HOMEPAGE_VAR_HASS_TOKEN}}"
+    - Mealie:
+        href: https://mealie.${SECRET_DOMAIN_FBE}
+        siteMonitor: http://mealie.home.svc.cluster.local:9000
+        icon: mealie.png
+        #description: Mealie
+        widget:
+          type: mealie
+          url: http://mealie.home.svc.cluster.local:9000
+          key: "{{HOMEPAGE_VAR_MEALIE_KEY}}"
+          version: 2
+#- Downloaders:
+    #- Deluge:
+    #    href: https://deluge.${SECRET_DOMAIN}
+    #    siteMonitor: https://deluge.${SECRET_DOMAIN}
+    #    icon: deluge.png
+    #    description: Torrents
+    #    widget:
+    #      type: deluge
+    #      url: http://10.0.2.105:8112/
+    #      password: "{{HOMEPAGE_VAR_DELUGE_PASSWORD}}"
+    #      enableLeechProgress: false
+    #- Sab:
+    #    href: https://sab.${SECRET_DOMAIN}
+    #    siteMonitor: http://sabnzbd.media.svc.cluster.local
+    #    icon: sabnzbd.png
+    #    description: Newsgroups
+    #    widget:
+    #      type: sabnzbd
+    #      url: http://sabnzbd.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_SABNZBD_TOKEN}}"
+#- Media: 
+    #- Plex:
+    #    href: https://plex.${SECRET_DOMAIN}
+    #    siteMonitor: http://plex.media.svc.cluster.local:32400
+    #    icon: plex.png
+    #    description: Movies & TV
+    #    widget:
+    #      type: plex
+    #      url: "{{HOMEPAGE_VAR_PLEX_URL}}"
+    #      key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
+    #      enableUser: true
+    #      showEpisodeNumber: true
+    #      expandOneStreamToTwoRows: true
+    #- Lidarr:
+    #    href: https://lidarr.${SECRET_DOMAIN}
+    #    siteMonitor: http://lidarr.media.svc.cluster.local
+    #    icon: lidarr.png
+    #    description: Music PVR
+    #    widget:
+    #      type: lidarr
+    #      url: http://lidarr.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_LIDARR_TOKEN}}"
+    #- Radarr:
+    #    href: https://radarr.${SECRET_DOMAIN}
+    #    siteMonitor: http://radarr.media.svc.cluster.local
+    #    icon: radarr.png
+    #    description: Movie PVR
+    #    widget:
+    #      type: radarr
+    #      url: http://radarr.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_RADARR_TOKEN}}"
+    #- Readarr:
+    #    href: https://readarr.${SECRET_DOMAIN}
+    #    siteMonitor: http://readarr.media.svc.cluster.local
+    #    icon: readarr.png
+    #    description: Books PVR
+    #    widget:
+    #      type: readarr
+    #      url: http://readarr.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_READARR_TOKEN}}"
+    #- Readarr-audio:
+    #    href: https://readarr-audio.${SECRET_DOMAIN}
+    #    siteMonitor: http://readarr-audio.media.svc.cluster.local
+    #    icon: readarr.png
+    #    description: Audiobooks PVR
+    #    widget:
+    #      type: readarr
+    #      url: http://readarr-audio.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_READARR_AUDIO_TOKEN}}"
+    #- Sonarr:
+    #    href: https://sonarr.${SECRET_DOMAIN}
+    #    siteMonitor: http://sonarr.media.svc.cluster.local
+    #    icon: sonarr.png
+    #    description: TV Show PVR
+    #    widget:
+    #      type: sonarr
+    #      url: http://sonarr.media.svc.cluster.local
+    #      key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"
+
+- Web:
+    - Adguard01:
+        href: https://adguard01.${SECRET_DOMAIN_FBE}
+        icon: adguard-home.png
+        siteMonitor: http://10.0.2.101/
+        #description: Adguard 01
+        widget:
+          type: adguard
+          url: https://adguard01.${SECRET_DOMAIN_FBE}
+          fields: ["queries", "blocked", "latency"]
+          username: admin
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+    - Adguard02:
+        href: https://adguard02.${SECRET_DOMAIN_FBE}
+        siteMonitor: http://10.0.2.50/
+        icon: adguard-home.png
+        #description: Adguard 02
+        widget:
+          type: adguard
+          url: https://adguard02.${SECRET_DOMAIN_FBE}
+          fields: ["queries", "blocked", "latency"]
+          username: admin
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+    - Adguard03:
+        href: https://adguard03.${SECRET_DOMAIN_FBE}
+        icon: adguard-home.png
+        siteMonitor: http://10.0.2.10/a0d7b954_adguard/ingress
+        #description: Adguard 03
+        widget:
+          type: adguard
+          url: https://adguard03.${SECRET_DOMAIN_FBE}
+          fields: ["queries", "blocked", "latency"]
+          username: admin
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+    - NextDNS:
+        href: https://my.nextdns.io/
+        icon: nextdns.png
+        siteMonitor: "{{HOMEPAGE_VAR_NEXTDNS_URL}}"
+        widget:
+          type: nextdns
+          profile: "{{HOMEPAGE_VAR_NEXTDNS_PROFILE}}"
+          key: "{{HOMEPAGE_VAR_NEXTDNS_KEY}}"
