@@ -4,7 +4,7 @@ originRequest:
 
 ingress:
   - hostname: "home.${SECRET_DOMAIN_FBE}"
-    service: http://10.0.2.10
+    service: hello_world
   - hostname: "whoami.${SECRET_DOMAIN_FBE}"
     service: "http://whoami.whoami.svc.cluster.local"
   - hostname: "${SECRET_DOMAIN}"
