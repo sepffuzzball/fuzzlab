@@ -5,6 +5,6 @@ kind: Kustomization
 resources:
   - ./certificate.yaml
   - ./external.yaml
-  - ./external-fbe.yaml
+  #- ./external-fbe.yaml
   - ./external-kmc.yaml
   - ./internal.yaml
