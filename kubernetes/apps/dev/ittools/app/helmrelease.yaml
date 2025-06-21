@@ -42,30 +42,7 @@ spec:
         controller: ittools
         ports:
           http:
-            port: 80
-
-    ingress:
-      app:
-        className: external
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts:
-          - host: it-tools.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-          - host: ittools.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - it-tools.${SECRET_DOMAIN}
-              - ittools.${SECRET_DOMAIN}
+            port: &port 80
     route:
       app:
         enabled: true
