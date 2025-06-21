@@ -5,7 +5,6 @@ namespace: web
 components:
   - ../../components/common
 resources:
-  - ./namespace.yaml
   - ./homepage/ks.yaml
   - ./shlink/ks.yaml
   - ./searxng/ks.yaml
