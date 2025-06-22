@@ -10,6 +10,10 @@ spec:
       app.kubernetes.io/name: *app
   components:
   - ../../../../components/gatus/external
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   dependsOn:
     - name: csi-driver-cephfs
       namespace: storage
