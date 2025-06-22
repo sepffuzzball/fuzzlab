@@ -46,6 +46,12 @@ spec:
               RADARR__LOG__DBENABLED: "False"
               RADARR__LOG__LEVEL: info
               RADARR__SERVER__PORT: &port 80
+              RADARR__SSL__PORT: 6969
+              RADARR__ENABLE__SSL: false
+              RADARR__LAUNCH__BROWSER: false
+              RADARR__SSL__CERT__PATH: ""
+              RADARR__SSL__CERT__PASSWORD: ""
+              RADARR__URL__BASE: ""
               RADARR__BIND__ADDRESS: "*"
               RADARR__UPDATE__BRANCH: develop
               RADARR__POSTGRES__HOST:
