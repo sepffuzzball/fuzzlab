@@ -39,30 +39,32 @@ spec:
               tag: 2.13.0.4664
             env:
               TZ: ${TIMEZONE}
-              LIDARR__INSTANCE_NAME: Lidarr
-              LIDARR__PORT: &port 80
-              LIDARR__LOG_LEVEL: info
-              LIDARR__ANALYTICS_ENABLED: "False"
-              LIDARR__AUTHENTICATION_METHOD: External
-              LIDARR__THEME: dark
-              LIDARR__POSTGRES_HOST:
+              LIDARR__APP__INSTANCENAME: lidarr
+              LIDARR__APP__THEME: dark
+              LIDARR__AUTH__METHOD: External
+              LIDARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              LIDARR__LOG__DBENABLED: "False"
+              LIDARR__LOG__LEVEL: info
+              LIDARR__SERVER__PORT: &port 80
+              LIDARR__UPDATE__BRANCH: develop
+              LIDARR__POSTGRES__HOST:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_HOST
-              LIDARR__POSTGRES_MAIN_DB: "${DB_NAME}"
-              LIDARR__POSTGRES_LOG_DB: "${DB_NAME}-log"
-              LIDARR__POSTGRES_PASSWORD:
+              LIDARR__POSTGRES__MAINDB: "${DB_NAME}"
+              LIDARR__POSTGRES__LOGDB: "${DB_NAME}-log"
+              LIDARR__POSTGRES__PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_PASS
-              LIDARR__POSTGRES_USER:
+              LIDARR__POSTGRES__USER:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_USER
-              LIDARR__API_KEY:
+              LIDARR__AUTH__APIKEY:
                 valueFrom:
                   secretKeyRef:
                     name: cluster-media-secrets
