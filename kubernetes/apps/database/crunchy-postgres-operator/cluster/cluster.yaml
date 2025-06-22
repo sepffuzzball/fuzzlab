@@ -28,7 +28,7 @@ spec:
           # - hostnossl all all 10.33.0.0/16 md5
           # - hostnossl all all 10.100.0.0/16 md5
           # - hostnossl all all 10.88.0.0/16 md5
-          #- hostssl all all all md5
+          - hostssl all all all md5
         parameters:
           max_connections: 500
   instances:
