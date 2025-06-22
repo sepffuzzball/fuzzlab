@@ -40,23 +40,14 @@ spec:
       app:
         endpoints:
           - port: http
-    persistence:
-      data:
-        existingClaim: newt-data
-        globalMounts:
-          - path: /opt/newthome/data
-      conf:
-        existingClaim: newt-config
-        globalMounts:
-          - path: /opt/newthome/conf
-    route:
-      app:
-        hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
-        parentRefs:
-          - name: internal
-            namespace: kube-system
-            sectionName: https
+    # route:
+    #   app:
+    #     hostnames:
+    #       - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
     # ingress:
     #   app:
     #     enabled: true
