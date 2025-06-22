@@ -11,13 +11,15 @@ spec:
     name: app-template
   install:
     remediation:
-      retries: -1
+      retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
   dependsOn:
     - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
       namespace: storage
   values:
     controllers:
