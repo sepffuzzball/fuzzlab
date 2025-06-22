@@ -24,3 +24,4 @@ spec:
             - "${SECRET_DOMAIN_FBS}"
             - "${SECRET_DOMAIN_FBM}"
             - "${SECRET_DOMAIN_KMC}"
+            - "${SECRET_DOMAIN_CCC}"
