@@ -39,32 +39,30 @@ spec:
               tag: 5.22.2.9862
             env:
               TZ: ${TIMEZONE}
-              RADARR__APP__INSTANCENAME: radarr
-              RADARR__APP__THEME: dark
-              RADARR__UPDATE__BRANCH: develop
+              RADARR__INSTANCE_NAME: radarr
               RADARR__PORT: &port 80
               RADARR__LOG_LEVEL: info
               RADARR__ANALYTICS_ENABLED: "False"
-              RADARR__AUTH__METHOD: External
-              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
-              RADARR__POSTGRES__HOST:
+              RADARR__AUTHENTICATION_METHOD: External
+              RADARR__THEME: dark
+              RADARR__POSTGRES_HOST:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_HOST
-              RADARR__POSTGRES__MAINDB: "${DB_NAME}"
-              RADARR__POSTGRES__LOG_DB: "${DB_NAME}-log"
-              RADARR__POSTGRES__PASSWORD:
+              RADARR__POSTGRES_MAIN_DB: "${DB_NAME}"
+              RADARR__POSTGRES_LOG_DB: "${DB_NAME}-log"
+              RADARR__POSTGRES_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_PASS
-              RADARR__POSTGRES__USER:
+              RADARR__POSTGRES_USER:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_USER
-              RADARR__API__KEY:
+              RADARR__API_KEY:
                 valueFrom:
                   secretKeyRef:
                     name: cluster-media-secrets
