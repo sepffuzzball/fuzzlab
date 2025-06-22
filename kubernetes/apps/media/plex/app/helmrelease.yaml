@@ -86,19 +86,19 @@ spec:
           http:
             port: &port 32400
 
-    route:
-      app:
-        enabled: true
-        hostnames:
-          - "plex.${SECRET_DOMAIN_FBE}"
-        parentRefs:
-          - name: external-fbe
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
+    # route:
+    #   app:
+    #     enabled: true
+    #     hostnames:
+    #       - "plex.${SECRET_DOMAIN_FBE}"
+    #     parentRefs:
+    #       - name: external-fbe
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: app
+    #             port: *port
 
 
     persistence:
