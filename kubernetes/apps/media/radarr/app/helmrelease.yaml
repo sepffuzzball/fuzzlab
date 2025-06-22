@@ -52,8 +52,8 @@ spec:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_HOST
-              RADARR__POSTGRES__MAIN_DB: "${DB_NAME}"
-              RADARR__POSTGRES__LOG_DB: "${DB_NAME}-log"
+              RADARR__POSTGRES__MAIN__DB: "${DB_NAME}"
+              RADARR__POSTGRES__LOG__DB: "${DB_NAME}-log"
               RADARR__POSTGRES__PASSWORD:
                 valueFrom:
                   secretKeyRef:
