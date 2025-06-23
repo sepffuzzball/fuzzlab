@@ -37,23 +37,23 @@ spec:
         ports:
           http:
             port: &port 80
-    ingress:
-      main:
-        enabled: true
-        className: "external"
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: "external"
+    #     annotations:
+    #       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
 
-        hosts:
-          - host: &host "beginnings.${SECRET_DOMAIN_SEPF}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-        tls:
-          - hosts:
-              - *host
+    #     hosts:
+    #       - host: &host "beginnings.${SECRET_DOMAIN_SEPF}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #     tls:
+    #       - hosts:
+    #           - *host
     route:
       main:
         enabled: true
