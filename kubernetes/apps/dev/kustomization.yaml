@@ -8,5 +8,5 @@ resources:
   - ./coder/ks.yaml
   - ./ittools/ks.yaml
   - ./n8n/ks.yaml
- # - ./netbox/ks.yaml
+  - ./netbox/ks.yaml
   - ./semaphore/ks.yaml

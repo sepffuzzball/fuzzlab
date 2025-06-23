@@ -27,7 +27,7 @@ spec:
     dateTimeFormat: "j. F, Y g:i a"
     shortDateTimeFormat: "j.m.Y H:i"
     storages:
-    existingSecret: netbox-secret
+    #existingSecret: netbox-secret
     metricsEnabled: true
     postgresql:
       enabled: false
@@ -65,33 +65,33 @@ spec:
       timeoutSeconds: 1
       periodSeconds: 10
       successThreshold: 1
-    commonLabels:
-      teleport: enabled
-    service:
-      annotations:
-        teleport.dev/name: *app
+    #commonLabels:
+    #  teleport: enabled
+    #service:
+    #  annotations:
+    #    teleport.dev/name: *app
     ingress:
       enabled: false
-      className: external
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-      hosts:
-        - host: &host "netbox.${SECRET_DOMAIN_LOCAL}"
-          paths:
-            - path: /
-              pathType: Prefix
-              backend:
-                service:
-                  name: netbox
-                  port:
-                    number: 80
-      tls:
-        - hosts:
-            - *host
+      #className: external
+      #annotations:
+      #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+      #hosts:
+      #  - host: &host "netbox.${SECRET_DOMAIN_LOCAL}"
+      #    paths:
+      #      - path: /
+      #        pathType: Prefix
+      #        backend:
+      #          service:
+      #            name: netbox
+      #            port:
+      #              number: 80
+      #tls:
+      #  - hosts:
+      #      - *host
           #secretName: "${SECRET_DOMAIN/./-}-production-tls"
-    extraConfig:
-      - secret:
-          secretName: netbox-secret
+    #extraConfig:
+    #  - secret:
+    #      secretName: netbox-secret
     housekeeping:
       enabled: false
     worker:
