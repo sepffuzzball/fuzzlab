@@ -65,7 +65,7 @@ spec:
           - "blog.${SECRET_DOMAIN_SEPF}"
           - "${SECRET_DOMAIN_SEPF}"
         parentRefs:
-          - name: external
+          - name: external-spf
             namespace: kube-system
             sectionName: https
         rules:

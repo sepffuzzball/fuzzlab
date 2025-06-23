@@ -7,4 +7,5 @@ resources:
   - ./external.yaml
   #- ./external-fbe.yaml
   - ./external-kmc.yaml
+  - ./external-spf.yaml
   - ./internal.yaml
