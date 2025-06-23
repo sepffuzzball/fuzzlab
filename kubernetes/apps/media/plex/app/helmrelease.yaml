@@ -100,6 +100,23 @@ spec:
     #           - identifier: app
     #             port: *port
 
+    ingress:
+      app:
+        enabled: true
+        className: "fbe"
+        #annotations:
+        #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
+
+        hosts:
+          - host: &host "plex.${SECRET_DOMAIN_FBE}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
 
     persistence:
       config:
