@@ -57,7 +57,7 @@ spec:
       from: netbox@${SECRET_DOMAIN_FBE}
     persistence:
       enabled: true
-      existingClaim: netbox-config-pv
+      existingClaim: netbox-config
       persistence.accessMode: ReadWriteMany
     readinessProbe:
       enabled: true
