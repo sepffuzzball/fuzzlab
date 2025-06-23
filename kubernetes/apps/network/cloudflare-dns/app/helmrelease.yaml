@@ -143,7 +143,7 @@ spec:
     txtPrefix: k8s.
     txtOwnerId: default
     domainFilters:
-            - "${SECRET_DOMAIN_SPF}"
+            - "${SECRET_DOMAIN_SEPF}"
     serviceMonitor:
       enabled: true
     podAnnotations:
