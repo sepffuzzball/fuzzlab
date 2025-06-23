@@ -9,4 +9,4 @@ resources:
   - ./foundrydc20/ks.yaml
   - ./immich/ks.yaml
   #- ./nextcloud/ks.yaml
-  #- ./owncloud/ks.yaml
+  - ./owncloud/ks.yaml

@@ -65,19 +65,37 @@ spec:
           http:
             port: &port 9200
 
-    route:
+    # route:
+    #   app:
+    #     enabled: true
+    #     hostnames:
+    #       - cloud.${SECRET_DOMAIN_FBE}
+    #     parentRefs:
+    #       - name: external-fbe
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: app
+    #             port: *port
+
+    ingress:
       app:
         enabled: true
-        hostnames:
-          - cloud.${SECRET_DOMAIN}
-        parentRefs:
-          - name: fbe
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
+        className: "fbe"
+        #annotations:
+        #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
+
+        hosts:
+          - host: &host "cloud.${SECRET_DOMAIN_FBE}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
 
     persistence:
       config:
