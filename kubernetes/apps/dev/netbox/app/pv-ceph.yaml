@@ -21,7 +21,7 @@ spec:
   storageClassName: csi-cephfs-sc
   claimRef:
     name: netbox-config
-    namespace: documentation
+    namespace: dev
   capacity:
     storage: 5Gi
   volumeMode: Filesystem
