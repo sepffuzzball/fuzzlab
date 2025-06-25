@@ -5,9 +5,9 @@ namespace: home
 components:
   - ../../components/common
 resources:
-  - ./km/ks.yaml
-  - ./beginnings/ks.yaml
-  - ./blog/ks.yaml
+  #- ./km/ks.yaml
+  #- ./beginnings/ks.yaml
+  #- ./blog/ks.yaml
   #- ./frigate/ks.yaml
   - ./mealie/ks.yaml
   - ./secrets.sops.yaml
