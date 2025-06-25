@@ -6,6 +6,6 @@ resources:
   - ./certificate.yaml
   - ./external.yaml
   #- ./external-fbe.yaml
-  - ./external-kmc.yaml
-  - ./external-spf.yaml
+  #- ./external-kmc.yaml
+  #- ./external-spf.yaml
   - ./internal.yaml
