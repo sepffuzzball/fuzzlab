@@ -45,7 +45,7 @@ spec:
         enabled: true
         hostnames:
           - "blog.${SECRET_DOMAIN_KMC}"
-          - "${SECRET_DOMAIN_KMC}"
+          #- "${SECRET_DOMAIN_KMC}"
           - "www.${SECRET_DOMAIN_KMC}"
         parentRefs:
           - name: external-kmc
