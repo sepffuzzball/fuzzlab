@@ -59,22 +59,22 @@ spec:
         ports:
           http:
             port: &port 8080
-    # route:
-    #   app:
-    #     enabled: true
-    #     hostnames:
-    #       - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-    #       - "ai.${SECRET_DOMAIN}"
-    #     #annotations:
-    #     #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
-    #     parentRefs:
-    #       - name: external
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: app
-    #             port: *port
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - "ai.${SECRET_DOMAIN}"
+        #annotations:
+        #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
 
     persistence:
       config:
