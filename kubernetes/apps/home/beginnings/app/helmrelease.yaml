@@ -58,7 +58,7 @@ spec:
       main:
         enabled: true
         hostnames:
-          - "beginnings.${SECRET_DOMAIN_SEPF}"
+          - "beginnings.${SECRET_DOMAIN}"
         parentRefs:
           - name: external
             namespace: kube-system
