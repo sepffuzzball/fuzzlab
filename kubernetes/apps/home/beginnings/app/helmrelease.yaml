@@ -58,9 +58,9 @@ spec:
       main:
         enabled: true
         hostnames:
-          - "beginnings.${SECRET_DOMAIN}"
+          - "beginnings.${SECRET_DOMAIN_SEPF}"
         parentRefs:
-          - name: external
+          - name: external-spf
             namespace: kube-system
             sectionName: https
         rules:

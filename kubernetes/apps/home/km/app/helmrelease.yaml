@@ -50,7 +50,7 @@ spec:
         parentRefs:
           - name: external
             namespace: kube-system
-            sectionName: https-spf
+            sectionName: https-kmc
         rules:
           - backendRefs:
               - identifier: main
