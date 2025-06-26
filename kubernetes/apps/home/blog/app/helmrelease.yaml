@@ -66,9 +66,9 @@ spec:
           - "www.${SECRET_DOMAIN_SEPF}"
           #- "${SECRET_DOMAIN_SEPF}"
         parentRefs:
-          - name: external-spf
+          - name: external
             namespace: kube-system
-            sectionName: https
+            sectionName: https-spf
         rules:
           - backendRefs:
               - identifier: main

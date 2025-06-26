@@ -48,9 +48,9 @@ spec:
           #- "${SECRET_DOMAIN_KMC}"
           - "www.${SECRET_DOMAIN_KMC}"
         parentRefs:
-          - name: external-kmc
+          - name: external
             namespace: kube-system
-            sectionName: https
+            sectionName: https-spf
         rules:
           - backendRefs:
               - identifier: main
