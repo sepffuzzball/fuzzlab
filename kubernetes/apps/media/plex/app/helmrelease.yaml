@@ -86,22 +86,22 @@ spec:
           http:
             port: &port 32400
 
-    ingress:
-      app:
-        enabled: true
-        className: &class "pangolin"
-        annotations:
-          kubernetes.io/ingress.allow-http: "true"
-          kubernetes.io/ingress.class: *class
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-        hosts:
-          - host: &host "plex.${SECRET_DOMAIN_FBE}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: *port
+    # ingress:
+    #   app:
+    #     enabled: true
+    #     className: &class "pangolin"
+    #     annotations:
+    #       kubernetes.io/ingress.allow-http: "true"
+    #       kubernetes.io/ingress.class: *class
+    #       nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    #     hosts:
+    #       - host: &host "plex.${SECRET_DOMAIN_FBE}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: app
+    #               port: *port
         # tls:
         #   - hosts:
         #       - *host
