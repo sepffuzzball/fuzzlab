@@ -44,19 +44,19 @@ spec:
           http:
             port: &port 80
 
-    ingress:
-      main:
-        enabled: true
-        className: &class "pangolin"
-        annotations:
-          kubernetes.io/ingress.allow-http: "true"
-          kubernetes.io/ingress.class: *class
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-        hosts:
-          - host: "${SECRET_DOMAIN_KMC}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: &class "pangolin"
+    #     annotations:
+    #       kubernetes.io/ingress.allow-http: "true"
+    #       kubernetes.io/ingress.class: *class
+    #       nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    #     hosts:
+    #       - host: "${SECRET_DOMAIN_KMC}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
