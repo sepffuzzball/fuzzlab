@@ -30,7 +30,7 @@ spec:
       service:
         annotations:
          # external-dns-kmc.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN_kmc}"
-          io.cilium/lb-ipam-ips: "10.0.100.102"
+          io.cilium/lb-ipam-ips: "10.0.100.106"
         externalTrafficPolicy: Cluster
       ingressClassResource:
         name: kmc
