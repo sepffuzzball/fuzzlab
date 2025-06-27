@@ -59,9 +59,9 @@ spec:
                 service:
                   identifier: main
                   port: http
-          # - host: "${SECRET_DOMAIN_SEPFY}"
-          #   paths:
-          #     - path: /
-          #       service:
-          #         identifier: main
-          #         port: http
+          - host: "${SECRET_DOMAIN_SEPFY}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http

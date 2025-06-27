@@ -41,16 +41,25 @@ spec:
       main:
         enabled: true
         className: "spf"
+        annotations:
+          kubernetes.io/ingress.allow-http: "true"
+          kubernetes.io/ingress.class: spf
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
         hosts:
-          - host: &host "beginnings.${SECRET_DOMAIN_SEPF}"
+          - host: "beginnings.${SECRET_DOMAIN_SEPF}"
             paths:
               - path: /
                 service:
                   identifier: main
                   port: http
-        tls:
-          - hosts:
-              - *host
+          - host: "beginnings.${SECRET_DOMAIN_SEPFY}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+
     # route:
     #   main:
     #     enabled: true
