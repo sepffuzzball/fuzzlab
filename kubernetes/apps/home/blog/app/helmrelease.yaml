@@ -37,6 +37,9 @@ spec:
     service:
       main:
         controller: blog
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${SPF_ADDR}
         ports:
           http:
             port: &port 80
@@ -56,19 +59,3 @@ spec:
                 service:
                   identifier: main
                   port: http
-
-    # route:
-    #   main:
-    #     enabled: true
-    #     hostnames:
-    #       - "blog.${SECRET_DOMAIN_SEPF}"
-    #       - "www.${SECRET_DOMAIN_SEPF}"
-    #       #- "${SECRET_DOMAIN_SEPF}"
-    #     parentRefs:
-    #       - name: external
-    #         namespace: kube-system
-    #         sectionName: https-spf
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: main
-    #             port: *port
