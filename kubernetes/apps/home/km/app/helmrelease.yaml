@@ -37,7 +37,9 @@ spec:
     service:
       main:
         controller: blog
-
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${CLOUD_ADDR}
         ports:
           http:
             port: &port 80
