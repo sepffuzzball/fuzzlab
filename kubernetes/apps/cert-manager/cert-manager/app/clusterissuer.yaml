@@ -18,10 +18,10 @@ spec:
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"
-            - "${SECRET_DOMAIN_FBE}"
-            - "${SECRET_DOMAIN_SEPF}"
+            #- "${SECRET_DOMAIN_FBE}"
+            #- "${SECRET_DOMAIN_SEPF}"
             - "${SECRET_DOMAIN_FBEC}"
             - "${SECRET_DOMAIN_FBS}"
             - "${SECRET_DOMAIN_FBM}"
-            - "${SECRET_DOMAIN_KMC}"
-            - "${SECRET_DOMAIN_CCC}"
+            #- "${SECRET_DOMAIN_KMC}"
+            #- "${SECRET_DOMAIN_CCC}"

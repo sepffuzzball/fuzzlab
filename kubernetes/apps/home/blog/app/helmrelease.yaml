@@ -40,36 +40,40 @@ spec:
         ports:
           http:
             port: &port 80
-    # ingress:
-    #   main:
-    #     enabled: true
-    #     className: "external"
-    #     annotations:
-    #       external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
-
-    #     hosts:
-    #       - host: &host "blog.${SECRET_DOMAIN_SEPF}"
-    #         paths:
-    #           - path: /
-    #             service:
-    #               identifier: main
-    #               port: http
-    #     tls:
-    #       - hosts:
-    #           - *host
-
-    route:
+    ingress:
       main:
         enabled: true
-        hostnames:
-          - "blog.${SECRET_DOMAIN_SEPF}"
-          - "www.${SECRET_DOMAIN_SEPF}"
-          #- "${SECRET_DOMAIN_SEPF}"
-        parentRefs:
-          - name: external
-            namespace: kube-system
-            sectionName: https-spf
-        rules:
-          - backendRefs:
-              - identifier: main
-                port: *port
+        className: "spf"
+        hosts:
+          - host: &host1 "www.${SECRET_DOMAIN_SEPF}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+          - host: &host2 "blog.${SECRET_DOMAIN_SEPF}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host1
+              - *host2
+
+    # route:
+    #   main:
+    #     enabled: true
+    #     hostnames:
+    #       - "blog.${SECRET_DOMAIN_SEPF}"
+    #       - "www.${SECRET_DOMAIN_SEPF}"
+    #       #- "${SECRET_DOMAIN_SEPF}"
+    #     parentRefs:
+    #       - name: external
+    #         namespace: kube-system
+    #         sectionName: https-spf
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: main
+    #             port: *port

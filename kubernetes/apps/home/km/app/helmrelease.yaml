@@ -40,18 +40,40 @@ spec:
         ports:
           http:
             port: &port 80
-    route:
+    # route:
+    #   main:
+    #     enabled: true
+    #     hostnames:
+    #       - "blog.${SECRET_DOMAIN_KMC}"
+    #       #- "${SECRET_DOMAIN_KMC}"
+    #       - "www.${SECRET_DOMAIN_KMC}"
+    #     parentRefs:
+    #       - name: external
+    #         namespace: kube-system
+    #         sectionName: https-kmc
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: main
+    #             port: *port
+
+    ingress:
       main:
         enabled: true
-        hostnames:
-          - "blog.${SECRET_DOMAIN_KMC}"
-          #- "${SECRET_DOMAIN_KMC}"
-          - "www.${SECRET_DOMAIN_KMC}"
-        parentRefs:
-          - name: external
-            namespace: kube-system
-            sectionName: https-kmc
-        rules:
-          - backendRefs:
-              - identifier: main
-                port: *port
+        className: "kmc"
+        hosts:
+          - host: &host1 "www.${SECRET_DOMAIN_KMC}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+          - host: &host2 "blog.${SECRET_DOMAIN_KMC}"
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host1
+              - *host2
