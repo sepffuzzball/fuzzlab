@@ -43,6 +43,10 @@ spec:
     ingress:
       main:
         enabled: true
+        annotations:
+          - nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+          - nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+          - nginx.ingress.kubernetes.io/ssl-redirect: "false"
         className: "spf"
         hosts:
           - host: &host1 "www.${SECRET_DOMAIN_SEPF}"
@@ -57,10 +61,10 @@ spec:
                 service:
                   identifier: main
                   port: http
-        tls:
-          - hosts:
-              - *host1
-              - *host2
+        #tls:
+        #  - hosts:
+        #      - *host1
+        #      - *host2
 
     # route:
     #   main:

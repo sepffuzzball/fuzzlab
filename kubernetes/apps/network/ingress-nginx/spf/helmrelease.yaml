@@ -1,5 +1,6 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: ingress-nginx-spf
@@ -29,7 +30,6 @@ spec:
       replicaCount: 1
       service:
         annotations:
-         # external-dns-spf.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN_spf}"
           io.cilium/lb-ipam-ips: "10.0.100.103"
         externalTrafficPolicy: Cluster
       ingressClassResource:
