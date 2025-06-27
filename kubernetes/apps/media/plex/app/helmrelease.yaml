@@ -79,9 +79,9 @@ spec:
     service:
       app:
         controller: plex
-        # type: LoadBalancer
-        # externalTrafficPolicy: Cluster
-        # loadBalancerIP: ${PLEX_ADDR}
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${PLEX_ADDR}
         ports:
           http:
             port: &port 32400
