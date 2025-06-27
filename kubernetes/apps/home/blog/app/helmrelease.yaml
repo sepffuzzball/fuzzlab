@@ -37,31 +37,31 @@ spec:
     service:
       main:
         controller: blog
-        #type: LoadBalancer
-        #externalTrafficPolicy: Cluster
-        #loadBalancerIP: ${SPF_ADDR}
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${SPF_ADDR}
         ports:
           http:
             port: &port 80
-    ingress:
-      main:
-        enabled: true
-        className: &class "pangolin"
-        annotations:
-          kubernetes.io/ingress.allow-http: "true"
-          kubernetes.io/ingress.class: *class
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-        hosts:
-          - host: "${SECRET_DOMAIN_SEPF}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-          - host: "${SECRET_DOMAIN_SEPFY}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: &class "pangolin"
+    #     annotations:
+    #       kubernetes.io/ingress.allow-http: "true"
+    #       kubernetes.io/ingress.class: *class
+    #       nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    #       nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    #     hosts:
+    #       - host: "${SECRET_DOMAIN_SEPF}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #       - host: "${SECRET_DOMAIN_SEPFY}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
