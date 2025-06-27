@@ -61,6 +61,9 @@ spec:
     service:
       app:
         controller: owncloud
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${CLOUD_ADDR}
         ports:
           http:
             port: &port 9200
