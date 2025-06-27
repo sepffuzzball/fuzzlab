@@ -43,11 +43,12 @@ spec:
     ingress:
       main:
         enabled: true
-       #annotations:
-       #   - nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-       #   - nginx.ingress.kubernetes.io/ssl-passthrough: "false"
-       #   - nginx.ingress.kubernetes.io/ssl-redirect: "false"
         className: "spf"
+        annotations:
+          - kubernetes.io/ingress.allow-http: "true"
+          - kubernetes.io/ingress.class: nginx
+          - nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+          #- nginx.ingress.kubernetes.io/rewrite-target: /$2"
         hosts:
           - host: &host1 "www.${SECRET_DOMAIN_SEPF}"
             paths:
