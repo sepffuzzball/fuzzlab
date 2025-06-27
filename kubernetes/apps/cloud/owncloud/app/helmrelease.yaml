@@ -65,24 +65,10 @@ spec:
           http:
             port: &port 9200
 
-    # route:
-    #   app:
-    #     enabled: true
-    #     hostnames:
-    #       - cloud.${SECRET_DOMAIN_FBE}
-    #     parentRefs:
-    #       - name: external-fbe
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: app
-    #             port: *port
-
     ingress:
       app:
         enabled: true
-        className: "fbe"
+        className: "pangolin"
         hosts:
           - host: &host "cloud.${SECRET_DOMAIN_FBE}"
             paths:

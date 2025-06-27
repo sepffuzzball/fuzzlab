@@ -79,34 +79,22 @@ spec:
     service:
       app:
         controller: plex
-        type: LoadBalancer
-        externalTrafficPolicy: Cluster
-        loadBalancerIP: ${PLEX_ADDR}
+        # type: LoadBalancer
+        # externalTrafficPolicy: Cluster
+        # loadBalancerIP: ${PLEX_ADDR}
         ports:
           http:
             port: &port 32400
 
-    # route:
-    #   app:
-    #     enabled: true
-    #     hostnames:
-    #       - "plex.${SECRET_DOMAIN_FBE}"
-    #     parentRefs:
-    #       - name: external-fbe
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: app
-    #             port: *port
-
     ingress:
       app:
         enabled: true
-        className: "fbe"
-        #annotations:
-        #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN_SEPF}"
-
+        className: &class "pangolin"
+        annotations:
+          kubernetes.io/ingress.allow-http: "true"
+          kubernetes.io/ingress.class: *class
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
         hosts:
           - host: &host "plex.${SECRET_DOMAIN_FBE}"
             paths:
@@ -114,9 +102,9 @@ spec:
                 service:
                   identifier: app
                   port: *port
-        tls:
-          - hosts:
-              - *host
+        # tls:
+        #   - hosts:
+        #       - *host
 
     persistence:
       config:

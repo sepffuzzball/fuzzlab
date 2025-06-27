@@ -40,40 +40,20 @@ spec:
         ports:
           http:
             port: &port 80
-    # route:
-    #   main:
-    #     enabled: true
-    #     hostnames:
-    #       - "blog.${SECRET_DOMAIN_KMC}"
-    #       #- "${SECRET_DOMAIN_KMC}"
-    #       - "www.${SECRET_DOMAIN_KMC}"
-    #     parentRefs:
-    #       - name: external
-    #         namespace: kube-system
-    #         sectionName: https-kmc
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: main
-    #             port: *port
 
     ingress:
       main:
         enabled: true
-        className: "kmc"
+        className: &class "pangolin"
+        annotations:
+          kubernetes.io/ingress.allow-http: "true"
+          kubernetes.io/ingress.class: *class
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
         hosts:
-          - host: &host1 "www.${SECRET_DOMAIN_KMC}"
+          - host: "${SECRET_DOMAIN_KMC}"
             paths:
               - path: /
                 service:
                   identifier: main
                   port: http
-          - host: &host2 "blog.${SECRET_DOMAIN_KMC}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-        tls:
-          - hosts:
-              - *host1
-              - *host2

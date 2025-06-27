@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-fbe
+  name: &app ingress-nginx-pangolin
   namespace: &namespace network
 spec:
   commonMetadata:
@@ -17,7 +17,7 @@ spec:
     - name: cilium-gateway
       namespace: kube-system
   interval: 30m
-  path: ./kubernetes/apps/network/ingress-nginx/fbe
+  path: ./kubernetes/apps/network/ingress-nginx/pangolin
   postBuild:
     substituteFrom:
       - name: cluster-secrets
@@ -33,73 +33,108 @@ spec:
   targetNamespace: *namespace
   timeout: 5m
   wait: false
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: &app ingress-nginx-spf
-  namespace: &namespace network
-spec:
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
-  dependsOn:
-    - name: cilium-gateway
-      namespace: kube-system
-  interval: 30m
-  path: ./kubernetes/apps/network/ingress-nginx/spf
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-      - kind: ConfigMap
-        name: cluster-settings
-  prune: true
-  retryInterval: 1m
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  targetNamespace: *namespace
-  timeout: 5m
-  wait: false
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: &app ingress-nginx-kmc
-  namespace: &namespace network
-spec:
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
-  dependsOn:
-    - name: cilium-gateway
-      namespace: kube-system
-  interval: 30m
-  path: ./kubernetes/apps/network/ingress-nginx/kmc
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-      - kind: ConfigMap
-        name: cluster-settings
-  prune: true
-  retryInterval: 1m
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  targetNamespace: *namespace
-  timeout: 5m
-  wait: false
+# ---
+# # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: &app ingress-nginx-fbe
+#   namespace: &namespace network
+# spec:
+#   commonMetadata:
+#     labels:
+#       app.kubernetes.io/name: *app
+#   decryption:
+#     provider: sops
+#     secretRef:
+#       name: sops-age
+#   dependsOn:
+#     - name: cilium-gateway
+#       namespace: kube-system
+#   interval: 30m
+#   path: ./kubernetes/apps/network/ingress-nginx/fbe
+#   postBuild:
+#     substituteFrom:
+#       - name: cluster-secrets
+#         kind: Secret
+#       - kind: ConfigMap
+#         name: cluster-settings
+#   prune: true
+#   retryInterval: 1m
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
+#   targetNamespace: *namespace
+#   timeout: 5m
+#   wait: false
+# ---
+# # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: &app ingress-nginx-spf
+#   namespace: &namespace network
+# spec:
+#   commonMetadata:
+#     labels:
+#       app.kubernetes.io/name: *app
+#   decryption:
+#     provider: sops
+#     secretRef:
+#       name: sops-age
+#   dependsOn:
+#     - name: cilium-gateway
+#       namespace: kube-system
+#   interval: 30m
+#   path: ./kubernetes/apps/network/ingress-nginx/spf
+#   postBuild:
+#     substituteFrom:
+#       - name: cluster-secrets
+#         kind: Secret
+#       - kind: ConfigMap
+#         name: cluster-settings
+#   prune: true
+#   retryInterval: 1m
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
+#   targetNamespace: *namespace
+#   timeout: 5m
+#   wait: false
+# ---
+# # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: &app ingress-nginx-kmc
+#   namespace: &namespace network
+# spec:
+#   commonMetadata:
+#     labels:
+#       app.kubernetes.io/name: *app
+#   decryption:
+#     provider: sops
+#     secretRef:
+#       name: sops-age
+#   dependsOn:
+#     - name: cilium-gateway
+#       namespace: kube-system
+#   interval: 30m
+#   path: ./kubernetes/apps/network/ingress-nginx/kmc
+#   postBuild:
+#     substituteFrom:
+#       - name: cluster-secrets
+#         kind: Secret
+#       - kind: ConfigMap
+#         name: cluster-settings
+#   prune: true
+#   retryInterval: 1m
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system
+#     namespace: flux-system
+#   targetNamespace: *namespace
+#   timeout: 5m
+#   wait: false

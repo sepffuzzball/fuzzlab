@@ -40,10 +40,10 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "spf"
+        className: &class "pangolin"
         annotations:
           kubernetes.io/ingress.allow-http: "true"
-          kubernetes.io/ingress.class: spf
+          kubernetes.io/ingress.class: *class
           nginx.ingress.kubernetes.io/ssl-redirect: "false"
           nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
         hosts:
@@ -59,17 +59,3 @@ spec:
                 service:
                   identifier: main
                   port: http
-
-    # route:
-    #   main:
-    #     enabled: true
-    #     hostnames:
-    #       - "beginnings.${SECRET_DOMAIN_SEPF}"
-    #     parentRefs:
-    #       - name: external-spf
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: main
-    #             port: *port
