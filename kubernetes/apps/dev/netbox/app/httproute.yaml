@@ -16,4 +16,4 @@ spec:
   rules:
     - backendRefs:
         - name: netbox
-          port: 80
+          port: 8080
