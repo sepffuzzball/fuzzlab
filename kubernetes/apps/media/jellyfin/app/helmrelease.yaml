@@ -71,16 +71,16 @@ spec:
               requests:
                 cpu: 2000m
                 #gpu.intel.com/i915: 1
-                #nvidia.com/gpu: 1
+                nvidia.com/gpu: 1
                 memory: 2Gi
               limits:
                 cpu: 8000m
                 #gpu.intel.com/i915: 1
-                #nvidia.com/gpu: 1
+                nvidia.com/gpu: 1
                 memory: 16Gi
 
-    #defaultPodOptions:
-    #  runtimeClassName: nvidia
+    defaultPodOptions:
+      runtimeClassName: nvidia
 
     service:
       main:
@@ -91,24 +91,24 @@ spec:
         ports:
           http:
             port: 8096
-    ingress:
-      main:
-        enabled: true
-        className: fbe
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            more_set_headers "X-Frame-Options: SAMEORIGIN";
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_FBE}"
-            paths:
-              - path: /
-                service:
-                  identifier: main
-                  port: http
-        tls:
-          - hosts:
-              - *host
+    # ingress:
+    #   main:
+    #     enabled: true
+    #     className: fbe
+    #     annotations:
+    #       external-dns.alpha.kubernetes.io/target: "${SECRET_DOMAIN_FBE}"
+    #       nginx.ingress.kubernetes.io/configuration-snippet: |
+    #         more_set_headers "X-Frame-Options: SAMEORIGIN";
+    #     hosts:
+    #       - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_FBE}"
+    #         paths:
+    #           - path: /
+    #             service:
+    #               identifier: main
+    #               port: http
+    #     tls:
+    #       - hosts:
+    #           - *host
     persistence:
       config:
         enabled: true
