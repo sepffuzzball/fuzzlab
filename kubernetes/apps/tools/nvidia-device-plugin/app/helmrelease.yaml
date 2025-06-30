@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: nvidia-device-plugin
-      version: 0.17.1
+      version: 0.16.2
       sourceRef:
         kind: HelmRepository
         name: nvidia
@@ -31,6 +31,15 @@ spec:
       repository: nvcr.io/nvidia/k8s-device-plugin
       tag: v0.17.2
     runtimeClassName: nvidia
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - talos10019
     config:
       map:
         default: |-
@@ -43,4 +52,4 @@ spec:
               failRequestsGreaterThanOne: false
               resources:
                 - name: nvidia.com/gpu
-                  replicas: 6
+                  replicas: 4
