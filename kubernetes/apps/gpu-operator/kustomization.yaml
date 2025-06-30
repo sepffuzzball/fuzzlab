@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: gpu-operator
 components:
   - ../../components/common
-resources:
-  - ./gpu-operator/ks.yaml
+#resources:
+#  - ./gpu-operator/ks.yaml
