@@ -89,9 +89,11 @@ spec:
       #  - hosts:
       #      - *host
           #secretName: "${SECRET_DOMAIN/./-}-production-tls"
-    #extraConfig:
-    #  - secret:
-    #      secretName: netbox-secret
+    extraConfig:
+      - secret:
+          secretName: netbox-secret
+      - secret:
+          secretName: netbox-db-secret
     housekeeping:
       enabled: false
     worker:
