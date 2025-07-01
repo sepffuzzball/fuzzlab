@@ -27,7 +27,7 @@ spec:
     dateTimeFormat: "j. F, Y g:i a"
     shortDateTimeFormat: "j.m.Y H:i"
     storages:
-    #existingSecret: netbox-secret
+    existingSecret: netbox-secret
     metricsEnabled: true
     postgresql:
       enabled: false
