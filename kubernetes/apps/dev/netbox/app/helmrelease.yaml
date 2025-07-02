@@ -48,7 +48,7 @@ spec:
       port: 5432
       database: netbox
       username: netbox
-      password: ""
+      #password: ""
       existingSecretName: ${DB_USER}-db-secret
       existingSecretKey: "POSTGRES_PASS"
     email:
@@ -95,6 +95,9 @@ spec:
           secretName: netbox-secret
       - secret:
           secretName: netbox-db-secret
+    extraEnvs:
+      - name: DB_WAIT_DEBUG
+        value: "1"
     housekeeping:
       enabled: false
     worker:
