@@ -18,7 +18,9 @@ spec:
       email: netbox@mail.${SECRET_DOMAIN_FBE}
     admins:
       - ["admin", "netbox@mail.${SECRET_DOMAIN_FBE}"]
-    loginRequired: true
+    loginRequired: false
+    exemptViewPermissions:
+      - '*'
     timeZone: ${TIMEZONE}
     dateFormat: "j. F, Y"
     shortDateFormat: "j.m.Y"
