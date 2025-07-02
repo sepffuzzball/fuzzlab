@@ -30,26 +30,26 @@ spec:
     existingSecret: netbox-secret
     metricsEnabled: true
     postgresql:
-      enabled: false
+    #  enabled: false
     valkey:
-      enabled: false
-    tasksDatabase:
-      host: redis.database.svc.cluster.local
-      database: 3
-      existingSecretName: "netbox-secret"
-      existingSecretKey: "REDIS_PASSWORD"
-    cachingDatabase:
-      host: redis.database.svc.cluster.local
-      database: 4
-      existingSecretName: "netbox-secret"
-      existingSecretKey: "REDIS_PASSWORD"
-    externalDatabase:
-      host: postgres-pgbouncer.database.svc.cluster.local
-      port: 5432
-      database: netbox
-      username: netbox
-      existingSecretName: ${DB_USER}-db-secret
-      existingSecretKey: "POSTGRES_PASS"
+#      enabled: false
+    # tasksDatabase:
+    #   host: redis.database.svc.cluster.local
+    #   database: 3
+    #   existingSecretName: "netbox-secret"
+    #   existingSecretKey: "REDIS_PASSWORD"
+    # cachingDatabase:
+    #   host: redis.database.svc.cluster.local
+    #   database: 4
+    #   existingSecretName: "netbox-secret"
+    #   existingSecretKey: "REDIS_PASSWORD"
+    # externalDatabase:
+    #   host: postgres-pgbouncer.database.svc.cluster.local
+    #   port: 5432
+    #   database: netbox
+    #   username: netbox
+    #   existingSecretName: ${DB_USER}-db-secret
+    #   existingSecretKey: "POSTGRES_PASS"
     email:
       existingSecretName: netbox-secret
       server: smtp.protonmail.ch
