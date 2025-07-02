@@ -32,7 +32,7 @@ spec:
     postgresql:
       enabled: false
     valkey:
-#      enabled: false
+      enabled: true
     # tasksDatabase:
     #   host: redis.database.svc.cluster.local
     #   database: 3
