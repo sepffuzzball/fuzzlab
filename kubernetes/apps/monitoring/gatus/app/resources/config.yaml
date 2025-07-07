@@ -31,7 +31,7 @@ endpoints:
   # External DNS
   - name: ${SECRET_DOMAIN}
     group: external-dns
-    url: https://echo-server-external.${SECRET_DOMAIN}
+    url: https://echo.${SECRET_DOMAIN}
     interval: 5m
     conditions:
       - "[STATUS] == 200"
@@ -39,10 +39,10 @@ endpoints:
       - type: telegram
   - name: ${SECRET_DOMAIN_FBE}
     group: external-dns
-    url: https://echo-server.${SECRET_DOMAIN_FBE}
+    url: http://${SECRET_DOMAIN_FBE}
     interval: 5m
     conditions:
-      - "[STATUS] == 200"
+      - "[STATUS] == 404"
     alerts:
       - type: telegram
 
@@ -200,7 +200,7 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: U6-Ent-Foxbox
+  - name: U7-Pro-Foxbox
     group: Network-AP
     url: icmp://10.0.1.24
     interval: 1m
@@ -268,86 +268,79 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s201
+  - name: talos10011
     group: server-virtual
-    url: icmp://10.0.2.201
+    url: icmp://10.0.100.11
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s202
+  - name: talos10012
     group: server-virtual
-    url: icmp://10.0.2.202
+    url: icmp://10.0.100.12
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s203
+  - name: talos10013
     group: server-virtual
-    url: icmp://10.0.2.203
+    url: icmp://10.0.100.13
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s204
+  - name: talos10014
     group: server-virtual
-    url: icmp://10.0.2.204
+    url: icmp://10.0.100.14
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s205
+  - name: talos10015
     group: server-virtual
-    url: icmp://10.0.2.205
+    url: icmp://10.0.100.15
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s206
+  - name: talos10016
     group: server-virtual
-    url: icmp://10.0.2.206
+    url: icmp://10.0.100.16
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s207
+  - name: talos10017
     group: server-virtual
-    url: icmp://10.0.2.207
+    url: icmp://10.0.100.17
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s208
+  - name: talos10018
     group: server-virtual
-    url: icmp://10.0.2.208
+    url: icmp://10.0.100.18
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s209
+  - name: talos10019
     group: server-virtual
-    url: icmp://10.0.2.209
+    url: icmp://10.0.100.19
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: k3s210
-    group: server-virtual
-    url: icmp://10.0.2.210
-    interval: 5m
-    conditions:
-      - "[CONNECTED] == true"
-    alerts:
-      - type: telegram
+
 
   # server-hardware
   - name: PVE00
