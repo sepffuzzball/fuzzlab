@@ -25,7 +25,7 @@ alerting:
 connectivity:
   checker:
     target: 1.1.1.1:53
-    interval: 1m
+    interval: 5m
 
 endpoints:
   # External DNS
@@ -75,7 +75,7 @@ endpoints:
   - name: UDM-Pro
     group: Network
     url: icmp://10.0.1.1
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -83,7 +83,7 @@ endpoints:
   - name: USW-Pro-Aggregation
     group: Network
     url: icmp://10.0.1.3
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -91,7 +91,7 @@ endpoints:
   - name: USW-Ent-Bottom
     group: Network
     url: icmp://10.0.1.2
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -99,7 +99,7 @@ endpoints:
   - name: USW-Ent-Top
     group: Network
     url: icmp://10.0.1.4
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -107,7 +107,7 @@ endpoints:
   - name: USW-8-Lighting
     group: Network
     url: icmp://10.0.1.5
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -115,7 +115,7 @@ endpoints:
   - name: USW-Agg-Upstairs
     group: Network
     url: icmp://10.0.1.7
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -123,7 +123,7 @@ endpoints:
   - name: USW-Pro-24
     group: Network
     url: icmp://10.0.1.8
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -131,7 +131,7 @@ endpoints:
   - name: USW-Flex-Mini-Outside
     group: Network
     url: icmp://10.0.1.9
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -139,7 +139,7 @@ endpoints:
   - name: USW-Flex-Mini-Attic
     group: Network
     url: icmp://10.0.1.10
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -147,7 +147,7 @@ endpoints:
   - name: USW-Agg-Fuzz-Suite
     group: Network
     url: icmp://10.0.1.12
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -155,7 +155,7 @@ endpoints:
   - name: USW-24-Fuzz-Suite
     group: Network
     url: icmp://10.0.1.13
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -163,7 +163,7 @@ endpoints:
   - name: USW-Flex-2.5G-Foxbox
     group: Network
     url: icmp://10.0.1.14
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -171,7 +171,7 @@ endpoints:
   - name: U6-Ent-Lounge
     group: Network-AP
     url: icmp://10.0.1.20
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -179,7 +179,7 @@ endpoints:
   - name: U6-Ent-LivingRoom
     group: Network-AP
     url: icmp://10.0.1.21
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -187,7 +187,7 @@ endpoints:
   - name: U6-Ent-Garage
     group: Network-AP
     url: icmp://10.0.1.22
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -195,7 +195,7 @@ endpoints:
   - name: U6-Ent-Upstairs
     group: Network-AP
     url: icmp://10.0.1.23
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -203,7 +203,7 @@ endpoints:
   - name: U7-Pro-Foxbox
     group: Network-AP
     url: icmp://10.0.1.24
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -213,7 +213,7 @@ endpoints:
   - name: Postgres
     group: Internal-Services
     url: tcp://postgres-ha.database.svc.cluster.local:5432
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -221,7 +221,7 @@ endpoints:
   - name: Redis
     group: Internal-Services
     url: tcp://redis.database.svc.cluster.local:6379
-    interval: 1m
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
     alerts:
@@ -343,100 +343,100 @@ endpoints:
 
 
   # server-hardware
-  - name: PVE00
+  - name: PVE64
     group: server-hardware
-    url: ssh://${PVE_ADDR}:22
+    url: icmp://${PVE_ADDR} # ssh://${PVE_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: PVE01
     group: server-hardware
-    url: ssh://${PVE01_ADDR}:22
+    url: icmp://${PVE01_ADDR} #ssh://${PVE01_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: PVE02
     group: server-hardware
-    url: ssh://${PVE02_ADDR}:22
+    url: icmp://${PVE02_ADDR} #ssh://${PVE02_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: PVE03
     group: server-hardware
-    url: ssh://${PVE03_ADDR}:22
+    url: icmp://${PVE03_ADDR} #ssh://${PVE03_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: PVE04
     group: server-hardware
-    url: ssh://${PVE04_ADDR}:22
+    url: icmp://${PVE04_ADDR} #ssh://${PVE04_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: PVE05
     group: server-hardware
-    url: ssh://${PVE05_ADDR}:22
+    url: icmp://${PVE05_ADDR} #ssh://${PVE05_ADDR}:22
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
-      - "[STATUS] == 0"
+      #- "[STATUS] == 0"
     alerts:
       - type: telegram
   - name: Home-Assistant
@@ -445,10 +445,10 @@ endpoints:
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    body: |
-      {
-        "command": "uptime"
-      }
+    # body: |
+    #   {
+    #     "command": "uptime"
+    #   }
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
