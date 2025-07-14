@@ -445,10 +445,7 @@ endpoints:
     ssh:
       username: ${SECRET_SSH_USER}
       password: ${SECRET_SSH_PASSWORD}
-    # body: |
-    #   {
-    #     "command": "uptime"
-    #   }
+
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
