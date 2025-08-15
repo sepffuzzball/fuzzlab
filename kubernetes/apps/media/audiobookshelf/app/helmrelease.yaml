@@ -55,6 +55,19 @@ spec:
         ports:
           http:
             port: &port 80
+    route:
+      abs:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: main
+                port: *port
 
 
     persistence:
