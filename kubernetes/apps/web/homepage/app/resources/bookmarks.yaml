@@ -1,6 +1,6 @@
 ---
 - BMTOP:
-    - BlueSky: 
+    - BlueSky:
         - icon: bluesky.png
           href: https://bsky.app/
     - Proton:
@@ -19,6 +19,9 @@
         - icon: github.png
           href: https://github.com
 - BMMID:
+    - Audiobookshelf:
+        - icon: audiobookshelf.png
+          href: https://audiobookshelf.${SECRET_DOMAIN}
     - Jellyfin:
         - icon: jellyfin.png
           href: https://jellyfin.${SECRET_DOMAIN_FBE}/
@@ -34,25 +37,25 @@
     - Mylar:
         - icon: mylar.png
           href: https://mylar.${SECRET_DOMAIN}
-    - Lidarr: 
+    - Lidarr:
         - icon: lidarr.png
           href: https://lidarr.${SECRET_DOMAIN}/
-    - Prowlarr: 
+    - Prowlarr:
         - icon: prowlarr.png
           href: https://prowlarr.${SECRET_DOMAIN}/
-    - Radarr: 
+    - Radarr:
         - icon: radarr.png
           href: https://radarr.${SECRET_DOMAIN}/
-    - Readarr: 
+    - Readarr:
         - icon: readarr.png
           href: https://readarr.${SECRET_DOMAIN}/
-    - Sonarr: 
+    - Sonarr:
         - icon: sonarr.png
           href: https://sonarr.${SECRET_DOMAIN}/
-    - Shlink: 
+    - Shlink:
         - icon: shlink.png
           href: https://shlink.${SECRET_DOMAIN}/
-    - Slskd: 
+    - Slskd:
         - icon: slskd.png
           href: https://slskd.${SECRET_DOMAIN}/
 - BMBTM:
