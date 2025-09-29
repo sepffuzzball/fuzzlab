@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.6.30
+              tag: 0.6.32
               pullPolicy: IfNotPresent
 
             probes:
