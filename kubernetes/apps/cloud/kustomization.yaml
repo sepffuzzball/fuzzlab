@@ -7,6 +7,7 @@ components:
 resources:
   - ./foundry/ks.yaml
   - ./foundrydc20/ks.yaml
+  - ./foundrydh/ks.yaml
   - ./immich/ks.yaml
   #- ./nextcloud/ks.yaml
   - ./owncloud/ks.yaml
