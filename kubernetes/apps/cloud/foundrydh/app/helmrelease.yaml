@@ -58,7 +58,7 @@ spec:
               FOUNDRY_PROXY_SSL: 'true'
             envFrom:
               - secretRef:
-                  name: foundry-secrets
+                  name: foundrydh-secrets
 
     service:
       app:
