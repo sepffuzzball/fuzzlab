@@ -25,7 +25,12 @@ spec:
       foundrydh:
         annotations:
           reloader.stakater.com/auto: 'true'
-
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
