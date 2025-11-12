@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: authentik
-      version: 2025.6.4
+      version: 2025.8.0
       sourceRef:
         kind: HelmRepository
         name: authentik
@@ -28,7 +28,7 @@ spec:
     global:
       image:
         repository: ghcr.io/goauthentik/server
-        tag: 2025.6.4
+        tag: 2025.8.0
         pullPolicy: IfNotPresent
 
       podAnnotations:
@@ -162,7 +162,7 @@ spec:
           cpu: 50m
           memory: 512Mi
         limits:
-          memory: 1Gi
+          memory: 2Gi
 
     postgresql:
       enabled: false
