@@ -7,4 +7,4 @@ components:
   - ../../components/common
 resources:
   - ./authentik/ks.yaml
-  - ./telegram-oauth/ks.yaml
+#  - ./telegram-oauth/ks.yaml
