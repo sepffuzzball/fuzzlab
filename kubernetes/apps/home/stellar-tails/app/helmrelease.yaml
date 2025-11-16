@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/stellar-tails
-              tag: main-3d9e660
+              tag: main-f1f712f
             resources:
               requests:
                 cpu: 100m
