@@ -39,10 +39,10 @@ spec:
         controller: blog
         type: LoadBalancer
         externalTrafficPolicy: Cluster
-        loadBalancerIP: ${SPF_ADDR}
+        loadBalancerIP: ${STELLAR_ADDR}
         ports:
           http:
-            port: &port 8080
+            port: &port 80
     # ingress:
     #   main:
     #     enabled: true
