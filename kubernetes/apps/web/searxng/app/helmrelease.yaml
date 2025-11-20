@@ -27,7 +27,7 @@ spec:
           main:
             image:
               repository: searxng/searxng
-              tag: 2025.2.20-28d1240fc
+              tag: 2025.11.18-576c8ca99
             env:
               SEARXNG_BASE_URL: &hostenv https://search.${SECRET_DOMAIN_FBE}
               SEARXNG_URL: *hostenv

@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/berriai/litellm
-              tag: main-v1.75.8-stable
+              tag: v1.77.3-stable-patch-2
             envFrom:
               - secretRef:
                   name: *secret
