@@ -7,7 +7,7 @@ components:
 resources:
   #- ./deluge/ks.yaml
   - ./audiobookshelf/ks.yaml
-  - ./lidarr-pr/ks.yaml
+  - ./lidarr/ks.yaml
   #- ./jellyfin/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
