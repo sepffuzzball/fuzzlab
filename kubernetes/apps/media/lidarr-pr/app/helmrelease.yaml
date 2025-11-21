@@ -28,7 +28,7 @@ spec:
           securityContext:
             runAsUser: ${PUID}
             runAsGroup: ${PGID}
-            runAsNonRoot: true
+            runAsNonRoot: false
             fsGroup: ${PGID}
             fsGroupChangePolicy: OnRootMismatch
 
