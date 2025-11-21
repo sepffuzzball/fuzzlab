@@ -75,6 +75,11 @@ spec:
         - lidarr
         - lidarr-log
       password: *password
+    - name: lidarr-pr
+      databases:
+        - lidarr-pr
+        - lidarr-pr-log
+      password: *password
     - name: litellm
       databases:
         - litellm

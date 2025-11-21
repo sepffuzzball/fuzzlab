@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app lidarr
+  name: &app lidarr-pr
 spec:
   interval: 30m
   chartRef:
@@ -24,13 +24,13 @@ spec:
   values:
     controllers:
       arr:
-        pod:
-          securityContext:
-            runAsUser: ${PUID}
-            runAsGroup: ${PGID}
-            runAsNonRoot: false
-            fsGroup: ${PGID}
-            fsGroupChangePolicy: OnRootMismatch
+        #pod:
+        #  securityContext:
+        #    runAsUser: ${PUID}
+        #    runAsGroup: ${PGID}
+        #    runAsNonRoot: false
+        #    fsGroup: ${PGID}
+        #    fsGroupChangePolicy: OnRootMismatch
 
         containers:
           main:
@@ -41,7 +41,7 @@ spec:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
               PGID: ${PGID}
-              LIDARR__APP__INSTANCENAME: lidarr
+              LIDARR__APP__INSTANCENAME: lidarr-pr
               LIDARR__APP__THEME: dark
               LIDARR__AUTH__METHOD: External
               LIDARR__AUTH__REQUIRED: DisabledForLocalAddresses
@@ -96,7 +96,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: lidarr-config
+        existingClaim: lidarr-pr-config
         globalMounts:
           - path: /config
       tmp:

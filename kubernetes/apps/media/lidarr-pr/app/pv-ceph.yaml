@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: lidarr-config
+  name: lidarr-pr-config
 spec:
   accessModes:
     - ReadWriteMany
@@ -10,17 +10,17 @@ spec:
     requests:
       storage: 2Gi
   storageClassName: csi-cephfs-sc
-  volumeName: lidarr-config-pv
+  volumeName: lidarr-pr-config-pv
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: lidarr-config-pv
+  name: lidarr-pr-config-pv
 spec:
   storageClassName: csi-cephfs-sc
   claimRef:
-    name: lidarr-config
+    name: lidarr-pr-config
     namespace: media
   capacity:
     storage: 2Gi
@@ -40,7 +40,7 @@ spec:
       "clusterID": "ace7b6a4-115a-42f7-ba4f-32ceeb11e3c3"
       "fsName": "k8s-cephfs"
       "staticVolume": "true"
-      "rootPath": /volumes/csi/k8s-media/lidarr/config
+      "rootPath": /volumes/csi/k8s-media/lidarr-pr/config
     # volumeHandle can be anything, need not to be same
     # as PV name or volume name. keeping same for brevity
     volumeHandle: lidarr
