@@ -35,10 +35,12 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/home-operations/lidarr
-              tag: 2.14.5.4836
+              repository:  ghcr.io/hotio/lidarr
+              tag: pr-plugins-3.1.1.4881
             env:
               TZ: ${TIMEZONE}
+              PUID: ${PUID}
+              PGID: ${PGID}
               LIDARR__APP__INSTANCENAME: lidarr
               LIDARR__APP__THEME: dark
               LIDARR__AUTH__METHOD: External
