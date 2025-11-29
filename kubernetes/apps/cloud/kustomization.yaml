@@ -11,3 +11,4 @@ resources:
   - ./immich/ks.yaml
   #- ./nextcloud/ks.yaml
   - ./owncloud/ks.yaml
+  - ./stash/ks.yaml
