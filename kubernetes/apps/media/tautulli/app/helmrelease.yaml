@@ -50,6 +50,9 @@ spec:
     service:
       main:
         controller: arr
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${TAUTULLI_ADDR}
         ports:
           http:
             port: *port
