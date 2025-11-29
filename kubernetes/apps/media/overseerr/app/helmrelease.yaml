@@ -21,17 +21,16 @@ spec:
       retries: 3
   values:
     controllers:
-      pod:
-        securityContext:
-          runAsUser: ${PUID}
-          runAsGroup: ${PGID}
-          runAsNonRoot: false
-          fsGroup: ${PGID}
-          fsGroupChangePolicy: OnRootMismatch
       overseerr:
         annotations:
           reloader.stakater.com/auto: "true"
-
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            runAsNonRoot: false
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           app:
             image:
@@ -51,12 +50,12 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-      resources:
-        requests:
-          cpu: 10m
-          memory: 250Mi
-        limits:
-          memory: 1500Mi
+            resources:
+              requests:
+                cpu: 10m
+                memory: 250Mi
+              limits:
+                memory: 1500Mi
     service:
       app:
         controller: overseerr
