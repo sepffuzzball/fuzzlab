@@ -21,3 +21,4 @@ resources:
   - ./secrets.sops.yaml
   - ./sonarr/ks.yaml
   - ./slskd/ks.yaml
+  - ./tautulli/ks.yaml
