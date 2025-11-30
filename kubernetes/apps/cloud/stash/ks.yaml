@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cloud
+  name: &app stash
   namespace: &namespace cloud
 spec:
   targetNamespace: *namespace
