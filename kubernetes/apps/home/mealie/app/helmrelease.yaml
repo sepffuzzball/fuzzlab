@@ -65,13 +65,14 @@ spec:
               POSTGRES_DB: ${DB_NAME}
               # Auth Settings
               OIDC_AUTH_ENABLED: true
-              OIDC_PROVIDER_NAME: Authentik
+              OIDC_PROVIDER_NAME: authentik
               OIDC_REMEMBER_ME: true
               OIDC_SIGNUP_ENABLED: true
               OIDC_CONFIGURATION_URL: https://auth.${SECRET_DOMAIN}/application/o/mealie/.well-known/openid-configuration
               OIDC_USER_CLAIM: preferred_username
               OIDC_GROUPS_CLAIM: groups
               OIDC_ADMIN_GROUP: "mealie Admins"
+              OIDC_AUTO_REDIRECT: true
               OPENAI_API_KEY:
                 valueFrom:
                   secretKeyRef:
