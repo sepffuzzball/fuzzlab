@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: planka
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+
+  values:
+    controllers:
+      planka:
+        annotations:
+          reloader.stakater.com/auto: 'true'
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/plankanban/planka
+              tag: 1.26.3@sha256:e469d724985db3f560ef0aa2218d54536212459bf8ecbdbc9fd995fc3cbe29db
+
+            env:
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: ${DB_USER}-db-secret
+                    key: POSTGRES_HOST
+              BASE_URL:
+                value: &BASE_URL '{{ printf "https://%s" (first .Values.ingress.app.hosts).host }}'
+              REACT_APP_SERVER_BASE_URL:
+                value: *BASE_URL
+
+              TRUST_PROXY: 1
+
+              OIDC_ENFORCED: 'true'
+              OIDC_SCOPES: openid profile groups email
+              OIDC_ADMIN_ROLES: planka-admin
+              OIDC_ROLES_ATTRIBUTE: groups
+
+              ALLOW_ALL_TO_CREATE_PROJECTS: 'true'
+
+              S3_ENABLE: false
+
+            envFrom:
+              - secretRef:
+                  name: planka-secret
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 50Mi
+              limits:
+                memory: 5Gi
+
+    service:
+      app:
+        controller: planka
+        ports:
+          http:
+            port: &port 80
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /app/logs
+            subPath: logs
+
+          - path: /app/.tmp
+            subPath: tmp
