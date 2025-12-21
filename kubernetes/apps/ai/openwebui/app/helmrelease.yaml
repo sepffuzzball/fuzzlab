@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.6.41
+              tag: 0.6.42
               pullPolicy: IfNotPresent
 
             probes:
@@ -47,6 +47,7 @@ spec:
               ENABLE_OAUTH_SIGNUP: "true"
               ENABLE_LITELLM: "false"
               OAUTH_MERGE_ACCOUNTS_BY_EMAIL: "true"
+
             envFrom:
               - secretRef:
                   name: openwebui-secrets
