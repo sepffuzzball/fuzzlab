@@ -51,7 +51,7 @@ spec:
               - secretRef:
                   name: openwebui-secrets
               - secretRef:
-                  name: ${APP}-db-secret
+                  name: ${APP}2-db-secret
 
     service:
       app:

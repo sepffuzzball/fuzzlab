@@ -104,6 +104,10 @@ spec:
       databases:
         - openwebui
       password: *password
+    - name: openwebui2
+      databases:
+        - openwebui2
+      password: *password
     - name: planka
       databases:
         - planka
