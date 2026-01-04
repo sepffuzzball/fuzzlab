@@ -1,0 +1,43 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app authentik2
+  namespace: &namespace security
+spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/security/authentik2/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  dependsOn:
+    - name: crunchy-postgres-operator
+      namespace: database
+  targetNamespace: *namespace
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  components:
+  - ../../../../components/gatus/external
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      DB_NAME: *app
+      DB_USER: *app
+      HOSTNAME: auth2.fzbl.xyz
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
+      GATUS_SUBDOMAIN: auth
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
