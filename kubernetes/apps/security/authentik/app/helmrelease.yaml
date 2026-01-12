@@ -132,7 +132,7 @@ spec:
             - "shlink.${SECRET_DOMAIN}"
             - "slskd.${SECRET_DOMAIN}"
             - "sonarr.${SECRET_DOMAIN}"
-            - "sillytavern.${SECRET_DOMAIN}"
+            #- "sillytavern.${SECRET_DOMAIN}"
             - "teslamate.${SECRET_DOMAIN}"
           annotations:
             external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
