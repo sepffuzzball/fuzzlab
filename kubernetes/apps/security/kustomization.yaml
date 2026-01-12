@@ -8,5 +8,5 @@ components:
 resources:
   - ./authentik/ks.yaml
   - ./authentik2/ks.yaml
-  #- ./pocket-id/ks.yaml
+  - ./pocket-id/ks.yaml
 #  - ./telegram-oauth/ks.yaml
