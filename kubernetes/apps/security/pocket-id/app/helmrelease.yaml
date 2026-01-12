@@ -68,9 +68,12 @@ spec:
                 port: *port
     persistence:
       config:
-        existingClaim: pocket-id-config
+        existingClaim: pocket-id
         globalMounts:
-          - path: /home/pocket-id/app
+          - path: /app/data
+      var:
+        type: emptyDir
+        sizeLimit: 1Gi
 
     resources:
       requests:
