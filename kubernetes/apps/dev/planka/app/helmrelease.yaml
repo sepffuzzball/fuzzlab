@@ -53,7 +53,7 @@ spec:
 
             envFrom:
               - secretRef:
-                  name: planka-secret
+                  name: planka-secrets
 
             resources:
               requests:
