@@ -88,11 +88,6 @@ spec:
             secretKeyRef:
               name: authentik-secret
               key: authentik_secret_key
-        - name: AUTHENTIK_REDIS__PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: authentik-secret
-              key: redisPassword
 
     authentik:
       log_level: info
@@ -105,8 +100,6 @@ spec:
       error_reporting:
         enabled: false
         send_pii: false
-      redis:
-        host: "authentik-redis.security.svc.cluster.local"
 
     server:
       replicas: 1
