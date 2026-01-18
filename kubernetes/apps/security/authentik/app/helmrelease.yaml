@@ -40,7 +40,7 @@ spec:
             claimName: authentik-media
 
       volumeMounts:
-        - mountPath: /media
+        - mountPath: /data/media
           name: media
 
       env:
