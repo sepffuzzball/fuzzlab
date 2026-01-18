@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: fosrl/newt
-              tag: 1.2.1
+              tag: 1.8.1
             env:
               PANGOLIN_ENDPOINT: https://pangolin.${SECRET_DOMAIN_FBE}
             envFrom:
