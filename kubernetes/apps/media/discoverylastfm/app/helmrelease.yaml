@@ -39,7 +39,7 @@ spec:
             env:
               MUSIC_SERVICE: lidarr
               LIDARR_ROOT_FOLDER: /lcl/music
-              LIDARR_QUALITY_PROFILE_ID: 2
+              LIDARR_QUALITY_PROFILE_ID: 1
               LIDARR_METADATA_PROFILE_ID: 1
 
             envFrom:
@@ -73,7 +73,7 @@ spec:
         enabled: true
         existingClaim: discoverylastfm-config
         globalMounts:
-          - path: /app/config
+          - path: /app
       tmp:
         type: emptyDir
       #logs:
