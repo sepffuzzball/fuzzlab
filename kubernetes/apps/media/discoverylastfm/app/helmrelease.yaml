@@ -31,15 +31,14 @@ spec:
         #    runAsNonRoot: false
         #    fsGroup: ${PGID}
         #    fsGroupChangePolicy: OnRootMismatch
-
         containers:
           main:
             image:
-              repository: MrRobotoGit/DiscoveryLastFM
+              repository: mrrobotogit/discoverylastfm
               tag: v2.1.0
             env:
               MUSIC_SERVICE: lidarr
-              LIDARR_ROOT_FOLDER: /music
+              LIDARR_ROOT_FOLDER: /lcl/music
               LIDARR_QUALITY_PROFILE_ID: 2
               LIDARR_METADATA_PROFILE_ID: 1
 
