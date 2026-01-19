@@ -1,0 +1,50 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app discoverylastfm
+  namespace: &namespace media
+spec:
+  components:
+  - ../../../../components/gatus/internal
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
+      namespace: storage
+  interval: 30m
+  path: ./kubernetes/apps/media/discoverylastfm/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      DB_NAME: *app
+      DB_USER: *app
+      GATUS_DOMAIN: ${SECRET_DOMAIN_LOCAL}
+      GATUS_SUBDOMAIN: *app
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
+      GATUS_GROUP: internal-media
+      GATUS_PROTOCOL: http
+  prune: true
+  retryInterval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: *namespace
+  timeout: 5m
+  wait: false
