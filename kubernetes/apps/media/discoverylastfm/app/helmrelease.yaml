@@ -76,8 +76,8 @@ spec:
           - path: /app/config
       tmp:
         type: emptyDir
-      logs:
-        enabled: true
-        existingClaim: discoverylastfm-logs
-        globalMounts:
-          - path: /app/logs
+      #logs:
+      #  enabled: true
+      #  existingClaim: discoverylastfm-logs
+      #  globalMounts:
+      #    - path: /app/logs
