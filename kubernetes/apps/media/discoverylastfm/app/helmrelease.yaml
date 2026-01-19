@@ -28,7 +28,7 @@ spec:
           securityContext:
             runAsUser: ${PUID}
             runAsGroup: ${PGID}
-            runAsNonRoot: false
+            runAsNonRoot: true
             fsGroup: ${PGID}
             fsGroupChangePolicy: OnRootMismatch
         containers:
