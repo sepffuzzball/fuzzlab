@@ -77,7 +77,7 @@ spec:
       tmp:
         type: emptyDir
       logs:
-        type: emptyDir
+        enabled: true
+        existingClaim: discoverylastfm-logs
         globalMounts:
           - path: /app/logs
-
