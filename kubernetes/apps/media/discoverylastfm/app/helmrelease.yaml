@@ -24,13 +24,13 @@ spec:
   values:
     controllers:
       arr:
-        #pod:
-        #  securityContext:
-        #    runAsUser: ${PUID}
-        #    runAsGroup: ${PGID}
-        #    runAsNonRoot: false
-        #    fsGroup: ${PGID}
-        #    fsGroupChangePolicy: OnRootMismatch
+        pod:
+          securityContext:
+            runAsUser: ${PUID}
+            runAsGroup: ${PGID}
+            runAsNonRoot: false
+            fsGroup: ${PGID}
+            fsGroupChangePolicy: OnRootMismatch
         containers:
           main:
             image:
