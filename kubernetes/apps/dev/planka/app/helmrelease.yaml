@@ -36,9 +36,9 @@ spec:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_HOST
               BASE_URL:
-                value: &BASE_URL '{{ printf "https://%s" (first .Values.ingress.app.hosts).host }}'
+                value: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               REACT_APP_SERVER_BASE_URL:
-                value: *BASE_URL
+                value: *host
 
               TRUST_PROXY: 1
 
@@ -72,7 +72,7 @@ spec:
       app:
         enabled: true
         hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - *host
         parentRefs:
           - name: external
             namespace: kube-system
