@@ -9,5 +9,5 @@ resources:
   - ./ittools/ks.yaml
   - ./n8n/ks.yaml
   - ./netbox/ks.yaml
-  - ./planka/ks.yaml
+  #- ./planka/ks.yaml
   - ./semaphore/ks.yaml
