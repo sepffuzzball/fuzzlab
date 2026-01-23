@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository:  ghcr.io/hotio/lidarr
-              tag: pr-plugins-3.0.0.4856
+              tag: nightly-3.1.2.4914
             env:
               TZ: ${TIMEZONE}
               PUID: ${PUID}

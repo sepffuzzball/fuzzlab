@@ -36,7 +36,7 @@ spec:
                     name: ${DB_USER}-db-secret
                     key: POSTGRES_URI
               BASE_URL:
-                value: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+                value: &host "planka.${SECRET_DOMAIN}"
               REACT_APP_SERVER_BASE_URL:
                 value: *host
 
