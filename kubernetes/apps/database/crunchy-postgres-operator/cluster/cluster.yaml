@@ -74,6 +74,10 @@ spec:
       databases:
         - gatus
       password: *password
+    - name: homebox
+      databases:
+        - homebox
+      password: *password
     - name: lidarr
       databases:
         - lidarr
