@@ -9,6 +9,5 @@ resources:
   - ./foundrydc20/ks.yaml
   - ./foundrydh/ks.yaml
   - ./immich/ks.yaml
-  #- ./nextcloud/ks.yaml
   - ./owncloud/ks.yaml
   - ./stash/ks.yaml
