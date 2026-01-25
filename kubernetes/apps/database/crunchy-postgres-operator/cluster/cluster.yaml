@@ -78,6 +78,10 @@ spec:
       databases:
         - homebox
       password: *password
+    - name: initiative
+      databases:
+        - initiative
+      password: *password
     - name: lidarr
       databases:
         - lidarr
