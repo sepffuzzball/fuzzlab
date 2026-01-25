@@ -30,11 +30,12 @@ spec:
               tag: 0.15.0
 
             env:
-              DATABASE_URL:
-                valueFrom:
-                  secretKeyRef:
-                    name: ${DB_USER}-db-secret
-                    key: POSTGRES_URI
+              #DATABASE_URL:
+              #  valueFrom:
+              #    secretKeyRef:
+              #      name: ${DB_USER}-db-secret
+              #      key: POSTGRES_URI
+
               ACCESS_TOKEN_EXPIRE_MINUTES: 10080
               APP_URL: https://initiative.${SECRET_DOMAIN_FBE}
               OIDC_ENABLED: true
