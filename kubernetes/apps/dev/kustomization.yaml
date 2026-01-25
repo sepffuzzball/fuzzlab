@@ -6,7 +6,7 @@ components:
   - ../../components/common
 resources:
   - ./coder/ks.yaml
-  #- ./initiative/ks.yaml
+  - ./initiative/ks.yaml
   - ./ittools/ks.yaml
   - ./n8n/ks.yaml
   - ./netbox/ks.yaml
