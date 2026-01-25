@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: morelitea/initiative
-              tag: v0.15.0
+              tag: 0.15.0
 
             env:
               DATABASE_URL:
