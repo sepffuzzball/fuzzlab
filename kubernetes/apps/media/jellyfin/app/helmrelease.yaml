@@ -28,8 +28,8 @@ spec:
           reloader.stakater.com/auto: "true"
         pod:
           #nodeSelector:
-            #intel.feature.node.kubernetes.io/gpu: "true"
-            #nvidia.com/gpu.present: "true"
+          #intel.feature.node.kubernetes.io/gpu: "true"
+          #nvidia.com/gpu.present: "true"
           securityContext:
             #runAsUser: ${PUID}
             #runAsGroup: ${PGID}
@@ -43,7 +43,7 @@ spec:
           main:
             image:
               repository: ghcr.io/jellyfin/jellyfin
-              tag: 10.11.3
+              tag: 10.11.6
             env:
               DOTNET_SYSTEM_IO_DISABLEFILELOCKING: "true"
               JELLYFIN_FFmpeg__probesize: 50000000

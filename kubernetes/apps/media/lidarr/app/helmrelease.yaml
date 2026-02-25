@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/home-operations/lidarr
-              tag: 3.1.1.4876
+              tag: 3.1.2.4902
             env:
               TZ: ${TIMEZONE}
               LIDARR__APP__INSTANCENAME: lidarr
@@ -122,7 +122,7 @@ spec:
         enabled: true
         existingClaim: lcl-music
         globalMounts:
-          - path:  /media/music
+          - path: /media/music
       videos:
         enabled: true
         existingClaim: lcl-videos
