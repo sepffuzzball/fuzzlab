@@ -68,7 +68,13 @@ spec:
           - backendRefs:
               - identifier: main
                 port: *port
-
+            filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  # Set (overwrite) the X-Forwarded-Proto header
+                  set:
+                    - name: X-Forwarded-Proto
+                      value: https
 
     persistence:
       config:
