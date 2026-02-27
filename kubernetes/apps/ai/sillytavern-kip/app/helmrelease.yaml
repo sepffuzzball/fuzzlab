@@ -23,13 +23,13 @@ spec:
     controllers:
       kiptavern:
         annotations:
-          reloader.stakater.com/auto: 'true'
+          reloader.stakater.com/auto: "true"
 
         containers:
           app:
             image:
               repository: ghcr.io/sillytavern/sillytavern
-              tag: 1.13.5
+              tag: 1.16.0
               pullPolicy: IfNotPresent
 
             probes:
@@ -42,7 +42,6 @@ spec:
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-
 
     service:
       app:

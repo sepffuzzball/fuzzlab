@@ -23,13 +23,13 @@ spec:
     controllers:
       openwebui:
         annotations:
-          reloader.stakater.com/auto: 'true'
+          reloader.stakater.com/auto: "true"
 
         containers:
           app:
             image:
               repository: ghcr.io/open-webui/open-webui
-              tag: 0.8.3
+              tag: 0.8.5
               pullPolicy: IfNotPresent
 
             probes:
