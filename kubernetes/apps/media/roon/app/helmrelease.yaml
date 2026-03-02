@@ -78,19 +78,19 @@ spec:
         ports:
           http:
             port: &port 9100
-    route:
-      app:
-        enabled: true
-        hostnames:
-          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-        parentRefs:
-          - name: external
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
+    # route:
+    #  app:
+    #    enabled: true
+    #    hostnames:
+    #      - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+    #    parentRefs:
+    #      - name: external
+    #        namespace: kube-system
+    #        sectionName: https
+    #    rules:
+    #      - backendRefs:
+    #          - identifier: app
+    #            port: *port
     persistence:
       app:
         enabled: true
