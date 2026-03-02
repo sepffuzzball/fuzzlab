@@ -72,6 +72,9 @@ spec:
     service:
       app:
         controller: roon
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${ROON_ADDR}
         ports:
           http:
             port: &port 9100
