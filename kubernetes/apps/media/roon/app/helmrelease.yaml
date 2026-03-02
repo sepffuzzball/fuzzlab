@@ -1,0 +1,113 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app roon
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
+      namespace: storage
+  values:
+    controllers:
+      roon:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: steefdebruijn/docker-roonserver
+              tag: debian-12-slim@sha256:89217c4f30f328676f96cee34a5f76bd7b9c10bda77219b6ae1c72f3d53c7a1f
+            env:
+              TZ: ${TIMEZONE}
+            ports:
+              - containerPort: 9101
+                protocol: TCP
+              - containerPort: 9102
+                protocol: TCP
+              - containerPort: 9103
+                protocol: TCP
+              - containerPort: 9104
+                protocol: TCP
+              - containerPort: 9105
+                protocol: TCP
+              - containerPort: 9106
+                protocol: TCP
+              - containerPort: 9107
+                protocol: TCP
+              - containerPort: 9108
+                protocol: TCP
+              - containerPort: 9109
+                protocol: TCP
+              - containerPort: 9110
+                protocol: TCP
+              - containerPort: 9003
+                protocol: UDP
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 8192Mi
+    defaultPodOptions:
+      securityContext:
+        runAsUser: ${PUID}
+        runAsGroup: ${PGID}
+        runAsNonRoot: true
+        fsGroup: ${PGID}
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        controller: roon
+        ports:
+          http:
+            port: &port 9100
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      app:
+        enabled: true
+        existingClaim: roon-app
+        globalMounts:
+          - path: /app
+      backup:
+        enabled: true
+        existingClaim: roon-backup
+        globalMounts:
+          - path: /backup
+      data:
+        enabled: true
+        existingClaim: roon-data
+        globalMounts:
+          - path: /data
+      tmp:
+        type: emptyDir
+      lcl:
+        enabled: true
+        existingClaim: lcl
+        globalMounts:
+          - path: /lcl
