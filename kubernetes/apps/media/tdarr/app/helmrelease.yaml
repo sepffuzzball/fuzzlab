@@ -80,9 +80,14 @@ spec:
     service:
       app:
         controller: arr
+        type: LoadBalancer
         ports:
           http:
-            port: *port
+            port: 8265
+          server:
+            enabled: true
+            protocol: TCP
+            port: 8266
     # route:
     #   app:
     #     hostnames:
