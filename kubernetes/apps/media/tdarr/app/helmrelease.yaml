@@ -71,11 +71,6 @@ spec:
         runAsNonRoot: true
         fsGroup: ${PGID}
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups:
-          - 44 # video
-          - 125 # render
-          - 105 # render
-          - 568
       runtimeClassName: nvidia
     service:
       app:
