@@ -53,7 +53,7 @@ spec:
               - name: serverIP
                 value: localhost
               - name: serverPort
-                value: 8266
+                value: &port 8266
             resources:
               requests:
                 memory: 1Gi
