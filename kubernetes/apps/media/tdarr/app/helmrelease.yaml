@@ -1,0 +1,111 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app tdarr
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+    - name: csi-driver-smb
+      namespace: storage
+  values:
+    controllers:
+      arr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr
+              tag: 2.60.01
+            env:
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                memory: 2048Mi
+
+          node:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr_node
+              tag: 2.60.01
+              pullPolicy: IfNotPresent
+            env:
+              - name: nodeID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName
+              - name: serverIP
+                value: localhost
+              - name: serverPort
+                value: 8266
+            resources:
+              requests:
+                memory: 1Gi
+                cpu: 1000m
+                nvidia.com/gpu: 1
+              limits:
+                cpu: 4000m
+                memory: 8Gi
+                nvidia.com/gpu: 1
+
+    defaultPodOptions:
+      securityContext:
+        runAsUser: ${PUID}
+        runAsGroup: ${PGID}
+        runAsNonRoot: true
+        fsGroup: ${PGID}
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44 # video
+          - 125 # render
+          - 105 # render
+          - 568
+      runtimeClassName: nvidia
+    service:
+      app:
+        controller: arr
+        ports:
+          http:
+            port: *port
+    # route:
+    #   app:
+    #     hostnames:
+    #       - "{{ .Release.Name }}.${SECRET_DOMAIN_LOCAL}"
+    #     parentRefs:
+    #       - name: internal
+    #         namespace: kube-system
+    #         sectionName: https
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: tdarr-config
+        advancedMounts:
+          arr:
+            app:
+              - path: /app/server
+                subPath: server
+            node:
+              - path: /app/configs
+                subPath: config
+      lcl:
+        enabled: true
+        existingClaim: lcl
+        globalMounts:
+          - path: /lcl
