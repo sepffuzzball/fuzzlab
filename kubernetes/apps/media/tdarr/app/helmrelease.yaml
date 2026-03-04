@@ -39,6 +39,8 @@ spec:
               tag: 2.60.01
             env:
               TZ: ${TIMEZONE}
+              PUID: ${PUID}
+              PGID: ${PGID}
             resources:
               requests:
                 cpu: 100m
@@ -76,6 +78,8 @@ spec:
       app:
         controller: arr
         type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${TDARR_ADDR}
         ports:
           http:
             port: 8265
