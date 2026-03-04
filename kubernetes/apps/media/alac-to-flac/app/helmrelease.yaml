@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/alac-to-flac-docker
-              tag: 0.1.1
+              tag: 0.1.2
             env:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
@@ -52,9 +52,9 @@ spec:
     service:
       main:
         controller: alc
-        #ports:
-        #  http:
-        #    port: 80
+        ports:
+          http:
+            port: 80
 
     persistence:
       tmp:
