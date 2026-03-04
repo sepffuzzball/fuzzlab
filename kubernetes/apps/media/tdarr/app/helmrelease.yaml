@@ -54,6 +54,8 @@ spec:
               tag: 2.60.01
               pullPolicy: IfNotPresent
             env:
+              - name: serverURL
+                value: https://tdarr.${SECRET_DOMAIN_FBE}
               - name: nodeID
                 valueFrom:
                   fieldRef:
