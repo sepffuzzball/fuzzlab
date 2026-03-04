@@ -36,12 +36,13 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/alac-to-flac-docker
-              tag: 0.1.3
+              tag: 0.1.4
             env:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
               PGID: ${PGID}
-              path: /media/music/2WEI
+              path: /media/music/†††
+              polldelayseconds: 60
               subfolder: true
             resources:
               requests:
