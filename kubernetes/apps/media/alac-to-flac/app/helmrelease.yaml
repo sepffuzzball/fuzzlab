@@ -42,7 +42,7 @@ spec:
               PUID: ${PUID}
               PGID: ${PGID}
               path: /media/music
-              polldelayseconds: 60
+              polldelayseconds: 10
               subfolder: true
             resources:
               requests:
