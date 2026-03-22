@@ -22,6 +22,7 @@ resources:
   - ./sabnzbd/ks.yaml
   - ./secrets.sops.yaml
   - ./sonarr/ks.yaml
+  - ./soundscout/ks.yaml
   - ./slskd/ks.yaml
   - ./tautulli/ks.yaml
   - ./tdarr/ks.yaml
