@@ -9,6 +9,7 @@ resources:
   #- ./deluge/ks.yaml
   - ./audiobookshelf/ks.yaml
   #- ./discoverylastfm/ks.yaml
+  - ./lazylibrarian/ks.yaml
   - ./lidarr-pr/ks.yaml
   #- ./jellyfin/ks.yaml
   - ./overseerr/ks.yaml
