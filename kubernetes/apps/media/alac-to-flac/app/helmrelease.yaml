@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/alac-to-flac-docker
-              tag: 0.1.4
+              tag: 0.1.5
             env:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
