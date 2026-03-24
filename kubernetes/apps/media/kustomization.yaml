@@ -26,4 +26,5 @@ resources:
   - ./soundscout/ks.yaml
   - ./slskd/ks.yaml
   - ./tautulli/ks.yaml
-  - ./tdarr/ks.yaml
+  #- ./tdarr/ks.yaml
+  - ./watcharr/ks.yaml
