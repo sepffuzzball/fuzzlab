@@ -1,0 +1,14 @@
+---
+apiVersion: toolhive.stacklok.dev/v1alpha1
+kind: MCPGroup
+metadata:
+  name: flux
+spec:
+  description: Flux reconcile, K8s/operator tasks
+---
+apiVersion: toolhive.stacklok.dev/v1alpha1
+kind: MCPGroup
+metadata:
+  name: homeassistant
+spec:
+  description: HA controls

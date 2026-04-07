@@ -1,0 +1,86 @@
+---
+apiVersion: toolhive.stacklok.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: homeassistant-opt
+  namespace: ai
+spec:
+  image: ghcr.io/homeassistant-ai/ha-mcp:7.2.0@sha256:84c744da96ae519822c321ef0f0a1348ec36b7797a70bc04b9bcc67de3402aa2
+  transport: streamable-http
+  mcpPort: 8086
+  proxyPort: 8080
+  groupRef: all
+  env:
+    - name: HOMEASSISTANT_URL
+      value: http://${HOME_ADDR}
+  secrets:
+    - name: toolhive-secrets
+      key: HOMEASSISTANT_API_TOKEN
+      targetEnvName: HOMEASSISTANT_TOKEN
+  toolConfigRef:
+    name: homeassistant
+  podTemplateSpec:
+    spec:
+      containers:
+        - name: mcp
+          command: ["fastmcp", "run", "fastmcp-http.json"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+---
+apiVersion: toolhive.stacklok.dev/v1alpha1
+kind: MCPServer
+metadata:
+  name: flux-operator-opt
+  namespace: ai
+spec:
+  image: ghcr.io/controlplaneio-fluxcd/flux-operator-mcp:v0.46.0
+  transport: stdio
+  groupRef: all
+  args:
+    - serve
+  env:
+    - name: KUBECONFIG
+      value: /kubeconfig/kubeconfig
+  toolConfigRef:
+    name: flux-operator
+  podTemplateSpec:
+    spec:
+      volumes:
+        - name: kubeconfig
+          secret:
+            secretName: toolhive-secrets
+            items:
+              - key: KUBECONFIG
+                path: kubeconfig
+      containers:
+        - name: mcp
+          volumeMounts:
+            - name: kubeconfig
+              mountPath: /kubeconfig
+              readOnly: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 1
+              memory: 256Mi
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 200Mi

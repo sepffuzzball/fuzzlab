@@ -9,3 +9,4 @@ resources:
   - ./openwebui/ks.yaml
   - ./sillytavern/ks.yaml
   - ./sillytavern-kip/ks.yaml
+  - ./toolhive/ks.yaml
