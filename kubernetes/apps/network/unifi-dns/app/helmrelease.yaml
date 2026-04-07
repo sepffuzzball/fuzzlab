@@ -63,7 +63,14 @@ spec:
     sources: ["gateway-httproute", "service"]
     txtOwnerId: main
     txtPrefix: k8s.main.
-    domainFilters: ["${SECRET_DOMAIN}", "${SECRET_DOMAIN_FBE}", "${SECRET_DOMAIN_SEPF}", "${SECRET_DOMAIN_KMC}"]
+    domainFilters:
+      [
+        "${SECRET_DOMAIN}",
+        "${SECRET_DOMAIN_FBE}",
+        "${SECRET_DOMAIN_SEPF}",
+        "${SECRET_DOMAIN_KMC}",
+        "${SECRET_DOMAIN_LOCAL}",
+      ]
     serviceMonitor:
       enabled: true
     podAnnotations:
