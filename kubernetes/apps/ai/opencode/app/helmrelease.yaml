@@ -79,18 +79,18 @@ spec:
           http:
             port: *port
 
-    route:
-      app:
-        hostnames:
-          - "opencode.${SECRET_DOMAIN}"
-        parentRefs:
-          - name: external
-            namespace: kube-system
-            sectionName: https
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
+    # route:
+    #   app:
+    #     hostnames:
+    #       - "opencode.${SECRET_DOMAIN}"
+    #     parentRefs:
+    #       - name: external
+    #         namespace: kube-system
+    #         sectionName: https
+    #     rules:
+    #       - backendRefs:
+    #           - identifier: app
+    #             port: *port
 
     persistence:
       config:
