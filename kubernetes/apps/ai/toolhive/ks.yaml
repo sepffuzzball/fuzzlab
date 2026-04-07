@@ -10,6 +10,19 @@ spec:
       app.kubernetes.io/name: toolhive-operator
   interval: 1h
   path: ./kubernetes/apps/ai/toolhive/crds
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      GATUS_DOMAIN: ${SECRET_DOMAIN_LOCAL}
+      GATUS_SUBDOMAIN: *app
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
   prune: false
   sourceRef:
     kind: GitRepository
@@ -31,6 +44,19 @@ spec:
     - name: toolhive-operator-crds
   interval: 1h
   path: ./kubernetes/apps/ai/toolhive/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      GATUS_DOMAIN: ${SECRET_DOMAIN_LOCAL}
+      GATUS_SUBDOMAIN: *app
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -53,11 +79,18 @@ spec:
   interval: 1h
   path: ./kubernetes/apps/ai/toolhive/config
   postBuild:
-    substitute:
-      APP: toolhive
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
+      - kind: ConfigMap
+        name: cluster-settings
+    substitute:
+      APP: *app
+      NS: *namespace
+      GATUS_DOMAIN: ${SECRET_DOMAIN_LOCAL}
+      GATUS_SUBDOMAIN: *app
+      GATUS_PATH: /
+      GATUS_STATUS: "200"
   prune: true
   sourceRef:
     kind: GitRepository
