@@ -94,9 +94,13 @@ spec:
 
     persistence:
       config:
-        existingClaim: opencode-data
+        existingClaim: opencode-config
         globalMounts:
           - path: /home/opencode/.config/opencode
+      data:
+        existingClaim: opencode-data
+        globalMounts:
+          - path: /projects
       config-file:
         type: configMap
         name: opencode-config
