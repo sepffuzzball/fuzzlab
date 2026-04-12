@@ -40,6 +40,7 @@ spec:
               repository: ghcr.io/ashyy0205/soundscout
               tag: main
             env:
+              DISCOVERY_ACQUIRE: 1
               TZ: ${TIMEZONE}
               PLEX_BASEURL: http://${PLEX_ADDR}:32400
               PLEX_MUSIC_LIBRARY: Music
