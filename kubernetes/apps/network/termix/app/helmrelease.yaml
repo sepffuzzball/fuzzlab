@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/lukegus/termix
-              tag: release-2.0.0
+              tag: release-2.1.0
             env:
               TZ: ${TIMEZONE}
               PORT: &port 8080
