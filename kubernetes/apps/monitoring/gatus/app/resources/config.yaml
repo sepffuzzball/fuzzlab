@@ -218,14 +218,14 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: Redis
-    group: Internal-Services
-    url: tcp://redis.database.svc.cluster.local:6379
-    interval: 5m
-    conditions:
-      - "[CONNECTED] == true"
-    alerts:
-      - type: telegram
+  #- name: Redis
+  #  group: Internal-Services
+  #  url: tcp://redis.database.svc.cluster.local:6379
+  #  interval: 5m
+  #  conditions:
+  #    - "[CONNECTED] == true"
+  #  alerts:
+  #    - type: telegram
 
   # Virtual Servers
   - name: Forge
@@ -340,7 +340,6 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-
 
   # server-hardware
   - name: PVE64
@@ -460,7 +459,7 @@ endpoints:
     alerts:
       - type: telegram
 
-# Lighting controller
+  # Lighting controller
   - name: FPPMAIN
     group: lit
     url: icmp://10.0.7.10
