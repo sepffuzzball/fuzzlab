@@ -8,7 +8,7 @@ resources:
   - ./km/ks.yaml
   - ./beginnings/ks.yaml
   - ./blog/ks.yaml
-  #- ./ha-ocr-schedulerr/ks.yaml
+  - ./ha-ocr-schedulerr/ks.yaml
   - ./homebox/ks.yaml
   - ./mealie/ks.yaml
   - ./secrets.sops.yaml
