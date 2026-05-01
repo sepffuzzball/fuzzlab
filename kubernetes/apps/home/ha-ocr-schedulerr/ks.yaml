@@ -35,7 +35,7 @@ spec:
     substitute:
       APP: *app
       NS: *namespace
-      GATUS_DOMAIN: ${SECRET_DOMAIN_SEPF}
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
       GATUS_SUBDOMAIN: "ha-ocr-schedulerr"
       GATUS_PATH: /
       GATUS_STATUS: "200"

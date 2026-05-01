@@ -5,11 +5,11 @@ namespace: home
 components:
   - ../../components/common
 resources:
-  - ./km/ks.yaml
   - ./beginnings/ks.yaml
   - ./blog/ks.yaml
   - ./ha-ocr-schedulerr/ks.yaml
   - ./homebox/ks.yaml
+  - ./km/ks.yaml
   - ./mealie/ks.yaml
   - ./secrets.sops.yaml
   - ./stellar-tails/ks.yaml
