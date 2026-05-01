@@ -26,10 +26,11 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/ha-ocr-schedulerr
-              tag: sha-d7e1298
+              tag: sha-da7b66d
             env:
               TZ: ${TZ}
               AI_PARSER_ENABLED: true
+              AI_TIMEOUT: 90
             envFrom:
               - secretRef:
                   name: ${APP}-secrets
