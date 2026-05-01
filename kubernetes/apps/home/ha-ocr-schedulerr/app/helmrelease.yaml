@@ -19,24 +19,25 @@ spec:
   values:
     controllers:
       ha-ocr-schedulerr:
-        pod:
-          automountServiceAccountToken: false
-          enableServiceLinks: false
+        annotations:
+          reloader.stakater.com/auto: "true"
+
         containers:
           main:
             image:
               repository: ghcr.io/sepffuzzball/ha-ocr-schedulerr
               tag: sha-d7e1298
-            resources:
-              requests:
-                cpu: 100m
-                memory: 128Mi
             env:
-              TZ: "${TIMEZONE}"
+              TZ: ${TZ}
               AI_PARSER_ENABLED: true
             envFrom:
               - secretRef:
                   name: ${APP}-secrets
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+
     service:
       main:
         controller: ha-ocr-schedulerr
