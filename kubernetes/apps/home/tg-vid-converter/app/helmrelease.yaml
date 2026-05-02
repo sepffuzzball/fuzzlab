@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/tg-vid-converter
-              tag: sha-77f803a
+              tag: sha-4fedfdb
             envFrom:
               - secretRef:
                   name: ${APP}-secrets
