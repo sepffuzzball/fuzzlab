@@ -14,3 +14,4 @@ resources:
   - ./secrets.sops.yaml
   - ./stellar-tails/ks.yaml
   - ./teslamate/ks.yaml
+  - ./tg-vid-converter/ks.yaml
