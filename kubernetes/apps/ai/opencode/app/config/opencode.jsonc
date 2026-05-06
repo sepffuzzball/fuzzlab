@@ -26,6 +26,9 @@
         "baseURL": "http://10.0.2.88:1234/v1"
       },
       "models": {
+        "huihui-qwen3.6-27b-abliterated": {
+          "name": "huihui-qwen3.6-27b-abliterated (local)"
+        },
         "huihui-qwen3-coder-next-abliterated-i1": {
           "name": "huihui-qwen3-coder-next-abliterated (local)"
         },
