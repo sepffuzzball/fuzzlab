@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/evolution-rpg
-              tag: sha-d302101
+              tag: sha-81e98af
             env:
               APP_ENV: production
               APP_STATE_KEY: main
