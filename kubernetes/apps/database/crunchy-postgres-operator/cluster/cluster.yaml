@@ -13,7 +13,8 @@ spec:
       crunchy-userinit.ramblurr.github.com/superuser: postgres
       postgres-operator.crunchydata.com/autoCreateUserSchema: "true"
 
-  patroni: # turn on sync writes to at least 1 other replica
+  patroni:
+    # turn on sync writes to at least 1 other replica
     dynamicConfiguration:
       synchronous_mode: true
       postgresql:
@@ -69,6 +70,10 @@ spec:
     - name: coder
       databases:
         - coder
+      password: *password
+    - name: evolution-rpg
+      databases:
+        - evolution-rpg
       password: *password
     - name: gatus
       databases:
@@ -166,23 +171,23 @@ spec:
 
   backups:
     pgbackrest:
-#      restore:
-#        enabled: true
-#        repoName: repo1
-#        options:
-#          - --type=time
-#          - --target="2024-11-01 12:00:00-00"
+      #      restore:
+      #        enabled: true
+      #        repoName: repo1
+      #        options:
+      #          - --type=time
+      #          - --target="2024-11-01 12:00:00-00"
       repos:
-      - name: repo1
-        volume:
-          volumeClaimSpec:
-            volumeName: postgres-dbbak-pv
-            storageClassName: csi-cephfs-sc
-            accessModes:
-              - ReadWriteMany
-            resources:
-              requests:
-                storage: 100Gi
+        - name: repo1
+          volume:
+            volumeClaimSpec:
+              volumeName: postgres-dbbak-pv
+              storageClassName: csi-cephfs-sc
+              accessModes:
+                - ReadWriteMany
+              resources:
+                requests:
+                  storage: 100Gi
 
   monitoring:
     pgmonitor:
