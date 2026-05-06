@@ -37,6 +37,9 @@ spec:
     service:
       app:
         controller: codex-web-test
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${SPACE_ADDR}
         ports:
           http:
             port: &port 80
