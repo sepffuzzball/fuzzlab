@@ -41,7 +41,7 @@ spec:
           http:
             port: &port 80
     route:
-      app:
+      codex-web-test:
         enabled: true
         hostnames:
           - "space.${SECRET_DOMAIN_KMC}"
@@ -51,5 +51,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - identifier: app
+              - identifier: codex-web-test
                 port: *port
