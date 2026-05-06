@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: codex-web-test
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      codex-web-test:
+        pod:
+          automountServiceAccountToken: false
+          enableServiceLinks: false
+          annotations:
+            reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sepffuzzball/codex-web-test
+              tag: sha-6ccb204
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+    service:
+      main:
+        controller: codex-web-test
+        ports:
+          http:
+            port: &port 80
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "space.${SECRET_DOMAIN_KMC}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
