@@ -41,9 +41,7 @@ spec:
               BACKUP_RETENTION_DAYS: 90
               SCAN_INTERVAL_MS: 60000
               TRASH_DIR: /data/trash
-            envFrom:
-              - secretRef:
-                  name: onefolderweb-secrets
+
     service:
       main:
         controller: onefolderweb
