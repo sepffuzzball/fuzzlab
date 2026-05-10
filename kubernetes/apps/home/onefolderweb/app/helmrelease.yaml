@@ -32,7 +32,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/onefolderweb
-              tag: 0.1.5
+              tag: 0.1.6
             resources:
               requests:
                 cpu: 100m
@@ -65,21 +65,3 @@ spec:
         existingClaim: onefolderweb-data
         globalMounts:
           - path: /data
-      backups:
-        enabled: false
-        type: emptyDir
-      cache:
-        enabled: false
-        type: emptyDir
-      config:
-        enabled: false
-        type: emptyDir
-      library:
-        enabled: false
-        type: emptyDir
-      settings:
-        enabled: false
-        type: emptyDir
-      trash:
-        enabled: false
-        type: emptyDir
