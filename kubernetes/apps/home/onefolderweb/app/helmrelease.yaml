@@ -65,3 +65,7 @@ spec:
         existingClaim: onefolderweb-data
         globalMounts:
           - path: /data
+      backups:
+        enabled: false
+      trash:
+        enabled: false
