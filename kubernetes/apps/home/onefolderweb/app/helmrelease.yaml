@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/onefolderweb
-              tag: 0.1.1
+              tag: 0.1.2
             resources:
               requests:
                 cpu: 100m
@@ -41,6 +41,9 @@ spec:
               BACKUP_RETENTION_DAYS: 90
               SCAN_INTERVAL_MS: 60000
               TRASH_DIR: /data/trash
+              SITE_NAME: Sepfy's art stash
+              HOST: 0.0.0.0
+              PORT: &port 4317
 
     service:
       main:
@@ -50,7 +53,7 @@ spec:
         loadBalancerIP: ${ONEFOLDERWEB_ADDR}
         ports:
           http:
-            port: &port 4317
+            port: *port
     persistence:
       data:
         enabled: true
