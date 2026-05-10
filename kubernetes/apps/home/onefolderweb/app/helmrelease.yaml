@@ -50,7 +50,7 @@ spec:
         loadBalancerIP: ${ONEFOLDERWEB_ADDR}
         ports:
           http:
-            port: &port 80
+            port: &port 4317
     persistence:
       data:
         enabled: true
