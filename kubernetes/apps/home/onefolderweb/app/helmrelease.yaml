@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/onefolderweb
-              tag: 0.1.2
+              tag: 0.1.3
             resources:
               requests:
                 cpu: 100m
