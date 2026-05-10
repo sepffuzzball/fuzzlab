@@ -13,7 +13,7 @@ resources:
   - ./homebox/ks.yaml
   - ./km/ks.yaml
   - ./mealie/ks.yaml
-  - ./onefolderweb/ks.yaml
+  # - ./onefolderweb/ks.yaml
   - ./secrets.sops.yaml
   - ./stellar-tails/ks.yaml
   - ./teslamate/ks.yaml
