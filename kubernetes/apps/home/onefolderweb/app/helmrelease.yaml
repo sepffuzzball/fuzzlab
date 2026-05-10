@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/onefolderweb
-              tag: 0.1.4
+              tag: 0.1.5
             resources:
               requests:
                 cpu: 100m
@@ -42,6 +42,7 @@ spec:
               SCAN_INTERVAL_MS: 60000
               TRASH_DIR: /data/trash
               SITE_NAME: Sepfy's art stash
+              #SITE_IMAGE_URL:
               HOST: 0.0.0.0
               PORT: &port 4317
 
