@@ -23,8 +23,8 @@ spec:
           securityContext:
             runAsUser: 3333
             runAsGroup: 3333
-            fsGroup: 3333
-            fsGroupChangePolicy: "OnRootMismatch"
+            #fsGroup: 3333
+            #fsGroupChangePolicy: "OnRootMismatch"
           # ------------------------------
           automountServiceAccountToken: false
           enableServiceLinks: false
