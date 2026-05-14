@@ -42,6 +42,7 @@ spec:
               tag: 1.14.50
             env:
               TZ: ${TIMEZONE}
+              CORS_DOMAIN: ${SECRET_DOMAIN_FBE}
               HOME: /home/opencode
             envFrom:
               - secretRef:
@@ -49,11 +50,31 @@ spec:
             command:
               - opencode
               - web
-              - --mdns
               - --hostname
               - 0.0.0.0
               - --port
               - &port 4096
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet: &probe
+                    path: /
+                    port: *port
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet: *probe
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 3
             resources:
               requests:
                 cpu: 100m
