@@ -23,15 +23,23 @@ spec:
               tag: 1.37
             securityContext:
               runAsUser: 0
-            command:
-              - sh
-              - -c
-              - cp /config/opencode.jsonc /home/opencode/.config/opencode/opencode.jsonc
+            command: [ "/bin/sh", "-c" ]
+            args:
+              - |
+                echo "Copying opencode.jsonc config file ...";
+                cp /config/opencode.jsonc /home/opencode/.config/opencode/opencode.jsonc
+                echo "Config file copied";
+                sleep 5;
+                echo "Copying oh-my-openagent.json config file ...";
+                cp /config/oh-my-openagent.json /home/opencode/.config/opencode/oh-my-openagent.json
+                echo "Config file copied";
+                sleep 5;
+                echo "Init completed";
         containers:
           app:
             image:
               repository: ghcr.io/anomalyco/opencode
-              tag: 1.14.25
+              tag: 1.14.50
             env:
               TZ: ${TIMEZONE}
               HOME: /home/opencode
@@ -41,8 +49,7 @@ spec:
             command:
               - opencode
               - web
-              - --hostname
-              - "0.0.0.0"
+              - --mdns
             probes:
               liveness:
                 enabled: true

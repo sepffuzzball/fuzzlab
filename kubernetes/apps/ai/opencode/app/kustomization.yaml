@@ -11,5 +11,6 @@ configMapGenerator:
   - name: opencode-config
     files:
       - config/opencode.jsonc
+      - config/oh-my-openagent.json
 generatorOptions:
   disableNameSuffixHash: true

@@ -1,12 +1,16 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "opencode/minimax-m2.5-free",
+  "server": {
+    "port": 4096,
+    "hostname": "0.0.0.0"
+  },
   "plugin": [
     "cc-safety-net",
     "@tarquinen/opencode-dcp@latest",
-    "oh-my-opencode-slim"
+    "oh-my-openagent@latest"
   ],
-  "mcp": {
+  /*"mcp": {
     "flux": {
       "type": "remote",
       "url": "http://mcp-flux.ai.svc.cluster.local:4483/mcp",
@@ -17,7 +21,7 @@
       "url": "http://mcp-homeassistant.ai.svc.cluster.local:4483/mcp",
       "enabled": true
     }
-  },
+  },*/
   "provider": {
     "lmstudio": {
       "npm": "@ai-sdk/openai-compatible",
@@ -37,6 +41,15 @@
         },
         "huihui-glm-4.5-air-abliterated": {
           "name": "huihui-glm-4.5-air-abliterated (local)"
+        },
+        "sugoi-32b-ultra": {
+          "name": "sugoi-32b-ultra (local)"
+        },
+        "huihui-gemma-4-31b-it-abliterated-v2-i1": {
+          "name": "huihui-gemma-4-31b-it-abliterated-v2-i1 (local)"
+        },
+        "huihui-gpt-oss-120b-abliterated_moe": {
+          "name": "huihui-gpt-oss-120b-abliterated_moe (local)"
         }
       }
     }
