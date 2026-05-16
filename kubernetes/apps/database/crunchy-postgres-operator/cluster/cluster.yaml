@@ -79,6 +79,14 @@ spec:
       databases:
         - gatus
       password: *password
+    - name: genrpg-prod
+      databases:
+        - genrpg-prod
+      password: *password
+    - name: genrpg-dev
+      databases:
+        - genrpg-dev
+      password: *password
     - name: homebox
       databases:
         - homebox
