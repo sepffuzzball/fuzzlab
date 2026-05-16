@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/iansholtys/genrpg
-              tag: 886c759
+              tag: 1633c64
             env:
               TZ: ${TIMEZONE}
               PORT: &port 3000
@@ -69,3 +69,8 @@ spec:
         existingClaim: genrpg-dev-data
         globalMounts:
           - path: /data
+      packages:
+        enabled: true
+        existingClaim: genrpg-dev-packages
+        globalMounts:
+          - path: /app/packages
