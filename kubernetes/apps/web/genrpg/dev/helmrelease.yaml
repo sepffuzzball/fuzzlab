@@ -26,14 +26,17 @@ spec:
           app:
             image:
               repository: ghcr.io/iansholtys/genrpg
-              tag: f046c47
+              tag: 5bb3803
             env:
               TZ: ${TIMEZONE}
-              POSTGRES_USER:
+              PORT: &port 3000
+              COOKIE_SECURE: false
+              TRUST_PROXY: loopback
+              DATABASE_URL:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
-                    key: POSTGRES_USER
+                    key: DATABASE_URL
             envFrom:
               - secretRef:
                   name: genrpg-dev-secret
@@ -53,7 +56,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: &port 80
+            port: *port
 
     persistence:
       config:
