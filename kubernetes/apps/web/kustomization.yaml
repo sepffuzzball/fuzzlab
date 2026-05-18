@@ -5,7 +5,7 @@ namespace: web
 components:
   - ../../components/common
 resources:
-  - ./genrpg/ks.yaml
+  #  - ./genrpg/ks.yaml
   - ./homepage/ks.yaml
   - ./shlink/ks.yaml
   - ./searxng/ks.yaml
