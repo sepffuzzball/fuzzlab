@@ -1,5 +1,5 @@
 model_list:
-  - model_name: "lms/*"
+  - model_name: "lm_studio/*"
     litellm_params:
       model: "lm_studio/*"
       api_base: "http://${LMS_ADDR}:1234/v1"
