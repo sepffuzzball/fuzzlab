@@ -1,11 +1,12 @@
 model_list:
-  - model_name: "lm_studio/*"
+  - model_name: "lms/*"
     litellm_params:
-      model: "lm_studio/*"
+      model: "openai/*"
       api_base: "http://${LMS_ADDR}:1234/v1"
       api_key: "not-needed"
 
 litellm_settings:
+  check_provider_endpoint: true
   cache: false
   cache_params: # set cache params for redis
     type: redis # type of cache to initialize
