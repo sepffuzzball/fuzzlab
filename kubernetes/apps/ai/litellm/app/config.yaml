@@ -3,7 +3,13 @@ model_list:
     litellm_params:
       model: "openai/*"
       api_base: "http://${LMS_ADDR}:1234/v1"
-      api_key: "not-needed"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: "zai/*"
+    litellm_params:
+      model: "openai/*"
+      api_base: "https://api.z.ai/api/coding/paas/v4"
+      api_key: os.environ/ZAI_API_KEY
 
 litellm_settings:
   check_provider_endpoint: true
