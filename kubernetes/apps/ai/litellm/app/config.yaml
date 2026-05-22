@@ -1,7 +1,85 @@
 model_list:
-  - model_name: "lms/*"
+  - model_name: lms/qwen3.6-27b-mtp
     litellm_params:
-      model: "openai/*"
+      model: openai/qwen3.6-27b-uncensored-heretic-v2-native-mtp-preserved
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/criminalcomputing-large
+    litellm_params:
+      model: openai/xortron.criminalcomputing.config.large.xprt2-i1
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/prophecy-70b
+    litellm_params:
+      model: openai/pernicious_prophecy_70b_gguf
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/mero-artemis-31b
+    litellm_params:
+      model: openai/mero-artemis-31b-v0.3.1
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/qwen3.5-40b-claude
+    litellm_params:
+      model: openai/qwen3.5-40b-claude-4.5-opus-high-reasoning-thinking-uncensored-heretic
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/gemma-4-31b
+    litellm_params:
+      model: openai/huihui-gemma-4-31b-it-abliterated-v2-i1
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/qwen3.6-27b
+    litellm_params:
+      model: openai/huihui-qwen3.6-27b-abliterated
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/sugoi-32b
+    litellm_params:
+      model: openai/sugoi-32b-ultra
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/qwen3-coder-next
+    litellm_params:
+      model: openai/huihui-qwen3-coder-next-abliterated-i1
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/qwen3-embedding-8b
+    litellm_params:
+      model: openai/text-embedding-qwen3-embedding-8b
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/qwen3.5-122b-a10b
+    litellm_params:
+      model: openai/huihui-qwen3.5-122b-a10b-abliterated
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/glm-4.7
+    litellm_params:
+      model: openai/huihui-glm-4.7-abliterated
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/nomic-embed-text-v1.5
+    litellm_params:
+      model: openai/text-embedding-nomic-embed-text-v1.5
+      api_base: "http://${LMS_ADDR}:1234/v1"
+      api_key: os.environ/LMS_API_KEY
+
+  - model_name: lms/glm-4.5-air
+    litellm_params:
+      model: openai/huihui-glm-4.5-air-abliterated
       api_base: "http://${LMS_ADDR}:1234/v1"
       api_key: os.environ/LMS_API_KEY
 
