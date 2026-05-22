@@ -1,0 +1,67 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app model-hotel
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      model-hotel:
+        annotations:
+          reloader.stakater.com/auto: "true"
+          secret.reloader.stakater.com/reload: &secret model-hotel-secrets
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/hugalafutro/model-hotel
+              tag: 0.9.5
+            env:
+              ALLOW_HTTP_PROVIDERS: true
+              ALLOWED_PROVIDER_HOSTS: ${LMS_ADDR}
+              #CORS_ORIGINS:
+              #TRUSTED_PROXIES: ${SECRET_DOMAIN_FBE}
+            envFrom:
+              - secretRef:
+                  name: *secret
+              - secretRef:
+                  name: ${APP}-db-secret
+    service:
+      app:
+        ports:
+          http:
+            port: &port 8080
+    serviceMonitor:
+      app:
+        endpoints:
+          - port: http
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "llm.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      data:
+        existingClaim: model-hotel-data
+        globalMounts:
+          - path: /data

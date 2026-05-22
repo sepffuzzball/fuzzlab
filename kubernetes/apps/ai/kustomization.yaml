@@ -7,6 +7,7 @@ components:
 resources:
   - ./litellm/ks.yaml
   # - ./opencode/ks.yaml
+  - ./model-hotel/ks.yaml
   - ./openwebui/ks.yaml
   - ./sillytavern/ks.yaml
   - ./sillytavern-kip/ks.yaml
