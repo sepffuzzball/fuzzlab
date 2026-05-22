@@ -30,7 +30,7 @@ spec:
               tag: 0.9.6
             env:
               ALLOW_HTTP_PROVIDERS: true
-              ALLOWED_PROVIDER_HOSTS: http://${LMS_ADDR}:1234
+              ALLOWED_PROVIDER_HOSTS: http://${LMS_ADDR}:1234/v1,${LMS_ADDR}
               #CORS_ORIGINS:
               #TRUSTED_PROXIES: ${SECRET_DOMAIN_FBE}
             envFrom:
