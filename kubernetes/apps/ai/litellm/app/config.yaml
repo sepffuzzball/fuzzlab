@@ -5,10 +5,28 @@ model_list:
       api_base: "http://${LMS_ADDR}:1234/v1"
       api_key: os.environ/LMS_API_KEY
 
-  - model_name: "zai/*"
+  - model_name: zai/glm-5.1
     litellm_params:
-      model: "openai/*"
-      api_base: "https://api.z.ai/api/coding/paas/v4"
+      model: openai/GLM-5.1
+      api_base: https://api.z.ai/api/coding/paas/v4
+      api_key: os.environ/ZAI_API_KEY
+
+  - model_name: zai/glm-5-turbo
+    litellm_params:
+      model: openai/GLM-5-Turbo
+      api_base: https://api.z.ai/api/coding/paas/v4
+      api_key: os.environ/ZAI_API_KEY
+
+  - model_name: zai/glm-4.7
+    litellm_params:
+      model: openai/GLM-4.7
+      api_base: https://api.z.ai/api/coding/paas/v4
+      api_key: os.environ/ZAI_API_KEY
+
+  - model_name: zai/glm-4.5-air
+    litellm_params:
+      model: openai/GLM-4.5-air
+      api_base: https://api.z.ai/api/coding/paas/v4
       api_key: os.environ/ZAI_API_KEY
 
 litellm_settings:
