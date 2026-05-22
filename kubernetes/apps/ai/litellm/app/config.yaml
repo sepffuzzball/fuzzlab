@@ -6,7 +6,7 @@ model_list:
       api_key: "not-needed"
 
 litellm_settings:
-  cache: true
+  cache: false
   cache_params: # set cache params for redis
     type: redis # type of cache to initialize
 
