@@ -36,6 +36,7 @@ spec:
               DELUGE_DAEMON_LOG_LEVEL: info
               DELUGE_WEB_LOG_LEVEL: info
               ENABLE_PRIVOXY: yes
+              ENABLE_SOCKS: no
               LAN_NETWORK: 172.21.0.0/16,172.17.0.0/16,10.0.0.0/16
               NAME_SERVERS: 10.0.1.1,1.1.1.1,9.9.9.9
               PGID: ${PGID}
@@ -61,10 +62,7 @@ spec:
                 memory: 2Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        fsGroup: 1100
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
@@ -78,7 +76,7 @@ spec:
             port: 8118
             protocol: TCP
           microsocks:
-            enabled: true
+            enabled: false
             port: 9118
             protocol: TCP
           vpn1:
@@ -93,29 +91,6 @@ spec:
             enabled: true
             port: 58946
             protocol: UDP
-    # ingress:
-    #   app:
-    #     className: internal
-    #     hosts:
-    #       - host: &host "deluge.${SECRET_DOMAIN_LOCAL}"
-    #         paths:
-    #           - path: /
-    #             service:
-    #               identifier: app
-    #               port: http
-    # route:
-    #   app:
-    #     enabled: true
-    #     hostnames:
-    #       - "deluge.${SECRET_DOMAIN_LOCAL}"
-    #     parentRefs:
-    #       - name: internal
-    #         namespace: kube-system
-    #         sectionName: https
-    #     rules:
-    #       - backendRefs:
-    #           - identifier: app
-    #             port: *port
 
     persistence:
       config:
@@ -132,3 +107,10 @@ spec:
         existingClaim: lcl-downloads
         globalMounts:
           - path: /downloads
+
+      dev-tun:
+        type: hostPath
+        hostPath: /dev/net/tun
+        hostPathType: CharDevice
+        globalMounts:
+          - path: /dev/net/tun

@@ -6,7 +6,7 @@ components:
   - ../../components/common
 resources:
   - ./alac-to-flac/ks.yaml
-  #- ./deluge/ks.yaml
+  - ./deluge/ks.yaml
   - ./audiobookshelf/ks.yaml
   #- ./discoverylastfm/ks.yaml
   - ./lazylibrarian/ks.yaml
