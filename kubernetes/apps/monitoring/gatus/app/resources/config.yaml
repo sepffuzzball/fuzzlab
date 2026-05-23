@@ -277,14 +277,6 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: Newt
-    group: Internal-Services
-    url: tcp://newt.network.svc.cluster.local:80
-    interval: 5m
-    conditions:
-      - "[CONNECTED] == true"
-    alerts:
-      - type: telegram
   - name: Termix
     group: Internal-Services
     url: tcp://termix.network.svc.cluster.local:8080
