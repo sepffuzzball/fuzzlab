@@ -35,7 +35,7 @@ spec:
               DEBUG: true
               DELUGE_DAEMON_LOG_LEVEL: info
               DELUGE_WEB_LOG_LEVEL: info
-              ENABLE_PRIVOXY: yes
+              ENABLE_PRIVOXY: no
               ENABLE_SOCKS: no
               LAN_NETWORK: 10.33.0.0/16,10.0.0.0/16
               NAME_SERVERS: 10.0.1.1,1.1.1.1,9.9.9.9
