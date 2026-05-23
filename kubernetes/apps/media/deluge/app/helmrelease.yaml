@@ -70,7 +70,7 @@ spec:
         controller: deluge
         ports:
           http:
-            port: 8112
+            port: &port 8112
           privoxy:
             enabled: true
             port: 8118
@@ -91,6 +91,15 @@ spec:
             enabled: true
             port: 58946
             protocol: UDP
+    service:
+      app:
+        controller: deluge
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${DELUGE_ADDR}
+        ports:
+          http:
+            port: *port
 
     persistence:
       config:
