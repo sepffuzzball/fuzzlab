@@ -31,6 +31,7 @@ spec:
             env:
               ALLOW_HTTP_PROVIDERS: true
               ALLOWED_PROVIDER_HOSTS: http://${LMS_ADDR}:1234/v1,${LMS_ADDR}
+              REQUEST_TIMEOUT: 5m
               #CORS_ORIGINS:
               #TRUSTED_PROXIES: ${SECRET_DOMAIN_FBE}
             envFrom:
