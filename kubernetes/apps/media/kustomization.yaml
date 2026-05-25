@@ -6,7 +6,7 @@ components:
   - ../../components/common
 resources:
   - ./alac-to-flac/ks.yaml
-  #- ./deluge/ks.yaml
+  - ./deluge/ks.yaml
   - ./audiobookshelf/ks.yaml
   #- ./discoverylastfm/ks.yaml
   - ./lazylibrarian/ks.yaml
@@ -18,7 +18,7 @@ resources:
   - ./pv-smb.yaml
   - ./radarr/ks.yaml
   - ./readarr/ks.yaml
-  - ./readarr-audio/ks.yaml
+  #- ./readarr-audio/ks.yaml
   - ./roon/ks.yaml
   - ./sabnzbd/ks.yaml
   - ./secrets.sops.yaml

@@ -37,7 +37,7 @@ spec:
           app:
             image:
               repository: ghcr.io/mealie-recipes/mealie
-              tag: v3.14.0
+              tag: v3.18.0
             env:
               TZ: ${TIMEZONE}
               PUID: ${PUID}
@@ -73,22 +73,9 @@ spec:
               OIDC_GROUPS_CLAIM: groups
               OIDC_ADMIN_GROUP: "mealie Admins"
               OIDC_AUTO_REDIRECT: true
-              OPENAI_API_KEY:
-                valueFrom:
-                  secretKeyRef:
-                    name: mealie-secrets
-                    key: OPENAI_API_KEY
-              OIDC_CLIENT_ID:
-                valueFrom:
-                  secretKeyRef:
-                    name: mealie-secrets
-                    key: OIDC_CLIENT_ID
-              OIDC_CLIENT_SECRET:
-                valueFrom:
-                  secretKeyRef:
-                    name: mealie-secrets
-                    key: OIDC_CLIENT_SECRET
-
+            envFrom:
+              - secretRef:
+                  name: mealie-secrets
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

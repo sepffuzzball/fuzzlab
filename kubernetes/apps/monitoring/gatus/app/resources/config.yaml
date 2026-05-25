@@ -71,6 +71,7 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
+
   # Network
   - name: UDM-Pro
     group: Network
@@ -168,6 +169,14 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
+  - name: USW-Flex-Mini-Lounge
+    group: Network
+    url: icmp://10.0.1.15
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
   - name: U6-Ent-Lounge
     group: Network-AP
     url: icmp://10.0.1.20
@@ -209,10 +218,68 @@ endpoints:
     alerts:
       - type: telegram
 
+  # Security
+  - name: UNVR
+    group: Security
+    url: icmp://10.0.10.2
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: USL-Gateway
+    group: Security
+    url: icmp://10.0.10.3
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: UA-Door-Hub-Mini
+    group: Security
+    url: icmp://10.0.10.10
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: DHM-Front-Doorbell
+    group: Security
+    url: icmp://10.0.10.20
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: UA-Intercom-Viewer
+    group: Security
+    url: icmp://10.0.10.30
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: UA-Chime-POE
+    group: Security
+    url: icmp://10.0.10.40
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+
   # Internal Services
   - name: Postgres
     group: Internal-Services
     url: tcp://postgres-ha.database.svc.cluster.local:5432
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: Termix
+    group: Internal-Services
+    url: tcp://termix.network.svc.cluster.local:8080
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
@@ -244,14 +311,6 @@ endpoints:
       - "[CONNECTED] == true"
     alerts:
       - type: telegram
-  - name: Deluge
-    group: server-virtual
-    url: icmp://10.0.2.105
-    interval: 5m
-    conditions:
-      - "[CONNECTED] == true"
-    alerts:
-      - type: telegram
   - name: Notes
     group: server-virtual
     url: icmp://10.0.2.114
@@ -263,6 +322,38 @@ endpoints:
   - name: KMS
     group: server-virtual
     url: icmp://10.0.2.177
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: OpenClaw
+    group: server-virtual
+    url: icmp://10.0.2.116
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: Cubuntu
+    group: server-virtual
+    url: icmp://10.0.2.178
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: Dat
+    group: server-virtual
+    url: icmp://10.0.2.20
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: Hal
+    group: server-virtual
+    url: icmp://10.0.2.88
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
@@ -463,6 +554,48 @@ endpoints:
   - name: FPPMAIN
     group: lit
     url: icmp://10.0.7.10
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+
+    # Pis
+  - name: pibat-fuzzsuite
+    group: pi
+    url: icmp://10.0.1.122
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: pibat-server
+    group: pi
+    url: icmp://10.0.1.121
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: pibat-upstairs
+    group: pi
+    url: icmp://10.0.1.123
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: pinode00
+    group: pi
+    url: icmp://10.0.1.60
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+    alerts:
+      - type: telegram
+  - name: plexamp
+    group: pi
+    url: icmp://10.0.2.180
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
