@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/hugalafutro/model-hotel
-              tag: 0.9.6
+              tag: 0.9.14
             env:
               ALLOW_HTTP_PROVIDERS: true
               ALLOWED_PROVIDER_HOSTS: http://${LMS_ADDR}:1234/v1,${LMS_ADDR}
