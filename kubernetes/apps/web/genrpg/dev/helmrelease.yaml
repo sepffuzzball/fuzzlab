@@ -26,7 +26,7 @@ spec:
           app:
             image:
               repository: ghcr.io/iansholtys/genrpg
-              tag: aceaf3c
+              tag: c4dd61e
             env:
               TZ: ${TIMEZONE}
               PORT: &port 3000
