@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository: ghcr.io/anomalyco/opencode
-              tag: 1.14.50
+              tag: 1.17.4
             env:
               TZ: ${TIMEZONE}
               CORS_DOMAIN: ${SECRET_DOMAIN_FBE}
