@@ -221,7 +221,8 @@ endpoints:
   # Security
   - name: UNVR
     group: Security
-    url: icmp://10.0.10.2
+    #url: icmp://10.0.10.2
+    url: icmp://10.0.3.247
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
@@ -229,7 +230,8 @@ endpoints:
       - type: telegram
   - name: USL-Gateway
     group: Security
-    url: icmp://10.0.10.3
+    #url: icmp://10.0.10.3
+    url: icmp://10.0.3.179
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
