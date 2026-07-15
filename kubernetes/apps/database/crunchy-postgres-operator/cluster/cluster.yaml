@@ -176,6 +176,10 @@ spec:
         - sonarr
         - sonarr-log
       password: *password
+    - name: taskmaster
+      databases:
+        - taskmaster
+      password: *password
     - name: teslamate
       databases:
         - teslamate
