@@ -48,7 +48,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/v1/health
-                    port: 3000
+                    port: &port 3000
                     scheme: HTTP
                   initialDelaySeconds: 30
                   periodSeconds: 30
@@ -60,7 +60,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/v1/health
-                    port: 3000
+                    port: *port
                     scheme: HTTP
                   initialDelaySeconds: 30
                   periodSeconds: 30
@@ -70,7 +70,7 @@ spec:
       app:
         ports:
           http:
-            port: &port 3000
+            port: *port
     route:
       app:
         enabled: true
