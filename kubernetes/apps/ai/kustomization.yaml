@@ -9,7 +9,7 @@ resources:
   # - ./opencode/ks.yaml
   - ./model-hotel/ks.yaml
   - ./openwebui/ks.yaml
-  - ./taskmaster/ks.yaml
+  #- ./taskmaster/ks.yaml
   - ./sillytavern/ks.yaml
   - ./sillytavern-kip/ks.yaml
 
