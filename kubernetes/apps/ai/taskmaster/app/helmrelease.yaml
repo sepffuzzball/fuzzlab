@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sepffuzzball/taskmaster
-              tag: sha-6ec40ff
+              tag: sha-1ade168
             env:
               NODE_ENV: production
               HOST: 0.0.0.0
@@ -48,7 +48,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/v1/health
-                    port: 3000
+                    port: http
                     scheme: HTTP
                   initialDelaySeconds: 30
                   periodSeconds: 30
@@ -60,7 +60,7 @@ spec:
                 spec:
                   httpGet:
                     path: /api/v1/health
-                    port: 3000
+                    port: http
                     scheme: HTTP
                   initialDelaySeconds: 30
                   periodSeconds: 30
