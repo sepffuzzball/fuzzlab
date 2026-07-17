@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sepffuzzball/taskmaster
-              tag: sha-f085bc2
+              tag: sha-808407e
             env:
               NODE_ENV: production
               HOST: 0.0.0.0
