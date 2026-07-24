@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app plexpass
+  name: &app plexplay
   namespace: ${NS}
   labels:
     app.kubernetes.io/name: *app
@@ -21,7 +21,7 @@ spec:
       retries: 3
   values:
     controllers:
-      plexpass:
+      plexplay:
         annotations:
           reloader.stakater.com/auto: "true"
         replicas: 1
@@ -32,11 +32,11 @@ spec:
               tag: sha-16f347b
             env:
               PORT: "3000"
-              APP_ORIGIN: https://plexpass.${SECRET_DOMAIN_FBE}
-              PLEX_PRODUCT: PlexPass
+              APP_ORIGIN: https://plexplay.${SECRET_DOMAIN_FBE}
+              PLEX_PRODUCT: PlexPlay
             envFrom:
               - secretRef:
-                  name: plexpass-secrets
+                  name: plexplay-secrets
             probes:
               liveness:
                 custom: true
@@ -76,7 +76,7 @@ spec:
       app:
         enabled: true
         hostnames:
-          - "plexpass.${SECRET_DOMAIN_FBE}"
+          - "plexplay.${SECRET_DOMAIN_FBE}"
         parentRefs:
           - name: external
             namespace: kube-system

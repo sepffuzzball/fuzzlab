@@ -14,7 +14,7 @@ resources:
   #- ./jellyfin/ks.yaml
   - ./overseerr/ks.yaml
   - ./plex/ks.yaml
-  - ./plexpass/ks.yaml
+  - ./plexplay/ks.yaml
   - ./prowlarr/ks.yaml
   - ./pv-smb.yaml
   - ./radarr/ks.yaml

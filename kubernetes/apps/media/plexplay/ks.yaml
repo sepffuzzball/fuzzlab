@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app plexpass
+  name: &app plexplay
   namespace: &namespace media
 spec:
   commonMetadata:
@@ -16,7 +16,7 @@ spec:
     secretRef:
       name: sops-age
   interval: 30m
-  path: ./kubernetes/apps/media/plexpass/app
+  path: ./kubernetes/apps/media/plexplay/app
   postBuild:
     substituteFrom:
       - name: cluster-secrets
