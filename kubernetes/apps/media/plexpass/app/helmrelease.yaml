@@ -1,0 +1,87 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app plexpass
+  namespace: ${NS}
+  labels:
+    app.kubernetes.io/name: *app
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      plexpass:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        replicas: 1
+        containers:
+          app:
+            image:
+              repository: ghcr.io/sepffuzzball/plexplay
+              tag: sha-16f347b
+            env:
+              PORT: "3000"
+              APP_ORIGIN: https://plexpass.${SECRET_DOMAIN_FBE}
+              PLEX_PRODUCT: PlexPass
+            envFrom:
+              - secretRef:
+                  name: plexpass-secrets
+            probes:
+              liveness:
+                custom: true
+                enabled: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: &port 3000
+                    scheme: HTTP
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                custom: true
+                enabled: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: *port
+                    scheme: HTTP
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        enabled: true
+        hostnames:
+          - "plexpass.${SECRET_DOMAIN_FBE}"
+        parentRefs:
+          - name: external
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
