@@ -29,7 +29,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sepffuzzball/plexplay
-              tag: sha-286911f
+              tag: sha-7f95f2c
             env:
               PORT: "3000"
               APP_ORIGIN: https://plexplay.${SECRET_DOMAIN_FBE}
