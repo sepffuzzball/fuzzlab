@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: ghcr.io/felddy/foundryvtt
-              tag: 12.331.0
+              tag: 14.365.0
               pullPolicy: IfNotPresent
 
             probes:
