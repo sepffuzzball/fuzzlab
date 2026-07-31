@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/ha-ocr-schedulerr
-              tag: sha-a9ffa81
+              tag: sha-9108d07
             env:
               TZ: ${TZ}
               AI_PARSER_ENABLED: true
