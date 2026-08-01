@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: owncloud/ocis
-              tag: 7.3.1
+              tag: 7.3.0
               pullPolicy: IfNotPresent
 
             probes:
@@ -50,7 +50,7 @@ spec:
               OCIS_INSECURE: 'true'
               PROXY_HTTP_ADDR: '0.0.0.0:9200'
               PROXY_AUTOPROVISION_ACCOUNTS: 'true'
-              PROXY_FORCE_STRICT_TRANSPORT_SECURITY: 'false'
+              #PROXY_FORCE_STRICT_TRANSPORT_SECURITY: 'false'
               PROXY_CSP_CONFIG_FILE_LOCATION: /etc/ocis/csp.yaml
               OCIS_LOG_LEVEL: 'info'
               OCIS_LOG_COLOR: 'true'
