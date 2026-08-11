@@ -5,6 +5,7 @@ namespace: home
 components:
   - ../../components/common
 resources:
+  - ./actual/ks.yaml
   - ./beginnings/ks.yaml
   - ./blog/ks.yaml
   - ./codex-web-test/ks.yaml
