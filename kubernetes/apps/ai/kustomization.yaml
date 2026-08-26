@@ -12,5 +12,6 @@ resources:
   - ./taskmaster/ks.yaml
   - ./sillytavern/ks.yaml
   - ./sillytavern-kip/ks.yaml
+  - ./serene-pub/ks.yaml
 
 #  - ./toolhive/ks.yaml
