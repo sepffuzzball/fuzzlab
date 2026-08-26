@@ -39,7 +39,7 @@ spec:
               HOST: 0.0.0.0
               PORT: "3000"
               SOCKETS_PORT: "3001"
-              PUBLIC_URL: https://serene.${SECRET_DOMAIN_FBE}
+              PUBLIC_URL: https://serene.${SECRET_DOMAIN}
               TRUSTED_PROXIES: private
             probes:
               startup:
@@ -83,7 +83,7 @@ spec:
       app:
         enabled: true
         hostnames:
-          - "serene.${SECRET_DOMAIN_FBE}"
+          - "serene.${SECRET_DOMAIN}"
         parentRefs:
           - name: external
             namespace: kube-system
