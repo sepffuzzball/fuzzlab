@@ -71,6 +71,10 @@ spec:
       databases:
         - coder
       password: *password
+    - name: dungeon-endless
+      databases:
+        - dungeon-endless
+      password: *password
     - name: evolution-rpg
       databases:
         - evolution-rpg

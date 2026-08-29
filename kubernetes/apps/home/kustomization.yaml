@@ -9,6 +9,7 @@ resources:
   - ./beginnings/ks.yaml
   - ./blog/ks.yaml
   - ./codex-web-test/ks.yaml
+  - ./dungeon-endless/ks.yaml
   - ./evolution-rpg/ks.yaml
   - ./ha-ocr-schedulerr/ks.yaml
   - ./homebox/ks.yaml
