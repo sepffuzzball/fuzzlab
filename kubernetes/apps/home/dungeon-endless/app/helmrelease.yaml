@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/sepffuzzball/dungeon-endless
-              tag: sha-8c02433
+              tag: sha-37adb59
             env:
               NODE_ENV: production
               PORT: "3000"
