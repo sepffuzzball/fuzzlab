@@ -43,9 +43,9 @@ spec:
               ALLOW_INSECURE_LLM_URLS: false
               ALLOW_PRIVATE_LLM_URLS: false
               LLM_DIAGNOSTICS: true
-              LLM_MAX_TOKENS: 32768
-              LLM_MAX_RESPONSE_BYTES: 524288
-              LLM_TIMEOUT_MS: 60000
+              LLM_MAX_TOKENS: "262144"
+              LLM_MAX_RESPONSE_BYTES: "16777216"
+              LLM_TIMEOUT_MS: "120000"
             envFrom:
               - secretRef:
                   name: dungeon-endless-db-secret
