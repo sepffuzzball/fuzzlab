@@ -44,7 +44,7 @@ spec:
               ALLOW_PRIVATE_LLM_URLS: false
               LLM_DIAGNOSTICS: true
               LLM_MAX_TOKENS: 32768
-              LLM_MAX_RESPONSE_BYTES: 8192
+              LLM_MAX_RESPONSE_BYTES: "8192"
               LLM_TIMEOUT_MS: 60000
             envFrom:
               - secretRef:
