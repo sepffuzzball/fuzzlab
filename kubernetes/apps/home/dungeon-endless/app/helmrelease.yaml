@@ -40,6 +40,7 @@ spec:
               PORT: "3000"
               ORIGIN: https://dungeon.${SECRET_DOMAIN_FBE}
               SECURE_COOKIE: "true"
+              LLM_MAX_RESPONSE_BYTES: 262144
             envFrom:
               - secretRef:
                   name: dungeon-endless-db-secret
