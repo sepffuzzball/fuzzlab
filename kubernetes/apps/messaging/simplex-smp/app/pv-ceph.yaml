@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: simplex-smp-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: csi-cephfs-sc
+  volumeName: simplex-smp-config-pv
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: simplex-smp-config-pv
+spec:
+  storageClassName: csi-cephfs-sc
+  claimRef:
+    name: simplex-smp-config
+    namespace: messaging
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      # node stage secret name
+      name: csi-cephfs-secret
+      # node stage secret namespace where above secret is created
+      namespace: storage
+    volumeAttributes:
+      # Required options from storageclass parameters need to be added in volumeAttributes
+      "clusterID": "ace7b6a4-115a-42f7-ba4f-32ceeb11e3c3"
+      "fsName": "k8s-cephfs"
+      "staticVolume": "true"
+      "rootPath": /volumes/csi/k8s-messaging/simplex-smp/config
+    # volumeHandle can be anything, need not to be same
+    # as PV name or volume name. keeping same for brevity
+    volumeHandle: simplex-smp-config
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: simplex-smp-state
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 9Gi
+  storageClassName: csi-cephfs-sc
+  volumeName: simplex-smp-state-pv
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: simplex-smp-state-pv
+spec:
+  storageClassName: csi-cephfs-sc
+  claimRef:
+    name: simplex-smp-state
+    namespace: messaging
+  capacity:
+    storage: 9Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: cephfs.csi.ceph.com
+    nodeStageSecretRef:
+      # node stage secret name
+      name: csi-cephfs-secret
+      # node stage secret namespace where above secret is created
+      namespace: storage
+    volumeAttributes:
+      # Required options from storageclass parameters need to be added in volumeAttributes
+      "clusterID": "ace7b6a4-115a-42f7-ba4f-32ceeb11e3c3"
+      "fsName": "k8s-cephfs"
+      "staticVolume": "true"
+      "rootPath": /volumes/csi/k8s-messaging/simplex-smp/state
+    # volumeHandle can be anything, need not to be same
+    # as PV name or volume name. keeping same for brevity
+    volumeHandle: simplex-smp-state

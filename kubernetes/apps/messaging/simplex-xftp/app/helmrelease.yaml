@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app simplex-xftp
+  namespace: messaging
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        strategy: Recreate
+        pod:
+          terminationGracePeriodSeconds: 60
+        containers:
+          main:
+            image:
+              repository: simplexchat/xftp-server
+              tag: v7.0.1@sha256:69a7f95746bb3c094ac36154ee8e7a8f552b5d9231587b88e6699d089003d26b
+            env:
+              ADDR: xftp.fuzzball.social
+              QUOTA: "85gb"
+              PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: simplex-xftp-secret
+                    key: PASS
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - |
+                      kill -INT 1
+                      i=0
+                      while kill -0 1 2>/dev/null && [ "$i" -lt 55 ]; do
+                        sleep 1
+                        i=$((i+1))
+                      done
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 443
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 443
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+
+    service:
+      main:
+        controller: main
+        ports:
+          xftp:
+            port: 443
+            protocol: TCP
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: simplex-xftp-config
+        globalMounts:
+          - path: /etc/opt/simplex-xftp
+      state:
+        enabled: true
+        existingClaim: simplex-xftp-state
+        globalMounts:
+          - path: /var/opt/simplex-xftp
+      files:
+        enabled: true
+        existingClaim: simplex-xftp-files
+        globalMounts:
+          - path: /srv/xftp

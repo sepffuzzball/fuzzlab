@@ -4,6 +4,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./pv-ceph.yaml
-  - ./cluster.yaml
-  - ./podmonitor.yaml
-  - ./synapse-database-job.yaml
+  - ./helmrelease.yaml
+  - ./secret.sops.yaml

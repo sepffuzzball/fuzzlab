@@ -1,0 +1,31 @@
+# Synapse homeserver configuration (non-secret)
+# The `database:` block is supplied separately via the `synapse-database` Secret
+# (rendered by ExternalSecret) and loaded as an additional --config-path.
+server_name: matrix.fuzzball.social
+public_baseurl: https://matrix.fuzzball.social/
+serve_server_wellknown: true
+
+report_stats: false
+
+pid_file: /data/homeserver.pid
+signing_key_path: /data/matrix.fuzzball.social.signing.key
+
+media_store_path: /data/media_store
+
+listeners:
+  - port: 8008
+    type: http
+    tls: false
+    bind_addresses: ["::"]
+    x_forwarded: true
+    resources:
+      - names:
+          - client
+          - federation
+
+# Registration is handled through Identity Provider SSO (OIDC).
+# Global registration is left disabled so OIDC is the only registration path.
+
+# Disable local password-based authentication.
+password_config:
+  enabled: false

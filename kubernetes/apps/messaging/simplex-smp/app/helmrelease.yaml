@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app simplex-smp
+  namespace: messaging
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        strategy: Recreate
+        pod:
+          terminationGracePeriodSeconds: 60
+        containers:
+          main:
+            image:
+              repository: simplexchat/smp-server
+              tag: v7.0.1@sha256:7d825822839a9d5ee9e9a99563d77a319816c7a8e0b4b7bf4dcebe448897af54
+            env:
+              ADDR: smp.fuzzball.social
+              WEB_MANUAL: "1"
+              PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: simplex-smp-secret
+                    key: PASS
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                    - /bin/sh
+                    - -c
+                    - |
+                      kill -INT 1
+                      i=0
+                      while kill -0 1 2>/dev/null && [ "$i" -lt 55 ]; do
+                        sleep 1
+                        i=$((i+1))
+                      done
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 5223
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 5223
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+
+    service:
+      main:
+        controller: main
+        ports:
+          smp:
+            port: 5223
+            protocol: TCP
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: simplex-smp-config
+        globalMounts:
+          - path: /etc/opt/simplex
+      state:
+        enabled: true
+        existingClaim: simplex-smp-state
+        globalMounts:
+          - path: /var/opt/simplex

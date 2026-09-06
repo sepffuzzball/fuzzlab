@@ -180,6 +180,10 @@ spec:
         - sonarr
         - sonarr-log
       password: *password
+    - name: synapse
+      # The `synapse` database is created by the `synapse-database-v1` (idempotent Job)
+      # so it is intentionally not listed here to avoid PGO auto-creating it.
+      password: *password
     - name: taskmaster
       databases:
         - taskmaster

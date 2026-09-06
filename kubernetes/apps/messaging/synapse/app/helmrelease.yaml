@@ -1,0 +1,122 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app synapse
+  namespace: messaging
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      main:
+        pod:
+          securityContext:
+            runAsUser: 991
+            runAsGroup: 991
+            runAsNonRoot: true
+            fsGroup: 991
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/element-hq/synapse
+              tag: v1.160.0@sha256:78de1d10bef02e375f861d1cc99f8bedd9381d4f9083ea8b2c22a053477b205f
+            args:
+              - run
+              - --config-path
+              - /data/homeserver.yaml
+              - --config-path
+              - /data/database.yaml
+              - --config-path
+              - /data/oidc.yaml
+            env:
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 1Gi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8008
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8008
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: 8008
+                  initialDelaySeconds: 5
+                  periodSeconds: 5
+                  timeoutSeconds: 5
+                  failureThreshold: 120
+
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8008
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: synapse-data
+        globalMounts:
+          - path: /data
+      homeserver:
+        type: configMap
+        name: synapse-homeserver
+        globalMounts:
+          - path: /data/homeserver.yaml
+            subPath: homeserver.yaml
+            readOnly: true
+      database:
+        type: secret
+        name: synapse-database
+        globalMounts:
+          - path: /data/database.yaml
+            subPath: database.yaml
+            readOnly: true
+      oidc:
+        type: secret
+        name: synapse-oidc
+        globalMounts:
+          - path: /secrets/oidc
+            readOnly: true
+          - path: /data/oidc.yaml
+            subPath: oidc.yaml
+            readOnly: true
