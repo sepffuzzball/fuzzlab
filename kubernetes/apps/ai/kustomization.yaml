@@ -6,6 +6,7 @@ components:
   - ../../components/common
 resources:
   - ./litellm/ks.yaml
+  - ./marinara-engine/ks.yaml
   # - ./opencode/ks.yaml
   - ./model-hotel/ks.yaml
   - ./openwebui/ks.yaml

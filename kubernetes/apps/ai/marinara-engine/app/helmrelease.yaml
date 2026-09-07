@@ -1,0 +1,99 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app marinara-engine
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+  values:
+    controllers:
+      marinara-engine:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        replicas: 1
+        # File-backed state permits a single writer, so recreate instead of rolling.
+        strategy: Recreate
+        pod:
+          automountServiceAccountToken: false
+          enableServiceLinks: false
+        containers:
+          app:
+            image:
+              repository: ghcr.io/pasta-devs/marinara-engine
+              tag: 2.4.4-lite
+              pullPolicy: IfNotPresent
+            env:
+              HOST: "0.0.0.0"
+              PORT: "7860"
+              DATA_DIR: /app/data
+              # Pangolin is the trusted external auth layer; the ClusterIP is only
+              # exposed internally so unauthenticated remote access is intentional.
+              TRUSTED_HOSTS: "marinara.${SECRET_DOMAIN_FBE},marinara.ai.svc.cluster.local"
+              CSRF_TRUSTED_ORIGINS: "https://marinara.${SECRET_DOMAIN_FBE}"
+              ALLOW_UNAUTHENTICATED_REMOTE: "true"
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: 7860
+                    scheme: HTTP
+                    httpHeaders:
+                      - name: Host
+                        value: marinara.ai.svc.cluster.local
+                  periodSeconds: 10
+                  failureThreshold: 30
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: 7860
+                    scheme: HTTP
+                    httpHeaders:
+                      - name: Host
+                        value: marinara.ai.svc.cluster.local
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 7860
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+
+    service:
+      app:
+        controller: marinara-engine
+        forceRename: marinara
+        ports:
+          http:
+            port: 7860
+
+    persistence:
+      data:
+        existingClaim: marinara-engine-data
+        globalMounts:
+          # Back up the entire /app/data directory, especially .encryption-key.
+          - path: /app/data
