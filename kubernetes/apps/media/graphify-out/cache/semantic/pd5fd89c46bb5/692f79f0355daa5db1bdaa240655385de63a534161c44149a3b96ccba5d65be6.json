@@ -1,0 +1,1 @@
+{"nodes": [{"id": "jellyfin_app_loadbalancer_jellyfin_service", "label": "Jellyfin LoadBalancer Service", "file_type": "document", "source_file": "jellyfin/app/loadbalancer.yaml", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
