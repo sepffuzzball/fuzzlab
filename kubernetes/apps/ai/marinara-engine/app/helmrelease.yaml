@@ -45,6 +45,10 @@ spec:
               TRUSTED_HOSTS: "marinara.${SECRET_DOMAIN_FBE},marinara.ai.svc.cluster.local"
               CSRF_TRUSTED_ORIGINS: "https://marinara.${SECRET_DOMAIN_FBE}"
               ALLOW_UNAUTHENTICATED_REMOTE: "true"
+
+            envFrom:
+              - secretRef:
+                  name: marinara-engine-secrets
             probes:
               startup:
                 enabled: true
