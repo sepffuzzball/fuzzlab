@@ -175,7 +175,7 @@ nodes:
       serial: "sda"
     machineSpec:
       secureboot: false
-    talosImageURL: factory.talos.dev/installer/d4f0e0890383069b4eb8f8ea5f59e6eee99e23aef66c9fd6ab1d1b636f654a0b
+    talosImageURL: factory.talos.dev/installer/30191123127e198e4f26041bf408a085944ead862a1ff09a620ee59f2981c3a9
     controlPlane: false
     networkInterfaces:
       - deviceSelector:
@@ -187,6 +187,15 @@ nodes:
           - network: "0.0.0.0/0"
             gateway: "10.0.100.1"
         mtu: 1500
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/amd-ucode
+            - siderolabs/mei
+            - siderolabs/qemu-guest-agent
+            - siderolabs/xe
+
 
 # Global patches
 patches:
