@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: binhex/arch-delugevpn
-              tag: 2.2.0-7-01
+              repository: ghcr.io/sepffuzzball/arch-delugevpn
+              tag: sha-70d79f3
             env:
               DEBUG: true
               DELUGE_DAEMON_LOG_LEVEL: info
