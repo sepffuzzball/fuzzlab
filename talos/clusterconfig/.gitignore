@@ -7,4 +7,6 @@ kubernetes-talos10016.yaml
 kubernetes-talos10017.yaml
 kubernetes-talos10018.yaml
 kubernetes-talos10019.yaml
+nvidia-node-backup.yaml
+intel-node-backup.yaml
 talosconfig
