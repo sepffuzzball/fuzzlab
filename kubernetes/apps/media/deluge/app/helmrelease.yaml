@@ -30,7 +30,7 @@ spec:
           app:
             image:
               repository: binhex/arch-delugevpn
-              tag: 2.2
+              tag: 2.20-7-01
             env:
               DEBUG: true
               DELUGE_DAEMON_LOG_LEVEL: info
