@@ -5,7 +5,7 @@ namespace: cloud
 components:
   - ../../components/common
 resources:
-  - ./foundry/ks.yaml
+  #- ./foundry/ks.yaml
   #- ./foundrydc20/ks.yaml
   - ./foundrydh/ks.yaml
   - ./immich/ks.yaml
