@@ -8,7 +8,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 100Gi
+      storage: 200Gi
   storageClassName: csi-cephfs-sc
   volumeName: foundry-data-pv
 
@@ -23,7 +23,7 @@ spec:
     name: foundry-data
     namespace: cloud
   capacity:
-    storage: 100Gi
+    storage: 200Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
