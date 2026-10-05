@@ -63,6 +63,9 @@ spec:
     service:
       app:
         controller: foundry
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${FOUNDRY_ADDR}
         ports:
           http:
             port: &port 30000
