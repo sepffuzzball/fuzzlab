@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: primal-creator
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    controllers:
+      primal-creator:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/sepffuzzball/primal-creator
+              tag: sha-11c1d68
+            env:
+              APP_PORT: &port 3000
+              CATALOG_PUBLIC: true
+            envFrom:
+              - secretRef:
+                  name: ${APP}-secrets
+              - secretRef:
+                  name: ${APP}-db-secret
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+
+    service:
+      main:
+        controller: primal-creator
+        ports:
+          http:
+            port: *port
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: primal-creator-data
+        globalMounts:
+          - path: /app/data
