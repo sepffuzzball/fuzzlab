@@ -29,6 +29,7 @@ spec:
               tag: sha-e65cf7d
             env:
               APP_PORT: &port 3000
+              APP_ORIGIN: https://primalcreator.${SECRET_DOMAIN_FBE}
               CATALOG_PUBLIC: true
             envFrom:
               - secretRef:
