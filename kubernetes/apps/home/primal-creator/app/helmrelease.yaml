@@ -26,7 +26,7 @@ spec:
           main:
             image:
               repository: ghcr.io/sepffuzzball/primal-creator
-              tag: sha-10d1c9e
+              tag: sha-052ff6f
             env:
               APP_PORT: &port 3000
               APP_ORIGIN: https://primalcreator.${SECRET_DOMAIN_FBE}
