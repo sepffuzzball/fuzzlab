@@ -16,7 +16,7 @@ resources:
   - ./km/ks.yaml
   - ./mealie/ks.yaml
   - ./onefolderweb/ks.yaml
-  #- ./primal-creator/ks.yaml
+  - ./primal-creator/ks.yaml
   - ./secrets.sops.yaml
   - ./stellar-tails/ks.yaml
   - ./teslamate/ks.yaml
