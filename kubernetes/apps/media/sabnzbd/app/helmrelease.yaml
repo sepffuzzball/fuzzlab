@@ -40,8 +40,8 @@ spec:
                 sabnzbd.media.svc.cluster.local,
                 sab.fzbl.xyz,
                 sabnzbd.fzbl.xyz,
-                sab.fzbl.local,
-                sabnzbd.fzbl.local,
+                sab.${SECRET_DOMAIN_LOCAL},
+                sabnzbd.${SECRET_DOMAIN_LOCAL},
                 sab.fuzzball.enterprises,
                 sabnzbd.fuzzball.enterprises
               SABNZBD__API_KEY: &apiKey
