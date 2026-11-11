@@ -40,7 +40,7 @@ spec:
               SPOOLMAN_DB_TYPE: sqlite
               PUID: "1000"
               PGID: "1000"
-              SPOOLMAN_ALLOWED_HOSTS: "spoolman.fuzzball.enterprises,spoolman.home.svc.cluster.local"
+              SPOOLMAN_ALLOWED_HOSTS: "spoolman.fuzzball.enterprises,spoolman.home.svc.cluster.local,spoolman.${SECRET_DOMAIN_LOCAL}"
 
             probes:
               startup:
@@ -87,6 +87,20 @@ spec:
         ports:
           http:
             port: 8000
+
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - spoolman.${SECRET_DOMAIN_LOCAL}
+        parentRefs:
+          - name: internal
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: 8000
 
     persistence:
       data:
