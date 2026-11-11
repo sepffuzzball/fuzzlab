@@ -18,6 +18,7 @@ resources:
   - ./onefolderweb/ks.yaml
   - ./primal-creator/ks.yaml
   - ./secrets.sops.yaml
+  - ./spoolman/ks.yaml
   - ./stellar-tails/ks.yaml
   - ./teslamate/ks.yaml
   - ./tg-vid-converter/ks.yaml

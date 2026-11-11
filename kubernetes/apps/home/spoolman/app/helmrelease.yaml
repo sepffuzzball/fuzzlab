@@ -1,0 +1,95 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: spoolman
+  namespace: home
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: csi-driver-cephfs
+      namespace: storage
+  values:
+    controllers:
+      spoolman:
+        replicas: 1
+        # SQLite permits a single writer, so recreate instead of rolling.
+        strategy: Recreate
+        pod:
+          automountServiceAccountToken: false
+          enableServiceLinks: false
+        containers:
+          app:
+            image:
+              repository: ghcr.io/donkie/spoolman
+              tag: 0.27.1
+              pullPolicy: IfNotPresent
+
+            env:
+              SPOOLMAN_DB_TYPE: sqlite
+              PUID: "1000"
+              PGID: "1000"
+              SPOOLMAN_ALLOWED_HOSTS: "spoolman.fuzzball.enterprises,spoolman.home.svc.cluster.local"
+
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/health
+                    port: 8000
+                    scheme: HTTP
+                    httpHeaders:
+                      - name: Host
+                        value: spoolman.home.svc.cluster.local
+                  periodSeconds: 10
+                  failureThreshold: 30
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/health
+                    port: 8000
+                    scheme: HTTP
+                    httpHeaders:
+                      - name: Host
+                        value: spoolman.home.svc.cluster.local
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 8000
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+
+    service:
+      app:
+        controller: spoolman
+        forceRename: spoolman
+        ports:
+          http:
+            port: 8000
+
+    persistence:
+      data:
+        existingClaim: spoolman-data
+        globalMounts:
+          - path: /home/app/.local/share/spoolman
