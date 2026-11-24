@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: ghcr.io/pasta-devs/marinara-engine
-              tag: 2.4.4-lite
+              tag: 2.5.2-lite
               pullPolicy: IfNotPresent
             env:
               HOST: "0.0.0.0"

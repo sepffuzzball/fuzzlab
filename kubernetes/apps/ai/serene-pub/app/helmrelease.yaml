@@ -33,7 +33,7 @@ spec:
           app:
             image:
               repository: ghcr.io/doolijb/serene-pub
-              tag: 0.5.1-beta
+              tag: 0.6.0-pr-8
             env:
               SERENE_PUB_DATA_DIR: /data
               HOST: 0.0.0.0
