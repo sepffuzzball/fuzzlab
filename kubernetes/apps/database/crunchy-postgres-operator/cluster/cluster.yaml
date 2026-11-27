@@ -171,6 +171,10 @@ spec:
         - readarr-audio-cache
         - readarr-audio-log
       password: *password
+    - name: readmeabook
+      databases:
+        - readmeabook
+      password: *password
     - name: semaphore
       databases:
         - semaphore
