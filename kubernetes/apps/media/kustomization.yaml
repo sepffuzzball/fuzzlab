@@ -19,6 +19,7 @@ resources:
   - ./pv-smb.yaml
   - ./radarr/ks.yaml
   - ./readarr/ks.yaml
+  - ./readmeabook/ks.yaml
   #- ./readarr-audio/ks.yaml
   - ./roon/ks.yaml
   - ./sabnzbd/ks.yaml
