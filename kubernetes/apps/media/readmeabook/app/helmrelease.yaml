@@ -46,7 +46,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: ${DB_USER}-db-secret
-                    key: POSTGRES_HOST
+                    key: DATABASE_URL
             resources:
               requests:
                 cpu: 18m
