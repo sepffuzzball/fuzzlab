@@ -58,7 +58,7 @@ spec:
         controller: arr
         ports:
           http:
-            port: *port
+            port: 3030
 
     persistence:
       config:
