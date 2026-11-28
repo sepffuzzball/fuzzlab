@@ -38,6 +38,7 @@ spec:
               PUID: ${PUID}
               PGID: ${PGID}
               UMASK: 002
+              PUBLIC_URL: https://readmeabook.${SECRET_DOMAIN_FBE}
               DISABLE_LOCAL_LOGIN: true
               DATABASE_URL:
                 valueFrom:
